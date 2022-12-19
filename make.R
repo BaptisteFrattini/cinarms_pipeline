@@ -1,8 +1,7 @@
 #' beta_diversity_arms: A Research Compendium
 #' 
 #' @description 
-#' A paragraph providing a full description of the project and describing each 
-#' step of the workflow.
+#' Computing beta diversity composition
 #' 
 #' @author Baptiste Frattini \email{baptiste.frattini22@gmail.com}
 #' 
@@ -12,12 +11,23 @@
 
 ## Install Dependencies (listed in DESCRIPTION) ----
 
-devtools::install_deps(upgrade = "never")
-
 
 ## Load Project Addins (R Functions and Packages) ----
 
 devtools::load_all(here::here())
+# dependences management
+
+renv::init()
+renv::install()
+renv::status()
+renv::snapshot()
+
+
+# make the pipeline
+targets::tar_visnetwork()
+targets::tar_make()
+targets::tar_visnetwork()
+
 
 
 ## Global Variables ----
