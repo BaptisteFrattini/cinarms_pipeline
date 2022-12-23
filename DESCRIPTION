@@ -23,6 +23,9 @@ Imports:
   vegan,
   betapart,
   adespatial,
-  ade4
+  ade4,
+  geosphere,
+  gclus,
+  cowplot
   
   
