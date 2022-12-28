@@ -7,7 +7,7 @@
 #' @export
 #'
 
-decomp_b_div <- function(meta_and_data, mean_by_arms) {
+decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
   #mean_by_arms = targets::tar_read("arms_mean") 
   #meta_and_data = targets::tar_read("metadata_data") 
   
@@ -97,17 +97,10 @@ decomp_b_div <- function(meta_and_data, mean_by_arms) {
   matrix.turn <- B.pair.pa$beta.jtu
   matrix.nest <- B.pair.pa$beta.jne
   matrix.jacc <- B.pair.pa$beta.jac
-  
-  
-  
-  
-  correl
+ 
   
   #### plot mantel ####
   
-  triangle_name <- paste0("triangle_", arms_id, ".pdf")
-  triangle_path <- here::here("outputs",  triangle_name)
-  pdf(file =  triangle_path, width = 10, height = 7)
 
   library(ggplot2)  
   #correl = vegan::mantel(matrix.dist, matrix.jacc, method = "pearson")
@@ -137,6 +130,10 @@ decomp_b_div <- function(meta_and_data, mean_by_arms) {
            panel.background = element_blank(), 
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
+  correl = vegan::mantel(matrix.dist, matrix.jacc, method = "pearson")
+ 
+  mm1 = mm1 + annotate(geom = "text", x = 40, y = 0.25, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
+                       color = "blue", size = 2.5)
   
   ##### nest #####
   aa = as.vector(matrix.nest)
@@ -164,6 +161,10 @@ decomp_b_div <- function(meta_and_data, mean_by_arms) {
            panel.background = element_blank(), 
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
+  correl = vegan::mantel(matrix.dist, matrix.nest, method = "pearson")
+  
+  mm2 = mm2 + annotate(geom = "text", x = 11, y = 0.25, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
+                       color = "blue", size = 2.5)
 
   ##### turn #####
   aa = as.vector(matrix.turn)
@@ -191,6 +192,10 @@ decomp_b_div <- function(meta_and_data, mean_by_arms) {
            panel.background = element_blank(), 
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
+  correl = vegan::mantel(matrix.dist, matrix.turn, method = "pearson")
+  
+  mm3 = mm3 + annotate(geom = "text", x = 27, y = 0.61, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
+                       color = "blue", size = 2.5)
   
   ##### bray #####
   aa = as.vector(matrix.bray)
@@ -218,6 +223,11 @@ decomp_b_div <- function(meta_and_data, mean_by_arms) {
            panel.background = element_blank(), 
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
+  
+  correl = vegan::mantel(matrix.dist, matrix.bray, method = "pearson")
+  
+  mm4 = mm4 + annotate(geom = "text", x = 40, y = 0.23, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
+                       color = "blue", size = 2.5)
   ##### gra #####
   aa = as.vector(matrix.gra)
   tt = as.vector(matrix.dist)
@@ -244,6 +254,10 @@ decomp_b_div <- function(meta_and_data, mean_by_arms) {
            panel.background = element_blank(), 
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
+   correl = vegan::mantel(matrix.dist, matrix.gra, method = "pearson")
+  
+   mm5 = mm5 + annotate(geom = "text", x = 10, y = 0.13, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
+                       color = "blue", size = 2.5)
   
   ##### bal #####
   aa = as.vector(matrix.bal)
@@ -271,11 +285,20 @@ decomp_b_div <- function(meta_and_data, mean_by_arms) {
            panel.background = element_blank(), 
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
+  correl = vegan::mantel(matrix.dist, matrix.bal, method = "pearson")
+  
+  mm6 = mm6 + annotate(geom = "text", x = 11, y = 0.43, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
+                       color = "blue", size = 2.5)
   
   ##### plot #####
   cowplot::plot_grid(mm1, mm2, mm3, mm4, mm5, mm6, ncol = 3, nrow = 2)
-  #### heatmap ####
+ 
+  mantel_name <- paste0("tmantel_", arms_id, ".pdf")
+  mantel_path <- here::here("outputs",  mantel_name)
   
+  ggsave(mantel_path, width = 11, height = 8)
+  #### heatmap ####
+  pdf("")
   source("R/coldiss.R")
   library(gclus)
   library(vegan)

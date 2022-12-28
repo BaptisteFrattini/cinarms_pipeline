@@ -1,9 +1,12 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 arms_mean|stem|4ed82221811936f1|d9d9d2a7f9422569|2ab1197f965e76b6|1153413326||t19342.6285395815s|80d8a0d48d45f5aa|172|rds|local|vector|||0.1||
-b_div|stem|63fb3faa23377db7|e51b8ef7ba424520|4b9db1e9290878dd|1199142944||t19342.6292022057s|45b306a4cd8a6a00|5516|rds|local|vector|||0.011||
+b_div|stem|1a5c374a6e8e40c1|0a18a7f0a7be8e26|d23d5697066c28c0|1199142944||t19354.5298081064s|17e1813002340629|93|rds|local|vector|||2.826||
 campain_id|stem|ede018d4628cf1ce|11b073332028455e|ef46db3751d8e999|-271504171||t19342.5668890739s|710c4f02beb47ff7|57|rds|local|vector|||0.001||
+coldiss|function|8f9b4df8c8b1c386|||||||||||||||
 data_arms|function|c7a51c47e865cbf1|||||||||||||||
-decomp_b_div|function|8f77c756548c4710|||||||||||||||
+decomp_b_div|function|1e3f0b46636fe509|||||||||||||||
+geoDist|function|3559387be7f2c0e9|||||||||||||||
+geoXY|function|9aa1a856fdd373d0|||||||||||||||
 mean_by_arms|function|11f0a2b3e6488feb|||||||||||||||
 metadata_data|stem|43be0c959946196f|1c4887c85fc6a0c5|accb28ec16245fda|970554103|/Users/baptistefrattini/Documents/M2 BEST/Stage/Analyse photo/Analyse_2022/R PROJECT/beta_diversity_arms/data/derived-data/data_RUNA.csv*/Users/baptistefrattini/Documents/M2 BEST/Stage/Analyse photo/Analyse_2022/R PROJECT/beta_diversity_arms/data/derived-data/metadata_RUNA.csv|t19342.5828190305s|c9688d1d02335676|159721|file|local|vector|||0.121||
 raw_data|stem|33f334a85117b0fc|af6c01ae4d5d454c|ef46db3751d8e999|-979620141|data/raw-data/Data_sans_UNAV-NR-OROS.csv|t19331.4598317597s|0c90ceb87a940184|265323|file|local|vector|||0.002||

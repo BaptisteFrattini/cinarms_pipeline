@@ -12,6 +12,8 @@ list(
   
   ,tar_target(arms_mean, mean_by_arms(meta_and_data = metadata_data))
   
-  ,tar_target(b_div, decomp_b_div(mean_by_arms = arms_mean))
+  ,tar_target(b_div, decomp_b_div(meta_and_data = metadata_data, 
+                                  mean_by_arms = arms_mean,
+                                  arms_id = campain_id))
   
   )
