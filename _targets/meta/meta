@@ -1,10 +1,10 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 arms_mean|stem|4ed82221811936f1|d9d9d2a7f9422569|2ab1197f965e76b6|1153413326||t19342.6285395815s|80d8a0d48d45f5aa|172|rds|local|vector|||0.1||
-b_div|stem|1a5c374a6e8e40c1|0a18a7f0a7be8e26|d23d5697066c28c0|1199142944||t19354.5298081064s|17e1813002340629|93|rds|local|vector|||2.826||
+b_div|stem|0012784986679a8f|0a18a7f0a7be8e26|c26880e60b5c7b4a|1199142944||t19354.5806865115s|334ec4c391c6746c|186|rds|local|vector|||3.428||
 campain_id|stem|ede018d4628cf1ce|11b073332028455e|ef46db3751d8e999|-271504171||t19342.5668890739s|710c4f02beb47ff7|57|rds|local|vector|||0.001||
 coldiss|function|8f9b4df8c8b1c386|||||||||||||||
 data_arms|function|c7a51c47e865cbf1|||||||||||||||
-decomp_b_div|function|1e3f0b46636fe509|||||||||||||||
+decomp_b_div|function|2cdf5ec2deee02dc|||||||||||||||
 geoDist|function|3559387be7f2c0e9|||||||||||||||
 geoXY|function|9aa1a856fdd373d0|||||||||||||||
 mean_by_arms|function|11f0a2b3e6488feb|||||||||||||||
