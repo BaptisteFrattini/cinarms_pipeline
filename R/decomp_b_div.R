@@ -1,4 +1,4 @@
-#' Subset a raw_data table for a sampling campain
+#' Triangle plot and mantel test/graphs
 #'
 #' @param meta_and_data the path to the metadata and data
 #' @param dat_thresh_path the path to the file data red
@@ -301,13 +301,6 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
 
   ggplot2::ggsave(mantel_path, plot = a, width = 14, height = 8)
   
-
-  #### heatmap ####
-  #source("R/coldiss.R")
-  #library(gclus)
-  #library(vegan)
-  #coldiss(as.dist(decostand(matrix.turn,"standardize")), byrank = TRUE, diag = TRUE)
-  #dev.off()
   
   return(c(mantel_path,triangle_path))
   

@@ -15,5 +15,8 @@ list(
   ,tar_target(b_div, decomp_b_div(meta_and_data = metadata_data, 
                                   mean_by_arms = arms_mean,
                                   arms_id = campain_id))
+  ,tar_target(ns, north_south(meta_and_data = metadata_data, 
+                                  mean_by_arms = arms_mean,
+                                  arms_id = campain_id))
   
   )

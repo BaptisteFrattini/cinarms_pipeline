@@ -9,4 +9,6 @@ geoDist|function|3559387be7f2c0e9|||||||||||||||
 geoXY|function|9aa1a856fdd373d0|||||||||||||||
 mean_by_arms|function|11f0a2b3e6488feb|||||||||||||||
 metadata_data|stem|43be0c959946196f|1c4887c85fc6a0c5|accb28ec16245fda|970554103|/Users/baptistefrattini/Documents/M2 BEST/Stage/Analyse photo/Analyse_2022/R PROJECT/beta_diversity_arms/data/derived-data/data_RUNA.csv*/Users/baptistefrattini/Documents/M2 BEST/Stage/Analyse photo/Analyse_2022/R PROJECT/beta_diversity_arms/data/derived-data/metadata_RUNA.csv|t19342.5828190305s|c9688d1d02335676|159721|file|local|vector|||0.121||
+north_south|function|88915e0d242b37c0|||||||||||||||
+ns|stem|a38b5454c2440f01|3d16f02ff5211d5d|6b04b5f0cf0099fe|2014082040||t19355.6579689992s|b2a37e7acd6b186f|188|rds|local|vector|||1.487||
 raw_data|stem|33f334a85117b0fc|af6c01ae4d5d454c|ef46db3751d8e999|-979620141|data/raw-data/Data_sans_UNAV-NR-OROS.csv|t19331.4598317597s|0c90ceb87a940184|265323|file|local|vector|||0.002||
