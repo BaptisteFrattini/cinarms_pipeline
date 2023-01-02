@@ -8,34 +8,35 @@
 "coldiss" <- function(D, nc = 4, byrank = TRUE, diag = FALSE)
 {
   require(gclus)
+  require(viridis)
   
   if (max(D)>1) D <- D/max(D)
   
   if (byrank) {
-    spe.color <- dmat.color(1-D, cm.colors(nc))
+    spe.color <- dmat.color(1-D, viridis(nc, direction = -1, option = "mako"))
   }
   else {
-    spe.color <- dmat.color(1-D, byrank=FALSE, cm.colors(nc))
+    spe.color <- dmat.color(1-D, byrank=FALSE, viridis(nc, direction = -1, option = "mako"))
   }
   
   spe.o <- order.single(1-D)
   speo.color <- spe.color[spe.o, spe.o]
   
-  op <- par(mfrow=c(1,2), pty="s")
+  op <- par(mfrow=c(1,1), pty="s")
   
   if (diag) {
     plotcolors(spe.color, rlabels=attributes(D)$Labels, 
                main="Dissimilarity Matrix", 
                dlabels=attributes(D)$Labels)
-    plotcolors(speo.color, rlabels=attributes(D)$Labels[spe.o], 
-               main="Ordered Dissimilarity Matrix", 
-               dlabels=attributes(D)$Labels[spe.o])
+    #plotcolors(speo.color, rlabels=attributes(D)$Labels[spe.o], 
+               #main="Ordered Dissimilarity Matrix", 
+               #dlabels=attributes(D)$Labels[spe.o])
   }
   else {
     plotcolors(spe.color, rlabels=attributes(D)$Labels, 
                main="Dissimilarity Matrix")
-    plotcolors(speo.color, rlabels=attributes(D)$Labels[spe.o], 
-               main="Ordered Dissimilarity Matrix")
+    #plotcolors(speo.color, rlabels=attributes(D)$Labels[spe.o], 
+              # main="Ordered Dissimilarity Matrix")
   }
   
   par(op)

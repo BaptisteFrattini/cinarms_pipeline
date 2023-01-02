@@ -146,18 +146,25 @@ north_south <- function (meta_and_data, mean_by_arms, arms_id) {
   #### coldiss ####
   heatmap_name <- paste0("heatmap_", arms_id, ".pdf")
   heatmap_path <- here::here("outputs",  heatmap_name)
-  pdf(file = heatmap_path, width = 11, height = 7)
-  par(mfrow = c(1,2))
+  pdf(file = heatmap_path, width = 10, height = 10)
+
   source("R/coldiss.R")
   library(gclus)
   library(vegan)
-  
-  coldiss(as.dist(decostand(as.matrix(B.pair.abund$beta.bray),"standardize")), byrank = TRUE, diag = FALSE)
-  coldiss(as.dist(decostand(as.matrix(B.pair.pa$beta.jac),"standardize")), byrank = TRUE, diag = FALSE)
-  
+  library(veridis)
+ 
+  coldiss(as.dist(scale(as.matrix(B.pair.abund$beta.bray))), byrank = TRUE, diag = FALSE, nc = 20)
+  mtext("Bray-Curtis index", side = 3)
+ 
+  #coldiss(as.dist(scale(as.matrix(B.pair.abund$beta.bray.bal))), byrank = TRUE, diag = FALSE, nc = 20)
+  #mtext("Balanced variation", side = 3)
+  #coldiss(as.dist(scale(as.matrix(B.pair.abund$beta.bray.gra))), byrank = TRUE, diag = FALSE, nc = 20)
+  #mtext("Abundance gradiant", side = 3)
+  #coldiss(as.dist(scale(as.matrix(B.pair.pa$beta.jac))), byrank = TRUE, diag = FALSE, nc = 20)
+  #mtext("Jaccard index", side = 3)
+  #coldiss(as.dist(scale(as.matrix(B.pair.pa$beta.jtu))), byrank = TRUE, diag = FALSE, nc = 20)
+  #coldiss(as.dist(scale(as.matrix(B.pair.pa$beta.jne))), byrank = TRUE, diag = FALSE, nc = 20)
   dev.off()
   return(c(north_south_path,heatmap_path))
-  
-  ?coldiss
 }
 
