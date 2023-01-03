@@ -13,10 +13,10 @@
   if (max(D)>1) D <- D/max(D)
   
   if (byrank) {
-    spe.color <- dmat.color(1-D, viridis(nc, direction = -1, option = "mako"))
+    spe.color <- dmat.color(1-D, viridis(nc, direction = 1, option = "mako"))
   }
   else {
-    spe.color <- dmat.color(1-D, byrank=FALSE, viridis(nc, direction = -1, option = "mako"))
+    spe.color <- dmat.color(1-D, byrank=FALSE, viridis(nc, direction = 1, option = "mako"))
   }
   
   spe.o <- order.single(1-D)

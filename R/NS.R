@@ -155,15 +155,18 @@ north_south <- function (meta_and_data, mean_by_arms, arms_id) {
  
   coldiss(as.dist(scale(as.matrix(B.pair.abund$beta.bray))), byrank = TRUE, diag = FALSE, nc = 20)
   mtext("Bray-Curtis index", side = 3)
- 
   #coldiss(as.dist(scale(as.matrix(B.pair.abund$beta.bray.bal))), byrank = TRUE, diag = FALSE, nc = 20)
   #mtext("Balanced variation", side = 3)
   #coldiss(as.dist(scale(as.matrix(B.pair.abund$beta.bray.gra))), byrank = TRUE, diag = FALSE, nc = 20)
   #mtext("Abundance gradiant", side = 3)
+  
+  
   #coldiss(as.dist(scale(as.matrix(B.pair.pa$beta.jac))), byrank = TRUE, diag = FALSE, nc = 20)
   #mtext("Jaccard index", side = 3)
-  #coldiss(as.dist(scale(as.matrix(B.pair.pa$beta.jtu))), byrank = TRUE, diag = FALSE, nc = 20)
+  #coldiss(as.dist(scale(as.matrix(B.pair.pa$beta.jtu))), byrank = TRUE, diag = TRUE, nc = 20)
   #coldiss(as.dist(scale(as.matrix(B.pair.pa$beta.jne))), byrank = TRUE, diag = FALSE, nc = 20)
+  
+  
   dev.off()
   return(c(north_south_path,heatmap_path))
 }
