@@ -151,7 +151,7 @@ north_south <- function (meta_and_data, mean_by_arms, arms_id) {
   source("R/coldiss.R")
   library(gclus)
   library(vegan)
-  library(veridis)
+  library(viridis)
  
   coldiss(as.dist(scale(as.matrix(B.pair.abund$beta.bray))), byrank = TRUE, diag = FALSE, nc = 20)
   mtext("Bray-Curtis index", side = 3)

@@ -6,8 +6,7 @@
 #' @return the path to the subseted raw data file
 #' @export
 #'
-data_arms <- function(raw_data,
-                      arms_id){
+data_arms <- function(raw_data, arms_id){
   #raw_data = "data/raw-data/Data_sans_UNAV-NR-OROS.csv"  
   #arms_id = "RUNA"
   

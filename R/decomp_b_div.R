@@ -69,8 +69,9 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
   text(0.1, -0.6, "Nestedness", cex = 1)
   text(-0.57, 0.2, "1 - Jaccard \n dissimilarity", cex = 1) 
   
-  
+  dev.off()
   #### Mantel with abundance based dissimilarity decomposition ####
+  
   meta_path <- meta_and_data[grepl("metadata", meta_and_data)] 
   meta <- read.csv(meta_path)
 
@@ -101,10 +102,10 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
  
   
   #### plot mantel ####
-  dev.off()
+  
 
   library(ggplot2)  
-  #correl = vegan::mantel(matrix.dist, matrix.jacc, method = "pearson")
+  
   ##### jacc #####
   aa = as.vector(matrix.jacc)
   tt = as.vector(matrix.dist)
@@ -113,7 +114,7 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
   
   mm1 = ggplot(mat, aes(y = aa, x = tt)) + 
     geom_point(size = 3, alpha = 0.5, color = "black") + 
-    labs(x = "Geographic distance (km)",
+    labs(x = NULL,
          y = "Jaccard dissimilarity") +
     geom_smooth(method = "gam", 
                 colour = "red", 
@@ -132,9 +133,20 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
   correl = vegan::mantel(matrix.dist, matrix.jacc, method = "pearson")
- 
-  mm1 = mm1 + annotate(geom = "text", x = 40, y = 0.25, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
-                       color = "blue", size = 3)
+  p <- correl$signif
+  if (p < 0.001) {
+    significativite <- "***"
+  } else if (p >= 0.001 && p < 0.01) {
+    significativite <- "**"
+  } else if (p >= 0.01 && p < 0.05) {
+    significativite <- "*"
+  } else {
+    significativite <- " NS"
+  }
+  
+  
+  mm1 = mm1 + annotate(geom = "text", x = 32.5, y = 0.25, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif,significativite),
+                       color = "black", size = 5)
   
   ##### nest #####
   aa = as.vector(matrix.nest)
@@ -144,7 +156,7 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
   
   mm2 = ggplot(mat, aes(y = aa, x = tt)) + 
     geom_point(size = 3, alpha = 0.5, color = "black") + 
-    labs(x = "Geographic distance (km)",
+    labs(x = NULL,
          y = "Nestedness component") +
     geom_smooth(method = "gam", 
                 colour = "red", 
@@ -163,9 +175,19 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
   correl = vegan::mantel(matrix.dist, matrix.nest, method = "pearson")
+  p <- correl$signif
+  if (p < 0.001) {
+    significativite <- "***"
+  } else if (p >= 0.001 && p < 0.01) {
+    significativite <- "**"
+  } else if (p >= 0.01 && p < 0.05) {
+    significativite <- "*"
+  } else {
+    significativite <- " NS"
+  }
   
-  mm2 = mm2 + annotate(geom = "text", x = 11, y = 0.25, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
-                       color = "blue", size = 3)
+  mm2 = mm2 + annotate(geom = "text", x = 19, y = 0.25, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif,significativite),
+                       color = "black", size = 5)
 
   ##### turn #####
   aa = as.vector(matrix.turn)
@@ -175,7 +197,7 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
   
   mm3 = ggplot(mat, aes(y = aa, x = tt)) + 
     geom_point(size = 3, alpha = 0.5, color = "black") + 
-    labs(x = "Geographic distance (km)",
+    labs(x = NULL,
          y = "Turnover component") +
     geom_smooth(method = "gam", 
                 colour = "red", 
@@ -194,9 +216,19 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
   correl = vegan::mantel(matrix.dist, matrix.turn, method = "pearson")
+  p <- correl$signif
+  if (p < 0.001) {
+    significativite <- "***"
+  } else if (p >= 0.001 && p < 0.01) {
+    significativite <- "**"
+  } else if (p >= 0.01 && p < 0.05) {
+    significativite <- "*"
+  } else {
+    significativite <- " NS"
+  }
   
-  mm3 = mm3 + annotate(geom = "text", x = 27, y = 0.62, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
-                       color = "blue", size = 3)
+  mm3 = mm3 + annotate(geom = "text", x = 31.7, y = 0.625, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif,significativite),
+                       color = "black", size = 5) 
   
   ##### bray #####
   aa = as.vector(matrix.bray)
@@ -206,7 +238,7 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
   
   mm4 = ggplot(mat, aes(y = aa, x = tt)) + 
     geom_point(size = 3, alpha = 0.5, color = "black") + 
-    labs(x = "Geographic distance (km)",
+    labs(x = " ",
          y = "Bray-Curtis dissimilarity") +
     geom_smooth(method = "gam", 
                 colour = "red", 
@@ -226,9 +258,19 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
                                        colour = "black")) 
   
   correl = vegan::mantel(matrix.dist, matrix.bray, method = "pearson")
+  p <- correl$signif
+  if (p < 0.001) {
+    significativite <- "***"
+  } else if (p >= 0.001 && p < 0.01) {
+    significativite <- "**"
+  } else if (p >= 0.01 && p < 0.05) {
+    significativite <- "*"
+  } else {
+    significativite <- " NS"
+  }
   
-  mm4 = mm4 + annotate(geom = "text", x = 40, y = 0.21, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
-                       color = "blue", size = 3)
+  mm4 = mm4 + annotate(geom = "text", x = 31, y = 0.21, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif,significativite),
+                       color = "black", size = 5)
   ##### gra #####
   aa = as.vector(matrix.gra)
   tt = as.vector(matrix.dist)
@@ -256,9 +298,18 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
    correl = vegan::mantel(matrix.dist, matrix.gra, method = "pearson")
-  
-   mm5 = mm5 + annotate(geom = "text", x = 10, y = 0.133, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
-                       color = "blue", size = 3)
+   p <- correl$signif
+   if (p < 0.001) {
+     significativite <- "***"
+   } else if (p >= 0.001 && p < 0.01) {
+     significativite <- "**"
+   } else if (p >= 0.01 && p < 0.05) {
+     significativite <- "*"
+   } else {
+     significativite <- " NS"
+   }
+   mm5 = mm5 + annotate(geom = "text", x = 18, y = 0.133, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif, significativite),
+                       color = "black", size = 5)
   
   ##### bal #####
   aa = as.vector(matrix.bal)
@@ -268,7 +319,7 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
   
   mm6 = ggplot(mat, aes(y = aa, x = tt)) + 
     geom_point(size = 3, alpha = 0.5, color = "black") + 
-    labs(x = "Geographic distance (km)",
+    labs(x = " ",
          y = "Balanced variation component") +
     geom_smooth(method = "gam", 
                 colour = "red", 
@@ -287,11 +338,21 @@ decomp_b_div <- function(meta_and_data, mean_by_arms, arms_id) {
            panel.border = element_rect(fill = NA,
                                        colour = "black")) 
   correl = vegan::mantel(matrix.dist, matrix.bal, method = "pearson")
+  p <- correl$signif
+  if (p < 0.001) {
+    significativite <- "***"
+  } else if (p >= 0.001 && p < 0.01) {
+    significativite <- "**"
+  } else if (p >= 0.01 && p < 0.05) {
+    significativite <- "*"
+  } else {
+    significativite <- " NS"
+  }
   
-  mm6 = mm6 + annotate(geom = "text", x = 11, y = 0.43, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif),
-                       color = "blue", size = 3)
+  mm6 = mm6 + annotate(geom = "text", x = 17, y = 0.43, label = paste0("Mantel R = ",  round(correl$statistic, 3), "; Pval = ", correl$signif, significativite),
+                       color = "black", size = 5)
   
-  ##### plot #####
+  ##### save plot #####
   
   mantel_name <- paste0("mantel_", arms_id, ".pdf")
   mantel_path <- here::here("outputs",  mantel_name)

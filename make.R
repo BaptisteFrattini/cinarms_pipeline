@@ -12,9 +12,7 @@
 ## Install Dependencies (listed in DESCRIPTION) ----
 
 
-## Load Project Addins (R Functions and Packages) ----
 
-devtools::load_all(here::here())
 # dependences management
 
 renv::init()
