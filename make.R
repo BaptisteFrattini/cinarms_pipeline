@@ -1,11 +1,11 @@
-#' beta_diversity_arms: A Research Compendium
+#' CINARMS: A Research Compendium
 #' 
 #' @description 
-#' Computing beta diversity composition
+#' A data analysis pipeline for CINARMS
 #' 
 #' @author Baptiste Frattini \email{baptiste.frattini22@gmail.com}
 #' 
-#' @date 2022/12/16
+#' @date 2023/04/12
 
 
 
