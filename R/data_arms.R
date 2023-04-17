@@ -6,10 +6,10 @@
 #' @return the path to the subseted raw data file
 #' @export
 
-data_arms <- function(raw_data, arms_id, arms_id_2y){
+data_arms <- function(raw_data, arms_id, arms_id_2years){
   # raw_data = targets::tar_read(raw_data)
   # arms_id = targets::tar_read(campain_id)
-  # arms_id_2y = targets::tar_read(arms_id_2y)
+  # arms_id_2years = targets::tar_read(arms_id_2y)
 
   dat_path <- here::here(raw_data)
   data <- read.table(dat_path, 
@@ -20,7 +20,7 @@ data_arms <- function(raw_data, arms_id, arms_id_2y){
   data 
   
   dat <- data[data$prefixe == arms_id, ]
-  dat2y <- data[data$arms_name == arms_id_2y, ]
+  dat2y <- data[data$arms_name == arms_id_2years, ]
   dat <- data.frame(rbind(dat, dat2y))
   
   
@@ -40,12 +40,12 @@ data_arms <- function(raw_data, arms_id, arms_id_2y){
     dat[i,] <- dat[i,]/sums[i]*100
   }
   
- 
+
   
   out_d_path <- "data/derived-data" #Nom du chemin qui mène à data derived
-  out_f_name <- paste0("data_", arms_id, "_",substr(arms_id_2y[1],1,5), ".csv") #Nom du fichier de data généré
+  out_f_name <- paste0("data_", arms_id, "_",substr(arms_id_2years[1],1,5), ".csv") #Nom du fichier de data généré
   #dans ce dossier
-  meta_out_f_name <- paste0("metadata_", arms_id, "_", substr(arms_id_2y[1],1,5), ".csv") #Nom du fichier de 
+  meta_out_f_name <- paste0("metadata_", arms_id, "_", substr(arms_id_2years[1],1,5), ".csv") #Nom du fichier de 
   #metadata généré dans ce dossier
   out_f_path <- here::here(out_d_path, out_f_name) #
   meta_out_f_path <- here::here(out_d_path, meta_out_f_name)

@@ -1,0 +1,61 @@
+#' NMDS
+#'
+#' @param metadata_data_mean the path to the raw data file
+#'
+#' @return the path to the NMDS plot
+#' @export
+
+fun_nmds_plot <- function(metadata_data_mean){
+  
+  # metadata_data_mean = targets::tar_read(mean_metadata_data)
+  
+  #### Load data and meta data ####
+  
+  df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
+  meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
+
+  #### Plot NMDS ####
+  
+  library(vegan)
+  #IMMERSION SEASON
+  NMDS_imm_path <- here::here("outputs/NMDS/NMDS_imm.pdf")
+  pdf(file = NMDS_imm_path, width = 10, height = 10)
+  
+  ord <- metaMDS(df_mean, distance = "bray")
+  plot(ord, main="NMDS (dist=bray)")
+  imm <- meta_mean$immersion_season
+  ordihull(ord, imm, col=1:2, lwd=3)
+  ordiellipse(ord, imm, col=1:2, kind = "ehull", lwd=3)
+  ordiellipse(ord, imm, col=1:2, draw="polygon")
+  ordispider(ord,  imm, col=1:2, label = TRUE)
+  dev.off()
+  
+  #RECOVERY SEASON
+  # plot(ord, main="NMDS (dist=bray)")
+  NMDS_rec_path <- here::here("outputs/NMDS/NMDS_rec.pdf")
+  pdf(file = NMDS_rec_path, width = 10, height = 10)
+  
+  ord <- metaMDS(df_mean, distance = "bray")
+  plot(ord, main="NMDS (dist=bray)")
+  rec <- meta_mean$recovery_season
+  ordihull(ord, rec, col=3:4, lwd=3)
+  ordiellipse(ord, rec, col=3:4, kind = "ehull", lwd=3)
+  ordiellipse(ord, rec, col=3:4, draw="polygon")
+  ordispider(ord,  rec, col=3:4, label = TRUE)
+  dev.off()
+  
+  #IMMERSION TIME
+  NMDS_tim_path <- here::here("outputs/NMDS/NMDS_tim.pdf")
+  pdf(file = NMDS_tim_path, width = 10, height = 10)
+  
+  plot(ord, main="NMDS (dist=bray)")
+  tim <- meta_mean$imm_time
+  ordihull(ord, tim, col=5:6, lwd=3)
+  ordiellipse(ord, tim, col=5:6, kind = "ehull", lwd=3)
+  ordiellipse(ord, tim, col=5:6, draw="polygon")
+  ordispider(ord,  tim, col=5:6, label = TRUE)
+  dev.off()
+  
+  
+  return(NMDS_tim_path)
+}
