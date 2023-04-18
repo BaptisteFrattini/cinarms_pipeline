@@ -12,11 +12,6 @@ fun_data_mean <- function(meta_data, arms_id){
   # arms_id = targets::tar_read(campain_id)
   library(dplyr)
   meta = read.csv(meta_data[grepl("metadata", meta_data)], header = TRUE)
-  meta$arms = substr(meta$arms_name, 1, 5)
-  hot_season_arms_imm <- c("CINA1", "CINA2", "RUNA2")
-  hot_season_arms_rec <- c("RUNA2", "CINA2", "CINA3")
-  meta$immersion_season <- ifelse(meta$arms %in% hot_season_arms_imm, "imm_hot", "imm_cold")
-  meta$recovery_season <- ifelse(meta$arms  %in% hot_season_arms_rec, "rec_hot", "rec_cold")
   meta <- meta[,-4]
   data = read.csv(meta_data[!grepl("metadata", meta_data)], header = TRUE)
   data <- data[ , colSums(data) != 0]
@@ -30,7 +25,7 @@ fun_data_mean <- function(meta_data, arms_id){
                           arms = df_mean$`meta$arms_name`)
   
   
-  meta_mean$imm_time <- c(rep("6m", 3), rep("1a", 3), rep("6m", 3), rep("1a", 3), rep("2a",3))
+  meta_mean$imm_time <- c(rep("6m", 3), rep("1y", 3), rep("6m", 3), rep("1y", 3), rep("2y",3))
   meta_mean$arms_name <- substr(meta_mean$arms, 1, 5)
   hot_season_arms_imm <- c("CINA1", "CINA2", "RUNA2")
   hot_season_arms_rec <- c("RUNA2", "CINA2", "CINA3")

@@ -54,6 +54,8 @@ fun_nmds_plot <- function(metadata_data_mean){
   ordiellipse(ord, tim, col=5:6, kind = "ehull", lwd=3)
   ordiellipse(ord, tim, col=5:6, draw="polygon")
   ordispider(ord,  tim, col=5:6, label = TRUE)
+  #text(ord, display = "spec", cex=0.7, col="blue")
+  
   dev.off()
   
   

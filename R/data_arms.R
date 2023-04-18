@@ -28,6 +28,21 @@ data_arms <- function(raw_data, arms_id, arms_id_2years){
   
   
   meta_data <- dat[, meta_names]
+ 
+  
+  library(dplyr)
+  meta_data$arms = substr(meta_data$arms_name, 1, 5)
+  hot_season_arms_imm <- c("CINA1", "CINA2", "RUNA2")
+  hot_season_arms_rec <- c("RUNA2", "CINA2", "CINA3")
+  meta_data$immersion_season <- ifelse(meta_data$arms %in% hot_season_arms_imm, "imm_hot", "imm_cold")
+  meta_data$recovery_season <- ifelse(meta_data$arms  %in% hot_season_arms_rec, "rec_hot", "rec_cold")
+  
+  meta_data$imm_time <- ifelse(meta_data$incubation == 0.5, "6m",
+                               ifelse(meta_data$incubation == 1.0, "1y",
+                                      ifelse(meta_data$incubation == 2.0, "2y", NA)))
+  
+  meta_data <- meta_data[,-c(3,4,5,6,7,18)]
+  
   dat <- dat[, !(names(dat) %in% meta_names)]
   
   # clean data for zero sum columns

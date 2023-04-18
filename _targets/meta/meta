@@ -2,20 +2,30 @@ name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iterat
 arms_id_2y|stem|2ecde806084ef169|4b256135b5785c65|a3dad144c40657ed|-389702700||t19459.6073942128s|e0224cf10db1a05d|62|rds|local|vector|||0||
 arms_mean|stem|d5b17e7294ce2cec|d9d9d2a7f9422569|891d01d7e5191caa|1153413326||t19363.420701085s|70a0bb6673f8b3be|137|rds|local|vector|||0.06||
 b_div|stem|bbf0ba429a48f0b4|0a18a7f0a7be8e26|8382b649c13647a9|1199142944||t19363.5550053805s|3e0fddb8c2da2da5|154|rds|local|vector|||2.99||
+boxplot_explo|function|170a812fb2267e0b|||||||||||||||
+boxplot_pool|stem|e465424eea9acf8e|53fe72af66063a42|0807ff01ed1f69c7|1819811011||t19465.6053061181s|dff9495c51b724c1|77|rds|local|vector|||16.27|le package ggpubr a été compilé avec la version R 4.2.3|
 campain_id|stem|1c41c7297df19614|89b5eccba0624514|ef46db3751d8e999|-271504171||t19459.5918809606s|710c4f02beb47ff7|57|rds|local|vector|||0||
 coldiss|function|1afee6d9f5ff500f|||||||||||||||
-data_arms|function|246d4fd5eb46d0ff|||||||||||||||
+data_arms|function|b3473da3d6c3345c|||||||||||||||
+data_pool|stem|64759ab9bb9a2576|9dd98da54cd79d44|20590145943b1ce7|-1404194966||t19465.3899541516s|8619def19bb20a44|79|rds|local|vector|||0.04||
+data_pool_mean|stem|cf4ceac2ba0939a9|9d290ee6be12009a|8d6effbd12819b7e|1690893223||t19465.3899714688s|3e4acf685da8f273|84|rds|local|vector|||0.04||
 decomp_b_div|function|ce0aa96bd3b4b026|||||||||||||||
-fun_data_mean|function|134b11bc0567e363|||||||||||||||
+fun_data_mean|function|9e83e38968af0959|||||||||||||||
 fun_nmds_plot|function|e5e845bf4f5b0c6c|||||||||||||||
+fun_perm|function|d311d83b427728e4|||||||||||||||
+fun_pool_full|function|e69b489f0683b43e|||||||||||||||
+fun_pool_mean|function|d89bbec2c021c7a8|||||||||||||||
 geoDist|function|3559387be7f2c0e9|||||||||||||||
 geoXY|function|9aa1a856fdd373d0|||||||||||||||
 mean_by_arms|function|11f0a2b3e6488feb|||||||||||||||
-mean_metadata_data|stem|061ada81792f0712|eed761c3314c3f51|1b1856dd3c50d61a|-588963438|data/derived-data/data_mean_CINA.csv*data/derived-data/metadata_mean_CINA.csv|t19464.3908946886s|65c246bc685d3b9f|9216|file|local|vector|||0.17|le package dplyr a été compilé avec la version R 4.2.3|
-metadata_data|stem|a4294553fd6cd7f8|8abba4198e15b656|26c17dde2f69e77c|970554103|C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/data_CINA_RUNA2.csv*C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/metadata_CINA_RUNA2.csv|t19461.567478853s|7f5d3849a8dc2d83|78573|file|local|vector|||1.41||
+mean_metadata_data|stem|4e78e02d05372717|eed761c3314c3f51|aebb4781a3f1a101|-588963438|data/derived-data/data_mean_CINA.csv*data/derived-data/metadata_mean_CINA.csv|t19465.3899535151s|65c246bc685d3b9f|9216|file|local|vector|||0.08||
+metadata_data|stem|a6bffbd648d5c85a|8abba4198e15b656|656d1980801b5c79|970554103|C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/data_CINA_RUNA2.csv*C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/metadata_CINA_RUNA2.csv|t19465.3899523402s|186b4eddf149943b|75013|file|local|vector|||1.59|le package dplyr a été compilé avec la version R 4.2.3|
 NMDS|function|ae44c8042649b4b4|||||||||||||||
-nmds_plot|stem|5508f6d3b14f45dc|6e5969e7a93a2556|2d12f9d749577f35|1217765512||t19464.4496407349s|63e5c65d6d1ce375|134|rds|local|vector|||1.61||
+nmds_plot|stem|5508f6d3b14f45dc|6e5969e7a93a2556|c078980c0da5fdfe|1217765512||t19465.3899743541s|63e5c65d6d1ce375|134|rds|local|vector|||0.24||
 NMDS_plot|function|e5e845bf4f5b0c6c|||||||||||||||
 north_south|function|b94162965bafeb0c|||||||||||||||
 ns|stem|16cd4a5cfba691fc|3d16f02ff5211d5d|df4920e5cf7b96fc|2014082040||t19363.4218934428s|c303d0aa7a9c897f|156|rds|local|vector|||1.3||
+pairwise.adonis2|function|f376819615b213eb|||||||||||||||
+permanova|stem|0766fe60a5f395bf|dd6d3c91549e78fa|83b2d25be30e84e6|-1858543183||t19465.389970829s|98a1b3498437d52e|529|rds|local|vector|||1.42||
 raw_data|stem|e3a7e2efababb330|a2f81db56e588783|ef46db3751d8e999|-979620141|data/raw-data/Data_sans_UNAV(2).csv|t19461.3268890639s|7d480317d81eaa09|265378|file|local|vector|||0||
+summary.pwadstrata|function|19f623099f484c05|||||||||||||||

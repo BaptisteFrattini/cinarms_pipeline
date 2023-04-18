@@ -13,9 +13,17 @@ list(
                                        arms_id = campain_id,
                                        arms_id_2years = arms_id_2y), format = "file")
   
+  ,tar_target(data_pool, fun_pool_full(meta_data = metadata_data))
+  
   ,tar_target(mean_metadata_data, fun_data_mean(meta_data = metadata_data, 
                                                 arms_id = campain_id), format = "file") 
   
+  ,tar_target(data_pool_mean, fun_pool_mean(metadata_data_mean = mean_metadata_data))
+  
   ,tar_target(nmds_plot, fun_nmds_plot(metadata_data_mean = mean_metadata_data))
-
+  
+  ,tar_target(permanova, fun_perm(metadata_data_mean = mean_metadata_data)) 
+  
+  ,tar_target(boxplot_pool, boxplot_explo(data_full_pool = data_pool, 
+                                          meta_data = metadata_data)) 
   )
