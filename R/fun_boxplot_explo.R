@@ -29,7 +29,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   data_pool$immersion_season <- meta$immersion_season
   data_pool$recovery_season <- meta$recovery_season
   #### Bare plate ####
-  
+  ggplot(data_pool, aes(x=bare_plate)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$bare_plate)
   shapiro.test(data_pool$bare_plate)
 
@@ -83,7 +84,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   
   
   #### Porifera ####
-  
+  ggplot(data_pool, aes(x=porifera)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$porifera)
   shapiro.test(data_pool$porifera)
   
@@ -136,12 +138,13 @@ boxplot_explo <- function(data_full_pool, meta_data){
   
   
   #### Ascidiacea ####
-  
+  ggplot(data_pool, aes(x=ascidiacea)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$ascidiacea)
   shapiro.test(data_pool$ascidiacea)
   
   #distrib not normal
-  
+  ?rstatix::kruskal_test
   res.aov <- rstatix::kruskal_test(data_pool, ascidiacea ~ meta$imm_time)
   p.sed <- rstatix::wilcox_test(data_pool, ascidiacea ~ imm_time, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.05)
@@ -190,6 +193,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   
 
   #### Bryozoa ####
+  ggplot(data_pool, aes(x=bryozoa)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$bryozoa)
   shapiro.test(data_pool$bryozoa)
   
@@ -243,6 +248,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   
   
   #### Annelida ####
+  ggplot(data_pool, aes(x=annelida)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$annelida)
   shapiro.test(data_pool$annelida)
   
@@ -294,6 +301,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   gg_all_annelida = cowplot::plot_grid(first_row_annelida, second_row_annelida, labels=c('', ''), ncol=1)
   
   #### foraminifera ####
+  ggplot(data_pool, aes(x=foraminifera)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$foraminifera)
   shapiro.test(data_pool$foraminifera)
   
@@ -349,6 +358,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   
   
   #### Hydrozoa ####
+  ggplot(data_pool, aes(x=Hydrozoa)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$Hydrozoa)
   shapiro.test(data_pool$Hydrozoa)
   
@@ -401,12 +412,14 @@ boxplot_explo <- function(data_full_pool, meta_data){
   gg_all_Hydrozoa = cowplot::plot_grid(first_row_Hydrozoa, second_row_Hydrozoa, labels=c('', ''), ncol=1)
   
   #### CCA ####
+  ggplot(data_pool, aes(x=CCA)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$CCA)
   shapiro.test(data_pool$CCA)
   
   #distrib not normal
   
-  res.aov <- rstatix::anova_test(data_pool, CCA ~ imm_time)
+  res.aov <- rstatix::anova_test(data_pool, CCA ~ imm_time*immersion_season)
   p.sed <- rstatix::pairwise_t_test(data_pool, CCA ~ imm_time, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.05)
   
@@ -454,6 +467,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   
   
   #### Bivalvia ####
+  ggplot(data_pool, aes(x=Bivalvia)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$Bivalvia)
   shapiro.test(data_pool$Bivalvia)
   
@@ -505,6 +520,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   second_row_Bivalvia <- cowplot::plot_grid(a2_Bivalvia, a3_Bivalvia, labels = c(" ", " "))
   gg_all_Bivalvia = cowplot::plot_grid(first_row_Bivalvia, second_row_Bivalvia, labels=c('', ''), ncol=1)
   #### other_algae ####
+  ggplot(data_pool, aes(x=other_algae)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$other_algae)
   shapiro.test(data_pool$other_algae)
   
@@ -557,6 +574,8 @@ boxplot_explo <- function(data_full_pool, meta_data){
   gg_all_other_algae = cowplot::plot_grid(first_row_other_algae, second_row_other_algae, labels=c('', ''), ncol=1)
   
   #### sediment ####
+  ggplot(data_pool, aes(x=sediment)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$sediment)
   shapiro.test(data_pool$sediment)
   
@@ -609,6 +628,9 @@ boxplot_explo <- function(data_full_pool, meta_data){
   gg_all_sediment = cowplot::plot_grid(first_row_sediment, second_row_sediment, labels=c('', ''), ncol=1)
   
   #### prokariotic_biotas ####
+  
+  ggplot(data_pool, aes(x=prokariotic_biotas)) + 
+    geom_density()
   ggpubr::ggqqplot(data_pool$prokariotic_biotas)
   shapiro.test(data_pool$prokariotic_biotas)
   

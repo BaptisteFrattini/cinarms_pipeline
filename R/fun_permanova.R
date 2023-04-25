@@ -1,4 +1,4 @@
-#' permanova
+#' permanova & simper
 #'
 #' @param metadata_data_mean the path to the raw data file
 #'
@@ -23,9 +23,30 @@ fun_perm <- function(metadata_data_mean){
   
   perm <- vegan::adonis2(df_mean ~ imm_time*immersion_season, data = meta_mean, method = "bray")
   
-  pairwise_ado <- pairwise.adonis2(df_mean ~ imm_time, data = meta_mean, method = "bray")
+  # pairwise_ado <- pairwise.adonis2(df_mean ~ imm_time, data = meta_mean, method = "bray")
 
   
+  sim_imm_tim <- summary(simper(df_mean, meta_mean$imm_time))
+  
+  sim_imm_tim_1 <- sim_imm_tim[[1]]
+  contrib_imm_tim_1 <- sim_imm_tim_1[(sim_imm_tim_1$p < 0.05) | (sim_imm_tim_1$average > 0.1),]
+  
+  sim_imm_tim_2 <- sim_imm_tim[[2]]
+  contrib_imm_tim_2 <- sim_imm_tim_2[(sim_imm_tim_2$p < 0.05) | (sim_imm_tim_2$average > 0.1),]
+  
+  sim_imm_tim_3 <- sim_imm_tim[[3]]
+  contrib_imm_tim_3 <- sim_imm_tim_3[(sim_imm_tim_3$p < 0.05) | (sim_imm_tim_3$average > 0.1),]
+  
+  levels(as.factor(c(rownames(contrib_imm_tim_1), rownames(contrib_imm_tim_2), rownames(contrib_imm_tim_3))))
+  
+  
+  sim_imm_season <- summary(simper(df_mean, meta_mean$immersion_season))
+  sim_imm_recovery <- summary(simper(df_mean, meta_mean$recovery_season))
+
+  
+  
+  return()  
+    
 }
 
   
