@@ -42,7 +42,6 @@ fun_perm <- function(metadata_data_mean){
   
   sim_imm_season <- summary(simper(df_mean, meta_mean$immersion_season))
   sim_imm_recovery <- summary(simper(df_mean, meta_mean$recovery_season))
-
   
   
   return()  

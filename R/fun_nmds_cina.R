@@ -58,6 +58,47 @@ fun_nmds_plot <- function(metadata_data_mean){
   
   dev.off()
   
+  #### Jaccard dissimilarity ####
+  #IMMERSION SEASON
+  NMDS_imm_path_jac <- here::here("outputs/NMDS/NMDS_imm_jac.pdf")
+  pdf(file = NMDS_imm_path_jac, width = 10, height = 10)
+ 
+  ord <- metaMDS(df_mean, distance = "jaccard")
+  plot(ord, main="NMDS (dist=jacc)")
+  imm <- meta_mean$immersion_season
+  ordihull(ord, imm, col=1:2, lwd=3)
+  ordiellipse(ord, imm, col=1:2, kind = "ehull", lwd=3)
+  ordiellipse(ord, imm, col=1:2, draw="polygon")
+  ordispider(ord,  imm, col=1:2, label = TRUE)
+  dev.off()
+  
+  #RECOVERY SEASON
+  # plot(ord, main="NMDS (dist=bray)")
+  NMDS_rec_path_jac <- here::here("outputs/NMDS/NMDS_rec_jac.pdf")
+  pdf(file = NMDS_rec_path_jac, width = 10, height = 10)
+  
+  ord <- metaMDS(df_mean, distance = "jaccard")
+  plot(ord, main="NMDS (dist=jacc)")
+  rec <- meta_mean$recovery_season
+  ordihull(ord, rec, col=3:4, lwd=3)
+  ordiellipse(ord, rec, col=3:4, kind = "ehull", lwd=3)
+  ordiellipse(ord, rec, col=3:4, draw="polygon")
+  ordispider(ord,  rec, col=3:4, label = TRUE)
+  dev.off()
+  
+  #IMMERSION TIME
+  NMDS_tim_path_jac <- here::here("outputs/NMDS/NMDS_tim_jac.pdf")
+  pdf(file = NMDS_tim_path_jac, width = 10, height = 10)
+  
+  ord <- metaMDS(df_mean, distance = "jaccard")
+  plot(ord, main="NMDS (dist=jacc)")
+  tim <- meta_mean$imm_time
+  ordihull(ord, tim, col=5:6, lwd=3)
+  ordiellipse(ord, tim, col=5:6, kind = "ehull", lwd=3)
+  ordiellipse(ord, tim, col=5:6, draw="polygon")
+  ordispider(ord,  tim, col=5:6, label = TRUE)
+  text(ord, display = "spec", cex=0.7, col="blue")
+  dev.off()
   
   return(NMDS_tim_path)
 }

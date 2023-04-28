@@ -817,6 +817,17 @@
         "ggplot2"
       ]
     },
+    "ggvenn": {
+      "Package": "ggvenn",
+      "Version": "0.1.10",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "76c1d0fc86099be703106f11ba755520",
+      "Requirements": [
+        "dplyr",
+        "ggplot2"
+      ]
+    },
     "glue": {
       "Package": "glue",
       "Version": "1.6.2",
