@@ -10,6 +10,8 @@ data_arms|function|b3473da3d6c3345c|||||||||||||||
 data_pool|stem|64759ab9bb9a2576|9dd98da54cd79d44|20590145943b1ce7|-1404194966||t19465.3899541516s|8619def19bb20a44|79|rds|local|vector|||0.04||
 data_pool_mean|stem|cf4ceac2ba0939a9|9d290ee6be12009a|8d6effbd12819b7e|1690893223||t19465.3899714688s|3e4acf685da8f273|84|rds|local|vector|||0.04||
 decomp_b_div|function|ce0aa96bd3b4b026|||||||||||||||
+div_explo|stem|d131862dc333587a|5e483ffd086b6638|6d42e14d67d7da82|-613222916||t19474.337581307s|44e327d1ee1978d7|43|rds|local|vector|||4.94||
+diversity_explo|function|f1a31b26f025ae69|||||||||||||||
 fun_data_mean|function|9e83e38968af0959|||||||||||||||
 fun_nmds_plot|function|e5e845bf4f5b0c6c|||||||||||||||
 fun_perm|function|087e6ef5811ec143|||||||||||||||
