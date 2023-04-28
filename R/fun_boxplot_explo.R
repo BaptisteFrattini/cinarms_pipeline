@@ -7,7 +7,7 @@
 #' 
 
 boxplot_explo <- function(data_full_pool, meta_data){
-# 
+ 
   # data_full_pool = targets::tar_read(data_pool)
   # meta_data = targets::tar_read(metadata_data)
 
@@ -59,7 +59,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of bare_plate") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -73,7 +73,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of bare_plate") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -113,7 +113,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of porifera") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -127,7 +127,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of porifera") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -168,7 +168,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of ascidiacea") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -182,7 +182,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of ascidiacea") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -223,7 +223,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of bryozoa") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -237,7 +237,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of bryozoa") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -277,7 +277,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of annelida") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -291,7 +291,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of annelida") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -331,7 +331,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of foraminifera") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -345,7 +345,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of foraminifera") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -388,7 +388,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of Hydrozoa") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -402,7 +402,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of Hydrozoa") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -442,7 +442,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of CCA") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -456,7 +456,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of CCA") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -497,7 +497,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of Bivalvia") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -511,7 +511,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of Bivalvia") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -550,7 +550,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of other_algae") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -564,7 +564,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of other_algae") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -604,7 +604,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of sediment") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -618,7 +618,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of sediment") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -659,7 +659,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Immersion season",
          y = "Percentage cover of prokariotic_biotas") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
@@ -673,7 +673,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
     labs(title = "",
          x = "Recovery season",
          y = "Percentage cover of prokariotic_biotas") +
-    scale_x_discrete(labels = c("Cold", "Hot")) +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)

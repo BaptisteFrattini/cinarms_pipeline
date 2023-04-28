@@ -36,7 +36,7 @@ fun_pool_full <- function(meta_data){
   prokariot_mean <- rowSums(data[,prokariot_columns])
   
   rest_columns <- names(data)
-  rest_columns <- rest_columns[c(1,3,17,55,56,58)]
+  rest_columns <- rest_columns[c(1,3,18,57,58,60)]
   rest_data <- data[,rest_columns]
   
   data_pool <- data.frame(porifera = spo_mean,

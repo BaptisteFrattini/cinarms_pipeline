@@ -15,8 +15,8 @@ fun_nmds_plot <- function(metadata_data_mean){
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
 
   #### Plot NMDS ####
-  
   library(vegan)
+  
   #IMMERSION SEASON
   NMDS_imm_path <- here::here("outputs/NMDS/NMDS_imm.pdf")
   pdf(file = NMDS_imm_path, width = 10, height = 10)
