@@ -28,7 +28,7 @@ fun_data_mean <- function(meta_data, arms_id){
   meta_mean$imm_time <- c(rep("6m", 3), rep("1y", 3), rep("6m", 3), rep("1y", 3), rep("2y",6))
   meta_mean$arms_name <- substr(meta_mean$arms, 1, 5)
   hot_season_arms_imm <- c("CINA1", "CINA2", "RUNA2","RUNA3")
-  hot_season_arms_rec <- c("RUNA2", "RUNA3", "CINA2", "CINA3")
+  hot_season_arms_rec <- c("RUNA2", "RUNA3", "CINA2", "CINA3","SALA1")
   meta_mean$immersion_season <- ifelse(meta_mean$arms_name %in% hot_season_arms_imm, "imm_hot", "imm_cool")
   meta_mean$recovery_season <- ifelse(meta_mean$arms_name  %in% hot_season_arms_rec, "rec_hot", "rec_cool")
   
