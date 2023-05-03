@@ -253,6 +253,14 @@ boxplot_explo <- function(data_full_pool, meta_data){
   ggpubr::ggqqplot(data_pool$annelida)
   shapiro.test(data_pool$annelida)
   
+  # # #If distrib was normal 
+  # res.aov <- rstatix::anova_test(data_pool, annelida ~ imm_time*immersion_season)
+  # # #plot the interaction
+  # interaction.plot(x.factor = meta$immersion_season,
+  #                  trace.factor = meta$imm_time,
+  #                  response = data_pool$annelida)
+
+  
   #distrib not normal
   
   res.aov <- rstatix::kruskal_test(data_pool, annelida ~ meta$imm_time)
@@ -363,6 +371,14 @@ boxplot_explo <- function(data_full_pool, meta_data){
   ggpubr::ggqqplot(data_pool$Hydrozoa)
   shapiro.test(data_pool$Hydrozoa)
   
+  # #If distrib was normal 
+  # res.aov <- rstatix::anova_test(data_pool, Hydrozoa ~ imm_time*immersion_season)
+  # #plot the interaction
+  # interaction.plot(x.factor = meta$immersion_season,
+  #                  trace.factor = meta$imm_time,
+  #                  response = data_pool$Hydrozoa)
+  
+  
   #distrib not normal
   
   res.aov <- rstatix::kruskal_test(data_pool, Hydrozoa ~ meta$imm_time)
@@ -433,6 +449,12 @@ boxplot_explo <- function(data_full_pool, meta_data){
     theme_classic() +
     stat_pvalue_manual(p.sed)
   
+  #plot the interaction
+  # ggplot(data_pool, aes(x = meta$imm_time, y = CCA, color = meta$immersion_season)) +
+  #   geom_point() +
+  #   labs(x = "Factor 1", y = "Response", color = "Factor 2") +
+  #   ggtitle("Interaction Plot") +
+  #   theme_bw()
   
   p.sed <- rstatix::pairwise_t_test(data_pool, CCA ~ immersion_season, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.5)

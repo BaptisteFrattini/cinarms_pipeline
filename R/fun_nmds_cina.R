@@ -50,10 +50,10 @@ fun_nmds_plot <- function(metadata_data_mean){
   
   plot(ord, main="NMDS (dist=bray)")
   tim <- meta_mean$imm_time
-  ordihull(ord, tim, col=5:6, lwd=3)
-  ordiellipse(ord, tim, col=5:6, kind = "ehull", lwd=3)
-  ordiellipse(ord, tim, col=5:6, draw="polygon")
-  ordispider(ord,  tim, col=5:6, label = TRUE)
+  ordihull(ord, tim, col=5:7, lwd=3)
+  ordiellipse(ord, tim, col=5:7, kind = "ehull", lwd=3)
+  ordiellipse(ord, tim, col=5:7, draw="polygon")
+  ordispider(ord,  tim, col=5:7, label = TRUE)
   #text(ord, display = "spec", cex=0.7, col="blue")
   
   dev.off()
@@ -93,10 +93,10 @@ fun_nmds_plot <- function(metadata_data_mean){
   ord <- metaMDS(df_mean, distance = "jaccard")
   plot(ord, main="NMDS (dist=jacc)")
   tim <- meta_mean$imm_time
-  ordihull(ord, tim, col=5:6, lwd=3)
-  ordiellipse(ord, tim, col=5:6, kind = "ehull", lwd=3)
-  ordiellipse(ord, tim, col=5:6, draw="polygon")
-  ordispider(ord,  tim, col=5:6, label = TRUE)
+  ordihull(ord, tim, col=5:7, lwd=3)
+  ordiellipse(ord, tim, col=5:7, kind = "ehull", lwd=3)
+  ordiellipse(ord, tim, col=5:7, draw="polygon")
+  ordispider(ord,  tim, col=5:7, label = TRUE)
   text(ord, display = "spec", cex=0.7, col="blue")
   dev.off()
   
