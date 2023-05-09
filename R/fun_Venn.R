@@ -14,7 +14,7 @@ fun_Venn <- function(metadata_data_mean){
   
   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
-  
+
   #### Venn diag with immersion time ####
   
   df_tim <- aggregate(df_mean, list(meta_mean$imm_time), mean)
@@ -54,10 +54,6 @@ fun_Venn <- function(metadata_data_mean){
   
   only_two_years_msp <- setdiff(two_years_msp, union(six_month_msp, one_year_msp))
   
-  
-  
-  
-  
   library(ggvenn)
   six_month <- my_table$msp[my_table$six_month == 1]
   one_year <- my_table$msp[my_table$one_year == 1]
@@ -67,15 +63,10 @@ fun_Venn <- function(metadata_data_mean){
             One_year = one_year,
             Two_years = two_years)
   Venn_imm_tim_path <- here::here("outputs/Venn_imm_tim.pdf")
-  pdf(file = Venn_imm_tim_path, width = 7.5, height = 7.5)
   
   venn <- ggvenn(x, fill_color = c("limegreen", "maroon1", "navy"))
   
-  
-  venn
-  
-  dev.off()
-  
+  ggsave(filename =  Venn_imm_tim_path, plot = venn , width = 6, height = 6)
 
   #### Venn diag with immersion season ####
   df_mean <- df_mean[1:12,]
@@ -99,14 +90,10 @@ fun_Venn <- function(metadata_data_mean){
   x <- list(Cool = cool_msp,
             Hot = hot_msp)
   Venn_immersion_season_path <- here::here("outputs/Venn_immersion_season.pdf")
-  pdf(file = Venn_immersion_season_path, width = 5, height = 5)
   
   venn <- ggvenn(x, fill_color = c("royalblue1", "red3"))
   
-  
-  venn
-  
-  dev.off()
+  ggsave(filename =  Venn_immersion_season_path, plot = venn , width = 6, height = 6)
   
   #### Venn diag with recovery season ####
   
@@ -128,15 +115,13 @@ fun_Venn <- function(metadata_data_mean){
   
   x <- list(Cool = cool_msp,
             Hot = hot_msp)
+  
   Venn_recovery_season_path <- here::here("outputs/Venn_recovery_season.pdf")
-  pdf(file = Venn_recovery_season_path, width = 5, height = 5)
   
   venn <- ggvenn(x, fill_color = c("royalblue1", "red3"))
   
-  
-  venn
-  
-  dev.off()
+  ggsave(filename =  Venn_recovery_season_path, plot = venn , width = 6, height = 6)
+
   return(Venn_imm_tim_path)
    
 }

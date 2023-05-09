@@ -34,6 +34,12 @@ boxplot_explo <- function(data_full_pool, meta_data){
   ggpubr::ggqqplot(data_pool$bare_plate)
   shapiro.test(data_pool$bare_plate)
 
+  # #If distrib was normal 
+  res.aov <- rstatix::anova_test(data_pool, bare_plate ~ imm_time*immersion_season)
+  #plot the interaction
+  interaction.plot(x.factor = meta$recovery_season,
+                   trace.factor = meta$imm_time,
+                   response = data_pool$bare_plate)
   #distrib not normal
   
   res.aov <- rstatix::kruskal_test(data_pool, bare_plate ~ meta$imm_time)
@@ -253,12 +259,12 @@ boxplot_explo <- function(data_full_pool, meta_data){
   ggpubr::ggqqplot(data_pool$annelida)
   shapiro.test(data_pool$annelida)
   
-  # # #If distrib was normal 
-  # res.aov <- rstatix::anova_test(data_pool, annelida ~ imm_time*immersion_season)
-  # # #plot the interaction
-  # interaction.plot(x.factor = meta$immersion_season,
-  #                  trace.factor = meta$imm_time,
-  #                  response = data_pool$annelida)
+  # #If distrib was normal
+  res.aov <- rstatix::anova_test(data_pool, annelida ~ imm_time*immersion_season)
+  # #plot the interaction
+  interaction.plot(x.factor = meta$immersion_season,
+                   trace.factor = meta$imm_time,
+                   response = data_pool$annelida)
 
   
   #distrib not normal
