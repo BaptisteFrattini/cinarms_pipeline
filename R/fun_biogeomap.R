@@ -1,10 +1,10 @@
 #' testing biogeonat
 #'
-#' @param 
+#' @param metadata_data_mean data
 #' @return the path to the subseted raw data file
 #' @export
 
-biogeo_test <- function(){
+biogeo_test <- function(metadata_data_mean){
  
   # metadata_data_mean = targets::tar_read(mean_metadata_data)
   

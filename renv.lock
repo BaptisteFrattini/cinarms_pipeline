@@ -27,10 +27,10 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-59",
+      "Version": "7.3-60",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "26570ae748e78cb2b0f56019dd2ba354",
+      "Hash": "a56a6365b3fa73293ea8d084be0d9bb0",
       "Requirements": []
     },
     "Matrix": {
@@ -308,6 +308,19 @@
         "rcdd",
         "snow"
       ]
+    },
+    "biogeonetworks": {
+      "Package": "biogeonetworks",
+      "Version": "0.1.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "biogeonetworks",
+      "RemoteUsername": "Farewe",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "caea7c693ccb3b7c2cbf059cda6debdc5920206a",
+      "Hash": "5f1076a5ecdbb43937ec358ec8d1d26b",
+      "Requirements": []
     },
     "boot": {
       "Package": "boot",
@@ -1837,10 +1850,10 @@
     },
     "targets": {
       "Package": "targets",
-      "Version": "1.0.0",
+      "Version": "1.1.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3f299989005cd3ccd101eb97623fd533",
+      "Hash": "547b1105f6a5d9ee56761562ceb63c7d",
       "Requirements": [
         "R6",
         "base64url",
@@ -1855,7 +1868,6 @@
         "tibble",
         "tidyselect",
         "vctrs",
-        "withr",
         "yaml"
       ]
     },
@@ -2003,10 +2015,10 @@
     },
     "viridis": {
       "Package": "viridis",
-      "Version": "0.6.2",
+      "Version": "0.6.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ee96aee95a7a563e5496f8991e9fde4b",
+      "Hash": "0d774f552202add033efc43a30293b3f",
       "Requirements": [
         "ggplot2",
         "gridExtra",
