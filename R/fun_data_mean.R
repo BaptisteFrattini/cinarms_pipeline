@@ -4,7 +4,7 @@
 #' @param arms_id the ID of the arms to subset for
 #'
 #' @return the path to the subseted derived data file
-#' @export
+#' @export 
 
 fun_data_mean <- function(meta_data, arms_id){
 
