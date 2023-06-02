@@ -15,6 +15,8 @@ fun_PCA <- function(metadata_data_mean){
   library(ggplot2)
   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
+  colnames(meta_mean)[5] <- "imm_season"
+  colnames(meta_mean)[6] <- "ret_season" 
   
   matrix.pa <- vegan::decostand(df_mean, "pa")
   rownames(matrix.pa) <- meta_mean$arms
@@ -39,7 +41,7 @@ fun_PCA <- function(metadata_data_mean){
   plot_pca_turn <- ggplot2::autoplot(pca.res.turn,
                                 data = meta_mean,
                                 colour = "imm_time",
-                                shape = "immersion_season") + 
+                                shape = "imm_season") + 
                    labs(title = "Turnover component")
 
           
@@ -53,7 +55,7 @@ fun_PCA <- function(metadata_data_mean){
   plot_pca_jacc <- ggplot2::autoplot(pca.res.jacc,
                                      data = meta_mean,
                                      colour = "imm_time",
-                                     shape = "immersion_season") + 
+                                     shape = "imm_season") + 
                    labs(title = "Jaccard distance")
   plot_pca_jacc
   
@@ -65,7 +67,7 @@ fun_PCA <- function(metadata_data_mean){
   plot_pca_bray <- ggplot2::autoplot(pca.res.bray,
                                      data = meta_mean,
                                      colour = "imm_time",
-                                     shape = "immersion_season") + 
+                                     shape = "imm_season") + 
                    labs(title = "Bray-Curtis distance")
   plot_pca_bray
   
@@ -78,7 +80,7 @@ fun_PCA <- function(metadata_data_mean){
   plot_pca_turn.2 <- ggplot2::autoplot(pca.res.turn,
                                      data = meta_mean,
                                      colour = "imm_time",
-                                     shape = "recovery_season") + 
+                                     shape = "ret_season") + 
     labs(title = "Turnover component")
   
   plot_pca_turn.2
@@ -90,7 +92,7 @@ fun_PCA <- function(metadata_data_mean){
   plot_pca_jacc.2 <- ggplot2::autoplot(pca.res.jacc,
                                      data = meta_mean,
                                      colour = "imm_time",
-                                     shape = "recovery_season") + 
+                                     shape = "ret_season") + 
     labs(title = "Jaccard distance")
   plot_pca_jacc.2
   
@@ -101,7 +103,7 @@ fun_PCA <- function(metadata_data_mean){
   plot_pca_bray.2 <- ggplot2::autoplot(pca.res.bray,
                                      data = meta_mean,
                                      colour = "imm_time",
-                                     shape = "recovery_season") + 
+                                     shape = "ret_season") + 
     labs(title = "Bray-Curtis distance")
   plot_pca_bray.2
   
