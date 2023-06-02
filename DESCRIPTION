@@ -35,6 +35,8 @@ Imports:
   ggvenn,
   VennDiagram,
   betapart,
-  ggtern
+  gbm,
+  plotly,
+  ggfortify
   
   

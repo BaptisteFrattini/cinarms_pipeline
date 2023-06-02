@@ -31,4 +31,12 @@ list(
   
   ,tar_target(div_explo, diversity_explo(metadata_data_mean = mean_metadata_data)) 
   
+  ,tar_target(div_beta_decomp, beta_div_decomp(metadata_data_mean = mean_metadata_data)) 
+  
+  ,tar_target(div_beta_decomp_full, beta_div_decomp_full(metadata_data_mean = mean_metadata_data))
+  
+  ,tar_target(div_alpha, fun_alpha_div(metadata_data_mean = mean_metadata_data))
+  
+  ,tar_target(PCA_fun, fun_PCA(metadata_data_mean = mean_metadata_data))
+  
   )

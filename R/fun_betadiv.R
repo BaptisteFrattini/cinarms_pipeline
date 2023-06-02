@@ -4,12 +4,15 @@
 #' @return the path to the subseted raw data file
 #' @export
 
-beta_div_decomp<- function(metadata_data_mean){
+beta_div_decomp <- function(metadata_data_mean){
   
-  # metadata_data_mean = targets::tar_read(mean_metadata_data)
+   # metadata_data_mean = targets::tar_read(mean_metadata_data)
   
-  #### Load data and meta data ####
-  
+   #### Load data and meta data ####
+  library(ggpubr)
+  library(forcats)
+  library(reshape2)
+  library(ggplot2)
   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
   
@@ -22,12 +25,12 @@ beta_div_decomp<- function(metadata_data_mean){
   mat.nest <- B.pair.pa$beta.jne
   mat.jacc <- 1-B.pair.pa$beta.jac
   
-  library(reshape2)
   
-  #### inter/intra ####
   
-  melt(mat.turn)
-  df.turn <- melt(mat.turn, varnames = c("row", "col"))
+   #### inter/intra ####
+  
+  
+  df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
   df.turn <- subset(df.turn, row != col) 
   
   df.turn$row <- substr(df.turn$row, 1, 5)
@@ -57,15 +60,23 @@ beta_div_decomp<- function(metadata_data_mean){
   decomp.pa$Jaccard_diss <- abs(as.numeric(decomp.pa$Jaccard_diss))
   decomp.pa$Nestedness <- abs(as.numeric(decomp.pa$Nestedness))
   decomp.pa$Turnover <- abs(as.numeric(decomp.pa$Turnover))
-  library(ggplot2)
  
-   
-  res.aov <- rstatix::anova_test(decomp.pa, Turnover ~ intrasite)
-  res.kru <- rstatix::kruskal_test(decomp.pa, Turnover ~ intrasite)
-  p.sed <- rstatix::wilcox_test(decomp.pa, Turnover ~ intrasite, p.adjust.method = "bonferroni")
+ 
+  # Turnover
+  # res.aov <- rstatix::anova_test(decomp.pa, Turnover ~ intrasite)
+  # res.kru <- rstatix::kruskal_test(decomp.pa, Turnover ~ intrasite)
+  
+  ggplot(decomp.pa, aes(x=Turnover)) + 
+    geom_density() #Données approximativement normales
+  bartlett.test(Turnover ~ intrasite, data = decomp.pa) #Homoscedasticité OK
+  ggpubr::ggqqplot(decomp.pa$Turnover) #QQplot OK
+  shapiro.test(decomp.pa$Turnover) #Shapiro test not OK
+
+  
+  p.sed <- rstatix::t_test(decomp.pa, Turnover ~ intrasite) #parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intrainter = c("between ARMS \n of the same batch", "between ARMS \n of different batch")
-  g <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
+  intrainter = c("between ARMS \n of the \n same batch", "between ARMS \n of different \n batch")
+  a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "",
          x = "Comparisons",
@@ -74,11 +85,54 @@ beta_div_decomp<- function(metadata_data_mean){
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
     stat_pvalue_manual(p.sed) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  g
-
-  path_to_turn_intrainter <- paste0("outputs/beta/turnover_intrainter.pdf")
-  ggsave(filename = path_to_turn_intrainter, plot = v, width = 6, height = 6)
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+  a
+   
+  #Nestedness
+  ggplot(decomp.pa, aes(x=Nestedness)) + 
+    geom_density() #Données pas normales normales
+  bartlett.test(Nestedness ~ intrasite, data = decomp.pa) #Homoscedasticité not OK
+  ggpubr::ggqqplot(decomp.pa$Nestedness) #QQplot not OK
+  shapiro.test(decomp.pa$Nestedness) #Shapiro not OK 
+  
+  p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ intrasite, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+  intrainter = c("between ARMS \n of the same batch", "between ARMS \n of different batch")
+  b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
+    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Nestedness component") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intrainter) +
+    theme_classic() +
+    stat_pvalue_manual(p.sed) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+  b
+  
+  #Jaccard
+  ggplot(decomp.pa, aes(x=Jaccard_diss)) + 
+    geom_density() #Données pas normales
+  bartlett.test(Jaccard_diss ~ intrasite, data = decomp.pa) #Homoscedasticité OK
+  ggpubr::ggqqplot(decomp.pa$Jaccard_diss) #QQplot Not OK
+  shapiro.test(decomp.pa$Jaccard_diss) #not OK
+  
+  p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ intrasite, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+  intrainter = c("between ARMS \n of the \n same batch", "between ARMS \n of different \n batch")
+  c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
+    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Jaccard similarity component") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intrainter) +
+    theme_classic() +
+    stat_pvalue_manual(p.sed) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+  c
+   # path_to_turn_intrainter <- paste0("outputs/beta/turnover_intrainter.pdf")
+   # ggsave(filename = path_to_turn_intrainter, plot = v, width = 6, height = 6)
    
    #### Immersion time ####
    #turnover
@@ -146,17 +200,21 @@ beta_div_decomp<- function(metadata_data_mean){
                              jacc = imm_jacc,
                              comp_imm = df.turn.comp.imm$comp_imm)
    
+   #Turnover
+   ggplot(df_imm_time, aes(x=turn)) + 
+     geom_density() #Données approximativement normales
+   bartlett.test(turn ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_imm_time$turn) #QQplot OK
+   shapiro.test(df_imm_time$turn) #Shapiro OK 
    
-   res.aov <- rstatix::anova_test(df_imm_time, turn ~ comp_imm)
-   res.kru <- rstatix::kruskal_test(df_imm_time, turn ~ comp_imm)
-   p.sed <- rstatix::wilcox_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
+   res.aov <- rstatix::anova_test(df_imm_time, turn ~ comp_imm) #parametrique
+   p.sed <- rstatix::pairwise_t_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
    
-   library(ggpubr)
-   library(forcats)
-   comp = c("between six months \n and one year", "between one year \n and two years", "between six months \n and two years")
    
-   v <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
+   comp = c("between six months \n and \n one year", "between one year \n and \n two years", "between six months \n and \n two years")
+   
+   d <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
      geom_boxplot(fill =  c("coral","coral","coral") ) +
      labs(title = "",
           x = "Comparisons",
@@ -165,15 +223,22 @@ beta_div_decomp<- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed)  +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1))
-   v
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+   d
+   
+   
+   #Nestedness
+   ggplot(df_imm_time, aes(x=nest)) + 
+     geom_density() #Données approximativement normales
+   bartlett.test(nest ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_imm_time$nest) #QQplot OK
+   shapiro.test(df_imm_time$nest) #Shapiro OK 
    
    res.aov <- rstatix::anova_test(df_imm_time, nest ~ comp_imm)
-   res.kru <- rstatix::kruskal_test(df_imm_time, nest ~ comp_imm)
-   p.sed <- rstatix::wilcox_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
+   p.sed <- rstatix::pairwise_t_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
    
-   f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
+   e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
      geom_boxplot(fill =  c("coral","coral","coral") ) +
      labs(title = "",
           x = "Comparisons",
@@ -182,15 +247,21 @@ beta_div_decomp<- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1))
-   f
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+   e
    
-   res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm)
-   res.kru <- rstatix::kruskal_test(df_imm_time, jacc ~ comp_imm)
-   p.sed <- rstatix::wilcox_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
+   #Jaccard
+   ggplot(df_imm_time, aes(x=jacc)) + 
+     geom_density() #Données approximativement normales
+   bartlett.test(jacc ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_imm_time$jacc) #QQplot OK
+   shapiro.test(df_imm_time$jacc) #Shapiro not OK 
+   
+   res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm) #parametrique
+   p.sed <- rstatix::pairwise_t_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
    
-   m <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
+   f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
      geom_boxplot(fill =  c("coral","coral","coral") ) +
      labs(title = "",
           x = "Comparisons",
@@ -199,16 +270,11 @@ beta_div_decomp<- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1))
-   m
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+   f
    
-   fin <- cowplot::plot_grid(v,f,m,
-                             ncol = 3,
-                             nrow = 1)
-   
-   
-   path_to_boxplot <- paste0("outputs/beta/boxplot_imm_tim.pdf")
-   ggsave(filename =  path_to_boxplot, plot = fin, width = 25, height = 16)
+   # path_to_boxplot <- paste0("outputs/beta/boxplot_imm_tim.pdf")
+   # ggsave(filename =  path_to_boxplot, plot = fin, width = 25, height = 16)
 
    #### deployment season ####
    #turnover
@@ -276,11 +342,16 @@ beta_div_decomp<- function(metadata_data_mean){
                              nest = deploy_nest,
                              jacc = deploy_jacc,
                              comp_deploy = df.turn.comp.deploy$comp_deploy)
-   
+   #turn
+   ggplot(df_deploy, aes(x=turn)) + 
+     geom_density() #Données pas normales
+   bartlett.test(turn ~ comp_deploy, data = df_deploy) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_deploy$turn) #QQplot not OK
+   shapiro.test(df_deploy$turn) #Shapiro not OK 
  
-   p.sed <- rstatix::t_test(df_deploy, turn ~ comp_deploy, p.adjust.method = "bonferroni")
+   p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-   depl = c("between same \n deployment season", "between different \n deployment season")
+   depl = c("between same \n deployment \n season", "between different \n deployment \n season")
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
      labs(title = "",
@@ -290,9 +361,64 @@ beta_div_decomp<- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
    g
-}
+   
+   #nest
+   ggplot(df_deploy, aes(x=nest)) + 
+     geom_density() #Données approximativement normales
+   bartlett.test(nest ~ comp_deploy, data = df_deploy) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_deploy$nest) #QQplot approximativement OK
+   shapiro.test(df_deploy$nest) #Shapiro not OK 
+   
+   p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   depl = c("between same \n deployment \n season", "between different \n deployment \n season")
+   h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
+     geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
+     labs(title = "",
+          x = "Comparisons",
+          y = "Nestedness component") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=depl) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+   h
+   
+   #jacc
+   ggplot(df_deploy, aes(x=jacc)) + 
+     geom_density() #Données pas normales
+   bartlett.test(jacc ~ comp_deploy, data = df_deploy) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_deploy$jacc) #QQplot not OK
+   shapiro.test(df_deploy$jacc) #Shapiro not OK
+  
+   p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   depl = c("between same \n deployment \n season", "between different \n deployment \n season")
+   i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
+     geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
+     labs(title = "",
+          y = "Jaccard similarity component") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=depl) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+   i
+   
+   
+   fin <- cowplot::plot_grid(a,b,c,d,e,f,g,h,i,
+                             ncol = 3,
+                             nrow = 3)
+   
+   path_to_boxplot <- paste0("outputs/beta/boxplot_beta.pdf")
+   ggsave(filename =  path_to_boxplot, plot = fin, width = 15, height = 13.5)
+   
+   return(path_to_boxplot)
+   
+   
+   }
 
 
 

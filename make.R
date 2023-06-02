@@ -24,6 +24,6 @@ renv::snapshot()
 # make the pipeline
 targets::tar_visnetwork()
 targets::tar_make()
-targets::tar_visnetwork()
+stargets::tar_visnetwork()
 
 
