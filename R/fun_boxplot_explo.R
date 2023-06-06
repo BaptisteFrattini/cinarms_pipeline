@@ -143,60 +143,112 @@ boxplot_explo <- function(data_full_pool, meta_data){
   gg_all_porifera = cowplot::plot_grid(first_row_porifera, second_row_porifera, labels=c('', ''), ncol=1)
   
   
-  #### Ascidiacea ####
-  ggplot(data_pool, aes(x=ascidiacea)) + 
+  #### Ascidiacea colonial####
+  ggplot(data_pool, aes(x=ascidiacea_c)) + 
     geom_density()
-  ggpubr::ggqqplot(data_pool$ascidiacea)
-  shapiro.test(data_pool$ascidiacea)
+  ggpubr::ggqqplot(data_pool$ascidiacea_c)
+  shapiro.test(data_pool$ascidiacea_c)
   
   #distrib not normal
   ?rstatix::kruskal_test
-  res.aov <- rstatix::kruskal_test(data_pool, ascidiacea ~ meta$imm_time)
-  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea ~ imm_time, p.adjust.method = "bonferroni")
+  res.aov <- rstatix::kruskal_test(data_pool, ascidiacea_c ~ meta$imm_time)
+  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea_c ~ imm_time, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.05)
   
-  a1_ascidiacea <- ggplot(data_pool, aes(x = fct_relevel(meta$imm_time, "6m", "1y", "2y"), y = ascidiacea)) +
+  a1_ascidiacea_c <- ggplot(data_pool, aes(x = fct_relevel(meta$imm_time, "6m", "1y", "2y"), y = ascidiacea_c)) +
     geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
     labs(title = "",
          x = "Immersion time",
-         y = "Percentage cover of ascidiacea") +
+         y = "Percentage cover of ascidiacea_c") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
     stat_pvalue_manual(p.sed)
 
   
-  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea ~ immersion_season, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea_c ~ immersion_season, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.5)
   
-  a2_ascidiacea <- ggplot(data_pool, aes(x = meta$immersion_season, y = ascidiacea)) +
+  a2_ascidiacea_c <- ggplot(data_pool, aes(x = meta$immersion_season, y = ascidiacea_c)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
          x = "Immersion season",
-         y = "Percentage cover of ascidiacea") +
+         y = "Percentage cover of ascidiacea_c") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
   
   
-  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea ~ recovery_season, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea_c ~ recovery_season, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.5)
   
-  a3_ascidiacea <- ggplot(data_pool, aes(x = meta$recovery_season, y = ascidiacea)) +
+  a3_ascidiacea_c <- ggplot(data_pool, aes(x = meta$recovery_season, y = ascidiacea_c)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
          x = "Recovery season",
-         y = "Percentage cover of ascidiacea") +
+         y = "Percentage cover of ascidiacea_c") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
     theme_classic() +
     stat_pvalue_manual(p.sed)
   
-  first_row_ascidiacea <- cowplot::plot_grid(a1_ascidiacea, labels = c("Ascidiacea"))
-  second_row_ascidiacea <- cowplot::plot_grid(a2_ascidiacea, a3_ascidiacea, labels = c(" ", " "))
-  gg_all_ascidiacea = cowplot::plot_grid(first_row_ascidiacea, second_row_ascidiacea, labels=c('', ''), ncol=1)
+  first_row_ascidiacea_c <- cowplot::plot_grid(a1_ascidiacea_c, labels = c("ascidiacea_c"))
+  second_row_ascidiacea_c <- cowplot::plot_grid(a2_ascidiacea_c, a3_ascidiacea_c, labels = c(" ", " "))
+  gg_all_ascidiacea_c = cowplot::plot_grid(first_row_ascidiacea_c, second_row_ascidiacea_c, labels=c('', ''), ncol=1)
+  #### Ascidiacea solitary ####
+  ggplot(data_pool, aes(x=ascidiacea_s)) + 
+    geom_density()
+  ggpubr::ggqqplot(data_pool$ascidiacea_s)
+  shapiro.test(data_pool$ascidiacea_s)
   
+  #distrib not normal
+  ?rstatix::kruskal_test
+  res.aov <- rstatix::kruskal_test(data_pool, ascidiacea_s ~ meta$imm_time)
+  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea_s ~ imm_time, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.05)
+  
+  a1_ascidiacea_s <- ggplot(data_pool, aes(x = fct_relevel(meta$imm_time, "6m", "1y", "2y"), y = ascidiacea_s)) +
+    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    labs(title = "",
+         x = "Immersion time",
+         y = "Percentage cover of ascidiacea_s") +
+    scale_x_discrete(labels=time) +
+    theme(legend.position = "none")+
+    theme_classic() +
+    stat_pvalue_manual(p.sed)
+  
+  
+  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea_s ~ immersion_season, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.5)
+  
+  a2_ascidiacea_s <- ggplot(data_pool, aes(x = meta$immersion_season, y = ascidiacea_s)) +
+    geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
+    labs(title = "",
+         x = "Immersion season",
+         y = "Percentage cover of ascidiacea_s") +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
+    theme(legend.position = "none") +
+    theme_classic() +
+    stat_pvalue_manual(p.sed)
+  
+  
+  p.sed <- rstatix::wilcox_test(data_pool, ascidiacea_s ~ recovery_season, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.5)
+  
+  a3_ascidiacea_s <- ggplot(data_pool, aes(x = meta$recovery_season, y = ascidiacea_s)) +
+    geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
+    labs(title = "",
+         x = "Recovery season",
+         y = "Percentage cover of ascidiacea_s") +
+    scale_x_discrete(labels = c("Cool", "Hot")) +
+    theme(legend.position = "none") +
+    theme_classic() +
+    stat_pvalue_manual(p.sed)
+  
+  first_row_ascidiacea_s <- cowplot::plot_grid(a1_ascidiacea_s, labels = c("ascidiacea_s"))
+  second_row_ascidiacea_s <- cowplot::plot_grid(a2_ascidiacea_s, a3_ascidiacea_s, labels = c(" ", " "))
+  gg_all_ascidiacea_s = cowplot::plot_grid(first_row_ascidiacea_s, second_row_ascidiacea_s, labels=c('', ''), ncol=1)
 
   #### Bryozoa ####
   ggplot(data_pool, aes(x=bryozoa)) + 
@@ -716,18 +768,20 @@ boxplot_explo <- function(data_full_pool, meta_data){
                             gg_all_foraminifera,
                             gg_all_annelida,
                             gg_all_bryozoa,
+                            gg_all_ascidiacea_c,
+                            gg_all_ascidiacea_s,
                             gg_all_Hydrozoa,
-                            gg_all_ascidiacea,
+                            gg_all_Bivalvia,
                             gg_all_porifera,
                             gg_all_prokariotic_biotas,
                             gg_all_bare_plate,
                             gg_all_sediment,
-                            ncol = 5,
+                            ncol = 6,
                             nrow = 2)
   
   
   path_to_boxplot <- paste0("outputs/boxplot_pool.pdf")
-  ggsave(filename =  path_to_boxplot , width = 25, height = 16)
+  ggsave(filename =  path_to_boxplot , width = 27, height = 17)
   
   return(path_to_boxplot)
 }

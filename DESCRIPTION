@@ -37,6 +37,7 @@ Imports:
   betapart,
   gbm,
   plotly,
-  ggfortify
+  ggfortify,
+  factoextra
   
   

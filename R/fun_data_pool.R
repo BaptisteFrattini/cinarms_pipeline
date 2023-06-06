@@ -20,8 +20,12 @@ fun_pool_full <- function(meta_data){
   bryo_columns <- grep("bryo", names(data), value = TRUE)
   bryo_mean <- rowSums(data[,bryo_columns])
   
-  asc_columns <- grep("asc", names(data), value = TRUE)
-  asc_mean <- rowSums(data[,asc_columns])
+  
+  ascc_columns <- grep("ascc", names(data), value = TRUE)
+  ascc_mean <- rowSums(data[,ascc_columns])
+  
+  ascs_columns <- grep("ascs", names(data), value = TRUE)
+  ascs_mean <- rowSums(data[,ascs_columns])
   
   for_columns <- grep("for", names(data), value = TRUE)
   for_mean <- rowSums(data[,for_columns])
@@ -41,7 +45,8 @@ fun_pool_full <- function(meta_data){
   
   data_pool <- data.frame(porifera = spo_mean,
                           bryozoa = bryo_mean,
-                          ascidiacea = asc_mean,
+                          ascidiacea_c = ascc_mean,
+                          ascidiacea_s = ascs_mean,
                           foraminifera = for_mean,
                           other_algae = algae_mean,
                           annelida = worm_mean,
