@@ -12,15 +12,16 @@ fun_alpha_div <- function(metadata){
   meta_mean <- read.csv(metadata[grepl("metadata", metadata)], header = TRUE)
   df_mean_pa <- vegan::decostand(df_mean, "pa")
  
+  div_alpha_name <- paste0("div_alpha_total.pdf")
+  div_alpha_path <- here::here("outputs/", div_alpha_name)
+  pdf(file =  div_alpha_path, width = 12, height = 7)
+  
+  par(mfrow = c(2, 3))
   #### All ARMS pooled ####
   
   s <- vegan::specaccum(df_mean_pa, method = "random", permutations = 999,
                         conditioned =TRUE) 
   pool <- vegan::specpool(df_mean_pa)
-  
-  div_alpha_name <- paste0("div_alpha_all.pdf")
-  div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 8, height = 6)
   
   plot(s, 
        ci.type="poly",
@@ -34,12 +35,12 @@ fun_alpha_div <- function(metadata){
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
-  text(150,
+  text(120,
        10,
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
   
-  dev.off()
+
   
   #### Only ARMS of 6 months ####
   
@@ -50,9 +51,6 @@ fun_alpha_div <- function(metadata){
   s
   pool <- vegan::specpool(df_mean_pa_six)
   
-  div_alpha_name <- paste0("div_alpha_six.pdf")
-  div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 8, height = 6)
   
   plot(s, 
        ci.type="poly",
@@ -65,12 +63,12 @@ fun_alpha_div <- function(metadata){
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
-  text(60,
+  text(50,
        10,
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
   
-  dev.off()
+  
   
   #### Only ARMS of 1 year ####
   df_mean_pa_one <- subset(df_mean_pa, meta_mean$imm_time == "1y")
@@ -79,10 +77,7 @@ fun_alpha_div <- function(metadata){
                         conditioned =TRUE) 
   s
   pool <- vegan::specpool(df_mean_pa_one)
-  
-  div_alpha_name <- paste0("div_alpha_one.pdf")
-  div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 8, height = 6)
+ 
   
   plot(s, 
        ci.type="poly",
@@ -96,12 +91,11 @@ fun_alpha_div <- function(metadata){
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
-  text(45,
+  text(51,
        10,
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
   
-  dev.off()
   
   #### Only ARMS of 2 years ####
   df_mean_pa_two <- subset(df_mean_pa, meta_mean$imm_time == "2y")
@@ -111,9 +105,7 @@ fun_alpha_div <- function(metadata){
   s
   pool <- vegan::specpool(df_mean_pa_two)
   
-  div_alpha_name <- paste0("div_alpha_two.pdf")
-  div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 8, height = 6)
+
   
   plot(s, 
        ci.type="poly",
@@ -132,7 +124,7 @@ fun_alpha_div <- function(metadata){
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
   
-  dev.off()
+
   
   #### Only ARMS deployed in hot season ####
   df_mean_pa_hot <- subset(df_mean_pa, meta_mean$immersion_season == "imm_hot")
@@ -143,9 +135,7 @@ fun_alpha_div <- function(metadata){
   s
   pool <- vegan::specpool(df_mean_pa_hot)
   
-  div_alpha_name <- paste0("div_alpha_hot.pdf")
-  div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 8, height = 6)
+  
   
   plot(s, 
        ci.type="poly",
@@ -163,7 +153,7 @@ fun_alpha_div <- function(metadata){
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
   
-  dev.off()
+ 
   
   #### Only ARMS deployed in cool season ####
   df_mean_pa_cool <- subset(df_mean_pa, meta_mean$immersion_season == "imm_cold")
@@ -173,9 +163,7 @@ fun_alpha_div <- function(metadata){
                         conditioned =TRUE) 
   pool <- vegan::specpool(df_mean_pa_cool)
   
-  div_alpha_name <- paste0("div_alpha_cool.pdf")
-  div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 8, height = 6)
+
   
   plot(s, 
        ci.type="poly",
@@ -189,7 +177,7 @@ fun_alpha_div <- function(metadata){
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
-  text(65,
+  text(49,
        10,
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
