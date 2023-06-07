@@ -136,21 +136,21 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   a <- fviz_pca_biplot(pca.res.bray,
                        col.ind = meta_mean$imm_time,
                        addEllipses = TRUE,
-                       ellipse.type = "confidence",
+                       ellipse.type = "convex",
                        col.var = "purple")
   
   
   b <- fviz_pca_biplot(pca.res.bray,
                   col.ind = meta_mean$imm_season,
                   addEllipses = TRUE,
-                  ellipse.type = "confidence",
+                  ellipse.type = "convex",
                   col.var = "purple")
   
   
   c <- fviz_pca_biplot(pca.res.bray, 
                   col.ind = meta_mean$ret_season,
                   addEllipses = TRUE,
-                  ellipse.type = "confidence",
+                  ellipse.type = "convex",
                   col.var = "purple")
   
   meta_mean$comb <- paste(meta_mean$imm_time, meta_mean$imm_season)
@@ -159,7 +159,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   d <- fviz_pca_biplot(pca.res.bray,
                   col.ind = meta_mean$comb,
                   addEllipses = TRUE,
-                  ellipse.type = "confidence",
+                  ellipse.type = "convex",
                   col.var = "purple")
   
   
