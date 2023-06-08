@@ -56,8 +56,6 @@ diversity_explo <- function(metadata_data_mean){
   # Trouver les noms des colonnes qui ne présentent pas de 0
   names(df_pa)[colSums(df_pa == 0) == 0]
   
-  #### sur toute les plaques ####
-  
   
   return(path_to_box_div)
       

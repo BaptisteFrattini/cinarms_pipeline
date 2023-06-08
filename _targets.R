@@ -37,7 +37,7 @@ list(
   
   ,tar_target(div_alpha, fun_alpha_div(metadata = metadata_data))
   
-  ,tar_target(PCA_fun, fun_PCA(metadata_data_mean = mean_metadata_data,
+  ,tar_target(PCA, fun_PCA(metadata_data_mean = mean_metadata_data,
                                data_mean_pool = data_pool_mean))
   
   )
