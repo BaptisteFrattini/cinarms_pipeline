@@ -26,11 +26,27 @@ diversity_explo <- function(metadata_data_mean){
   library(ggpubr)
   library(forcats)
   library(ggplot2)
+  
+  ggplot(data_div, aes(x=s)) + 
+    geom_density() #Normality OK
+  ggpubr::ggqqplot(data_div$s) #Normality ok
+  shapiro.test(data_div$s) #Normality OK
+  
+  #distrib not normal
+  ?rstatix::kruskal_test
+  res.aov <- rstatix::anova_test(data_div, s ~ imm_time)
+  p.sed <- rstatix::pairwise_t_test(data_div, s ~ imm_time, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.05)
+  
+  
   ff <- ggplot(data_div, aes(x = fct_relevel(imm_time, "6m", "1y", "2y"), y = S)) +
     geom_boxplot(fill =  c("cadetblue2","cadetblue3","cadetblue4")) +
     labs(title = "",
          x = "Immersion time",
-         y = "Average species richness in an ARMS") 
+         y = "Average species richness in an ARMS") +
+    theme_classic() +
+    stat_pvalue_manual(p.sed)
+  
   path_to_box_div <- paste0("outputs/box_div.pdf")
   ggsave(filename =  path_to_box_div , width = 6, height = 6)
   
@@ -40,6 +56,7 @@ diversity_explo <- function(metadata_data_mean){
   # Trouver les noms des colonnes qui ne présentent pas de 0
   names(df_pa)[colSums(df_pa == 0) == 0]
   
+  #### sur toute les plaques ####
   
   
   return(path_to_box_div)

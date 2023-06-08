@@ -8,7 +8,7 @@
 
 fun_perm <- function(metadata_data_mean){
   
-  metadata_data_mean = targets::tar_read(mean_metadata_data)
+  # metadata_data_mean = targets::tar_read(mean_metadata_data)
   
   #### Load data and meta data ####
   
@@ -23,7 +23,7 @@ fun_perm <- function(metadata_data_mean){
   
   meta_mean$imm_rec <- paste(meta_mean$immersion_season, meta_mean$recovery_season)
   
-  perm <- vegan::adonis2(df_mean ~ imm_time+immersion_season, data = meta_mean, method = "bray", permutations = 99999)
+  perm <- vegan::adonis2(df_mean ~ imm_time*immersion_season, data = meta_mean, method = "bray", permutations = 99999)
 
   
   # Sans RUNA3

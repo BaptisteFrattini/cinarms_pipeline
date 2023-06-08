@@ -16,6 +16,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   library(ggplot2)
   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
+  rownames(df_mean) = meta_mean$arms
   colnames(meta_mean)[5] <- "imm_season"
   colnames(meta_mean)[6] <- "ret_season" 
   
@@ -121,8 +122,41 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   path_to_PCA <- paste0("outputs/beta/PCA.pdf")
   ggsave(filename =  path_to_PCA, plot = fin, width = 19, height = 14)
   
+  #with fviz and selection of var 
+  sim_imm_tim <- summary(vegan::simper(df_mean, meta_mean$imm_time))
+ 
+  sim_imm_tim_1 <- sim_imm_tim[[1]]
+  contrib_imm_tim_1 <- sim_imm_tim_1[(sim_imm_tim_1$p < 0.05) & (sim_imm_tim_1$average > 0.0005),]
+  
+  sim_imm_tim_2 <- sim_imm_tim[[2]]
+  contrib_imm_tim_2 <- sim_imm_tim_2[(sim_imm_tim_2$p < 0.05) & (sim_imm_tim_2$average > 0.0005),]
+  
+  sim_imm_tim_3 <- sim_imm_tim[[3]]
+  contrib_imm_tim_3 <- sim_imm_tim_3[(sim_imm_tim_3$p < 0.05) & (sim_imm_tim_3$average > 0.0005),]
+  
+  sel <- levels(as.factor(c(rownames(contrib_imm_tim_1), rownames(contrib_imm_tim_2), rownames(contrib_imm_tim_3))))
+  
+  library(factoextra)
+  pca.res.full <- prcomp(df_mean,
+                         center = TRUE,
+                         scale. = TRUE)
+  
+  w <- fviz_pca_biplot(pca.res.full,
+                       col.ind = meta_mean$imm_time,
+                       addEllipses = TRUE,
+                       ellipse.type = "convex",
+                       select.var = list(contrib = 20),
+                       col.var = "purple",
+                       repel = TRUE,
+                       pointsize = 3,
+                       labelsize = 5)
   
   
+  
+  path_to_PCA_select <- paste0("outputs/PCA_select.pdf")
+  ggsave(filename =  path_to_PCA_select, plot = w, width = 12, height = 10)
+  
+
   #### With species pool ----------
   #### Load data and meta data ========
   data_pool <- read.csv(data_mean_pool, header = TRUE, row.names = "X")
@@ -132,7 +166,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                          center = TRUE,
                          scale. = TRUE)
   ?prcomp
-  library(factoextra)
+  
   a <- fviz_pca_biplot(pca.res.bray,
                        col.ind = meta_mean$imm_time,
                        addEllipses = TRUE,
@@ -179,8 +213,8 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                             ncol = 2,
                             nrow = 2)
   
-  path_to_PCA_pool <- paste0("outputs/beta/PCA_pool.pdf")
-  ggsave(filename =  path_to_PCA_pool, plot = fin, width = 10, height = 8)
+  path_to_PCA_pool <- paste0("outputs/PCA_pool.pdf")
+  ggsave(filename =  path_to_PCA_pool, plot = fin, width = 15, height = 12)
   
   
   return(path_to_PCA)
