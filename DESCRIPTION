@@ -38,6 +38,7 @@ Imports:
   gbm,
   plotly,
   ggfortify,
-  factoextra
+  factoextra,
+  lmPerm
   
   

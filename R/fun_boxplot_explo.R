@@ -29,18 +29,46 @@ boxplot_explo <- function(data_full_pool, meta_data){
   data_pool$immersion_season <- meta$immersion_season
   data_pool$recovery_season <- meta$recovery_season
   #### Bare plate ####
+  
   ggplot(data_pool, aes(x=bare_plate)) + 
-    geom_density()
-  ggpubr::ggqqplot(data_pool$bare_plate)
-  shapiro.test(data_pool$bare_plate)
-
-  # #If distrib was normal 
-  res.aov <- rstatix::anova_test(data_pool, bare_plate ~ imm_time*immersion_season)
-  #plot the interaction
-  interaction.plot(x.factor = meta$recovery_season,
-                   trace.factor = meta$imm_time,
-                   response = data_pool$bare_plate)
+    geom_density()                        #Data not normal
+  ggpubr::ggqqplot(data_pool$bare_plate)  #Data not normal
+  shapiro.test(data_pool$bare_plate)      #Data not normal
+  res.aov2 <- aov(bare_plate ~ imm_time*immersion_season, data=data_pool)
+  residuals <- resid(res.aov2)
+  plot(data_pool$bare_plate, residuals, xlab="Measurement", ylab="Residuals") # really bad
+  abline(0,0)
+  ggplot() +
+    geom_qq(aes(sample = rstandard(mod))) +
+    geom_abline(color = "red") +
+    coord_fixed() # QQplot on residuals --> not OK
+  
+  # # #If distrib was normal 
+  # res.aov <- rstatix::anova_test(data_pool, bare_plate ~ imm_time*immersion_season)
+  # 
+  # #plot the interaction
+  # interaction.plot(x.factor = meta$recovery_season,
+  #                  trace.factor = meta$imm_time,
+  #                  response = data_pool$bare_plate)
   #distrib not normal
+  
+  library(lmPerm)
+  mod <- aovp(bare_plate ~ imm_time*immersion_season,
+              data = data_pool,
+              perm="Exact") #Anova par permutation
+  summary(mod)
+  # checking residuals
+  residuals <- resid(mod)
+  plot(data_pool$bare_plate,
+       residuals,
+       xlab="Measurement",
+       ylab="Residuals") # not OK
+  abline(0,0)
+  
+  ggplot() +
+    geom_qq(aes(sample = rstandard(mod))) +
+    geom_abline(color = "red") +
+    coord_fixed() # QQplot on residuals --> not OK
   
   res.aov <- rstatix::kruskal_test(data_pool, bare_plate ~ meta$imm_time)
   p.sed <- rstatix::wilcox_test(data_pool, bare_plate ~ imm_time, p.adjust.method = "bonferroni")

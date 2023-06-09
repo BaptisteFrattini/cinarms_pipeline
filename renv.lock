@@ -1322,6 +1322,14 @@
         "lpSolve"
       ]
     },
+    "lmPerm": {
+      "Package": "lmPerm",
+      "Version": "2.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8dcc35516af6ccd602a5a171637c8239",
+      "Requirements": []
+    },
     "lme4": {
       "Package": "lme4",
       "Version": "1.1-33",
