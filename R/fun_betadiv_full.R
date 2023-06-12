@@ -75,7 +75,7 @@ beta_div_decomp_full <- function(metadata_data_mean){
   
   p.sed <- rstatix::t_test(decomp.pa, Turnover ~ intrasite) #parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intrainter = c("between ARMS \n of the \n same batch", "between ARMS \n of different \n batch")
+  intrainter = c("between ARMS \n of the \n same set", "between ARMS \n of different \n set")
   a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "",
@@ -97,7 +97,7 @@ beta_div_decomp_full <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ intrasite, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intrainter = c("between ARMS \n of the same batch", "between ARMS \n of different batch")
+  intrainter = c("between ARMS \n of the same set", "between ARMS \n of different set")
   b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "",
@@ -119,7 +119,7 @@ beta_div_decomp_full <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ intrasite, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intrainter = c("between ARMS \n of the \n same batch", "between ARMS \n of different \n batch")
+  intrainter = c("between ARMS \n of the \n same set", "between ARMS \n of different \n set")
   c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "",

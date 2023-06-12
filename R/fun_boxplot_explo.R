@@ -28,6 +28,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   data_pool$imm_time <- meta$imm_time
   data_pool$immersion_season <- meta$immersion_season
   data_pool$recovery_season <- meta$recovery_season
+  
   #### Bare plate ####
   
   ggplot(data_pool, aes(x=bare_plate)) + 

@@ -29,6 +29,9 @@ list(
   ,tar_target(boxplot_pool, boxplot_explo(data_full_pool = data_pool, 
                                           meta_data = metadata_data))
   
+  ,tar_target(boxplot_pool_alt, boxplot_explo_alt(data_full_pool = data_pool, 
+                                                  meta_data = metadata_data))
+  
   ,tar_target(div_explo, diversity_explo(metadata_data_mean = mean_metadata_data)) 
   
   ,tar_target(div_beta_decomp, beta_div_decomp(metadata_data_mean = mean_metadata_data)) 
