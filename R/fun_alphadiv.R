@@ -30,7 +30,8 @@ fun_alpha_div <- function(metadata){
        ci.lty=0,
        ci.col="lightblue",
        xlab="Number of plates analysed",
-       ylab="# morpho-species detected in all 15 ARMS")
+       ylab="# morpho-species detected in all 15 ARMS",
+       ylim=c(1,60))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -59,7 +60,8 @@ fun_alpha_div <- function(metadata){
        ci.lty=0,
        ci.col="lightblue",
        xlab="Number of plates analysed",
-       ylab="# morpho-species detected in 6-month ARMS")
+       ylab="# morpho-species detected in 6-month ARMS",
+       ylim=c(1,60))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -86,7 +88,8 @@ fun_alpha_div <- function(metadata){
        ci.lty=0,
        ci.col="lightblue",
        xlab="Number of plates analysed",
-       ylab="# morpho-species detected in one-year ARMS")
+       ylab="# morpho-species detected in one-year ARMS",
+       ylim=c(1,60))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -114,7 +117,8 @@ fun_alpha_div <- function(metadata){
        ci.lty=0,
        ci.col="lightblue",
        xlab="Number of plates analysed",
-       ylab="# morpho-species detected in two-year ARMS")
+       ylab="# morpho-species detected in two-year ARMS",
+       ylim=c(1,60))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -144,7 +148,8 @@ fun_alpha_div <- function(metadata){
        ci.lty=0,
        ci.col="lightblue",
        xlab="Number of plates analysed",
-       ylab="# morpho-species detected in ARMS deployed in hot season")
+       ylab="# morpho-species detected in ARMS deployed in hot season",
+       ylim=c(1,60))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -172,7 +177,8 @@ fun_alpha_div <- function(metadata){
        ci.lty=0,
        ci.col="lightblue",
        xlab="Number of plates analysed",
-       ylab="# morpho-species detected in ARMS deployed in cool season")
+       ylab="# morpho-species detected in ARMS deployed in cool season",
+       ylim=c(1,60))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -183,6 +189,7 @@ fun_alpha_div <- function(metadata){
        cex = 0.85)
   
   dev.off()  
+  
   
   #### return ####
  return(div_alpha_path) 

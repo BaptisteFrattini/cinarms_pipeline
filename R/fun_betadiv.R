@@ -23,7 +23,7 @@ beta_div_decomp <- function(metadata_data_mean){
   B.pair.pa <- betapart::beta.pair(matrix.pa, index.family = "jaccard")
   mat.turn <- B.pair.pa$beta.jtu
   mat.nest <- B.pair.pa$beta.jne
-  mat.jacc <- 1-B.pair.pa$beta.jac
+  mat.jacc <- B.pair.pa$beta.jac
   
   
   
@@ -85,7 +85,11 @@ beta_div_decomp <- function(metadata_data_mean){
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
     stat_pvalue_manual(p.sed) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
+    annotate(geom="text", x=1, y=0.24, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
+             color="black")+
+    annotate(geom="text", x=2, y=0.35, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
+             color="black")
   a
    
   #Nestedness
@@ -107,7 +111,11 @@ beta_div_decomp <- function(metadata_data_mean){
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
     stat_pvalue_manual(p.sed) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+    annotate(geom="text", x=1, y=0.04, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
+             color="black") +
+    annotate(geom="text", x=2, y=0.04, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
+             color="black")
   b
   
   #Jaccard
@@ -124,12 +132,16 @@ beta_div_decomp <- function(metadata_data_mean){
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard similarity component") +
+         y = "Jaccard dissimilarity component") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
     stat_pvalue_manual(p.sed) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+    annotate(geom="text", x=1, y=1-0.625, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
+             color="black")+
+    annotate(geom="text", x=2, y=1-0.57, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
+             color="black")
   c
    # path_to_turn_intrainter <- paste0("outputs/beta/turnover_intrainter.pdf")
    # ggsave(filename = path_to_turn_intrainter, plot = v, width = 6, height = 6)
@@ -207,6 +219,7 @@ beta_div_decomp <- function(metadata_data_mean){
    ggpubr::ggqqplot(df_imm_time$turn) #QQplot OK
    shapiro.test(df_imm_time$turn) #Shapiro OK 
    
+   
    res.aov <- rstatix::anova_test(df_imm_time, turn ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
@@ -223,7 +236,13 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed)  +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
+     annotate(geom="text", x=1, y=0.42, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.48, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=3, y=0.47, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+              color="black")
    d
    
    
@@ -247,12 +266,19 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.041, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=3, y=0.077, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+              color="black")
    e
    
    #Jaccard
    ggplot(df_imm_time, aes(x=jacc)) + 
      geom_density() #Données approximativement normales
+   
    bartlett.test(jacc ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
    ggpubr::ggqqplot(df_imm_time$jacc) #QQplot OK
    shapiro.test(df_imm_time$jacc) #Shapiro not OK 
@@ -265,12 +291,18 @@ beta_div_decomp <- function(metadata_data_mean){
      geom_boxplot(fill =  c("coral","coral","coral") ) +
      labs(title = "",
           x = "Comparisons",
-          y = "Jaccard similarity") +
+          y = "Jaccard dissimilarity") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=1-0.51, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=2, y=1-0.37, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=3, y=1-0.455, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+              color="black")
    f
    
    # path_to_boxplot <- paste0("outputs/beta/boxplot_imm_tim.pdf")
@@ -361,7 +393,11 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.28, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.33, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+              color="black")
    g
    
    #nest
@@ -383,7 +419,11 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.075, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.075, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+              color="black")
    h
    
    #jacc
@@ -399,12 +439,17 @@ beta_div_decomp <- function(metadata_data_mean){
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
      labs(title = "",
-          y = "Jaccard similarity component") +
+          y = "Jaccard dissimilarity component") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.36, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.39, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+              color="black")
    i
    
    
@@ -505,7 +550,14 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed)  +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
+     annotate(geom="text", x=1, y=0.425, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.49, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=3, y=0.49, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+              color="black")
+   
    j
    
    
@@ -529,7 +581,13 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.028, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=3, y=0.057, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+              color="black")
    k
    
    #Jaccard
@@ -547,12 +605,18 @@ beta_div_decomp <- function(metadata_data_mean){
      geom_boxplot(fill =  c("coral","coral","coral") ) +
      labs(title = "",
           x = "Comparisons",
-          y = "Jaccard similarity") +
+          y = "Jaccard dissimilarity") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=1-0.53, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=2, y=1-0.37, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+              color="black")+
+     annotate(geom="text", x=3, y=1-0.46, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+              color="black")
    l
    
    # path_to_boxplot <- paste0("outputs/beta/boxplot_imm_tim.pdf")
@@ -643,7 +707,11 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.275, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.33, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+              color="black")
    m
    
    #nest
@@ -665,7 +733,11 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.0355, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.032, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+              color="black")
    n
    
    #jacc
@@ -686,7 +758,11 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
+     annotate(geom="text", x=1, y=0.36, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+              color="black")+
+     annotate(geom="text", x=2, y=0.39, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+              color="black")
    o
    
    

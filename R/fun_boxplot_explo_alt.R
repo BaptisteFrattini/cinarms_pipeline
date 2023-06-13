@@ -54,7 +54,18 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=time_imm_seas) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed)+
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool$set[grepl("6m_imm_cold", data_pool$set)])),
+             color="black")+
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool$set[grepl("6m_imm_hot", data_pool$set)])),
+             color="black")+
+    annotate(geom="text", x=3, y=-0.1, label = paste0("N = ",length(data_pool$set[grepl("1y_imm_cold", data_pool$set)])),
+             color="black")+
+    annotate(geom="text", x=4, y=-0.1, label = paste0("N = ",length(data_pool$set[grepl("1y_imm_hot", data_pool$set)])),
+             color="black")+
+    annotate(geom="text", x=5, y=-0.1, label = paste0("N = ",length(data_pool$set[grepl("2y_imm_hot", data_pool$set)])),
+             color="black")
+    
   
   res.aov <- rstatix::kruskal_test(data_pool, bare_plate ~ set2)
   p.sed <- rstatix::wilcox_test(data_pool, bare_plate ~ set2, p.adjust.method = "bonferroni")
@@ -70,7 +81,17 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=time_rec_seas) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed)+
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool$set2[grepl("6m_rec_cold", data_pool$set2)])),
+             color="black")+
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool$set2[grepl("6m_rec_hot", data_pool$set2)])),
+             color="black")+
+    annotate(geom="text", x=3, y=-0.1, label = paste0("N = ",length(data_pool$set2[grepl("1y_rec_cold", data_pool$set2)])),
+             color="black")+
+    annotate(geom="text", x=4, y=-0.1, label = paste0("N = ",length(data_pool$set2[grepl("1y_rec_hot", data_pool$set2)])),
+             color="black")+
+    annotate(geom="text", x=5, y=-0.1, label = paste0("N = ",length(data_pool$set2[grepl("2y_rec_hot", data_pool$set2)])),
+             color="black")
   
   ### OU bien : 
   
@@ -94,7 +115,13 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed) +
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_hot$imm_time[grepl("6m", data_pool_hot$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_hot$imm_time[grepl("1y", data_pool_hot$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=3, y=-0.1, label = paste0("N = ",length(data_pool_hot$imm_time[grepl("2y", data_pool_hot$imm_time)])),
+             color="black")
   
   res.aov <- rstatix::kruskal_test(data_pool_cool, bare_plate ~ imm_time)
   p.sed <- rstatix::wilcox_test(data_pool_cool, bare_plate ~ imm_time, p.adjust.method = "bonferroni")
@@ -108,7 +135,13 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed) +
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_cool$imm_time[grepl("6m", data_pool_cool$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_cool$imm_time[grepl("1y", data_pool_cool$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=3, y=-0.1, label = paste0("N = ",length(data_pool_cool$imm_time[grepl("2y", data_pool_cool$imm_time)])),
+             color="black")
   
   res.aov <- rstatix::kruskal_test(data_pool_six, bare_plate ~ immersion_season)
   p.sed <- rstatix::wilcox_test(data_pool_six, bare_plate ~ immersion_season, p.adjust.method = "bonferroni")
@@ -122,7 +155,11 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed)+
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_six$immersion_season[grepl("imm_cold", data_pool_six$immersion_season)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_six$immersion_season[grepl("imm_hot", data_pool_six$immersion_season)])),
+             color="black") 
   
   res.aov <- rstatix::kruskal_test(data_pool_one, bare_plate ~ immersion_season)
   p.sed <- rstatix::wilcox_test(data_pool_one, bare_plate ~ immersion_season, p.adjust.method = "bonferroni")
@@ -136,7 +173,11 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed)+
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_one$immersion_season[grepl("imm_cold", data_pool_one$immersion_season)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_one$immersion_season[grepl("imm_hot", data_pool_one$immersion_season)])),
+             color="black") 
   
   #### Retrieval season
   
@@ -158,7 +199,13 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed)+
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_r_hot$imm_time[grepl("6m", data_pool_r_hot$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_r_hot$imm_time[grepl("1y", data_pool_r_hot$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=3, y=-0.1, label = paste0("N = ",length(data_pool_r_hot$imm_time[grepl("2y", data_pool_r_hot$imm_time)])),
+             color="black")
   
   res.aov <- rstatix::kruskal_test(data_pool_r_cool, bare_plate ~ imm_time)
   p.sed <- rstatix::wilcox_test(data_pool_r_cool, bare_plate ~ imm_time, p.adjust.method = "bonferroni")
@@ -172,7 +219,13 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed) +
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_r_cool$imm_time[grepl("6m", data_pool_r_cool$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_r_cool$imm_time[grepl("1y", data_pool_r_cool$imm_time)])),
+             color="black") +
+    annotate(geom="text", x=3, y=-0.1, label = paste0("N = ",length(data_pool_r_cool$imm_time[grepl("2y", data_pool_r_cool$imm_time)])),
+             color="black")
   
   res.aov <- rstatix::kruskal_test(data_pool_six, bare_plate ~ recovery_season)
   p.sed <- rstatix::wilcox_test(data_pool_six, bare_plate ~ recovery_season, p.adjust.method = "bonferroni")
@@ -186,7 +239,11 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed)+
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_six$recovery_season[grepl("rec_cold", data_pool_six$recovery_season)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_six$recovery_season[grepl("rec_hot", data_pool_six$recovery_season)])),
+             color="black") 
   
   res.aov <- rstatix::kruskal_test(data_pool_one, bare_plate ~ recovery_season)
   p.sed <- rstatix::wilcox_test(data_pool_one, bare_plate ~ recovery_season, p.adjust.method = "bonferroni")
@@ -200,7 +257,11 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
-    stat_pvalue_manual(p.sed)
+    stat_pvalue_manual(p.sed) +
+    annotate(geom="text", x=1, y=-0.1, label = paste0("N = ",length(data_pool_one$recovery_season[grepl("rec_cold", data_pool_one$recovery_season)])),
+             color="black") +
+    annotate(geom="text", x=2, y=-0.1, label = paste0("N = ",length(data_pool_one$recovery_season[grepl("rec_hot", data_pool_one$recovery_season)])),
+             color="black") 
   
   
   
