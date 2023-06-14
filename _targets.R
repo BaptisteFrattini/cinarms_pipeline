@@ -43,4 +43,6 @@ list(
   ,tar_target(PCA, fun_PCA(metadata_data_mean = mean_metadata_data,
                                data_mean_pool = data_pool_mean))
   
+  ,tar_target(tab_div, fun_tab(metadata_data_mean = mean_metadata_data))
+  
   )

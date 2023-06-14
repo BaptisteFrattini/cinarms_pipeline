@@ -151,7 +151,20 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                        pointsize = 3,
                        labelsize = 5)
   
+  meta_mean$set <- paste0(meta_mean$imm_time,"_",meta_mean$imm_season)
   
+  y <- fviz_pca_biplot(pca.res.full,
+                       col.ind = meta_mean$set,
+                       addEllipses = TRUE,
+                       ellipse.type = "convex",
+                       select.var = list(contrib = 20),
+                       col.var = "purple",
+                       repel = TRUE,
+                       pointsize = 2,
+                       labelsize = 5) + scale_color_manual(values=c("coral","coral","dodgerblue","forestgreen","forestgreen"))
+  
+  path_to_PCA_select_set <- paste0("outputs/PCA_select_set.pdf")
+  ggsave(filename =  path_to_PCA_select_set, plot = y, width = 12, height = 10)
   
   path_to_PCA_select <- paste0("outputs/PCA_select.pdf")
   ggsave(filename =  path_to_PCA_select, plot = w, width = 12, height = 10)

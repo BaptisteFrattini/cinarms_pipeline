@@ -23,10 +23,11 @@ diversity_explo|function|e6a6c3efbc971f46|||||||||||||||
 fun_alpha_div|function|9394251d4b1876c3|||||||||||||||
 fun_data_mean|function|2fc9d6993475b2ab|||||||||||||||
 fun_nmds_plot|function|4375cc8e836ba9ef|||||||||||||||
-fun_PCA|function|c68c31a306fcf974|||||||||||||||
+fun_PCA|function|7115bd830c931557|||||||||||||||
 fun_perm|function|17409cbfd65f479b|||||||||||||||
 fun_pool_full|function|3fb3d58a70c94416|||||||||||||||
 fun_pool_mean|function|390262a34f8ffeb6|||||||||||||||
+fun_tab|function|977deee39196ad77|||||||||||||||
 fun_Venn|function|fd73bf45f1d9ab0c|||||||||||||||
 geoDist|function|3559387be7f2c0e9|||||||||||||||
 geoXY|function|9aa1a856fdd373d0|||||||||||||||
@@ -39,9 +40,10 @@ NMDS_plot|function|e5e845bf4f5b0c6c|||||||||||||||
 north_south|function|b94162965bafeb0c|||||||||||||||
 ns|stem|16cd4a5cfba691fc|3d16f02ff5211d5d|df4920e5cf7b96fc|2014082040||t19363.4218934428s|c303d0aa7a9c897f|156|rds|local|vector|||1.3||
 pairwise.adonis2|function|f376819615b213eb|||||||||||||||
-PCA|stem|7d7ddd64f45f467d|0661a99c3b14a39e|fffdd47eb24fcfad|1441643777||t19516.6461143316s|c6fbfb9abe15abfd|72|rds|local|vector|||6.79||
+PCA|stem|7d7ddd64f45f467d|0661a99c3b14a39e|e219f07f8bccf1ce|1441643777||t19522.3965499925s|c6fbfb9abe15abfd|72|rds|local|vector|||5.14||
 PCA_fun|stem|7d7ddd64f45f467d|0661a99c3b14a39e|fffdd47eb24fcfad|1560311063||t19516.5131122066s|c6fbfb9abe15abfd|72|rds|local|vector|||4.35||
 permanova|stem|d131862dc333587a|dd6d3c91549e78fa|815b5a8369d4f791|-1858543183||t19516.6440385276s|44e327d1ee1978d7|43|rds|local|vector|||4.51||
 raw_data|stem|e3a7e2efababb330|a2f81db56e588783|ef46db3751d8e999|-979620141|data/raw-data/Data_sans_UNAV(2).csv|t19461.3268890639s|7d480317d81eaa09|265378|file|local|vector|||0||
 summary.pwadstrata|function|19f623099f484c05|||||||||||||||
+tab_div|stem|d131862dc333587a|e8315ba793553acf|1e749da8808fb1a8|1742957628||t19522.3479143551s|44e327d1ee1978d7|43|rds|local|vector|||0.72||
 venn_plot|stem|1a3bf70edd80b6df|eb116c01bfffdf83|3e841b8309ccc774|149217503||t19486.3460139645s|7dead8e41ac4f62d|130|rds|local|vector|||1.57||
