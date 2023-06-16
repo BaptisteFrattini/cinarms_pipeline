@@ -158,18 +158,69 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                        addEllipses = TRUE,
                        ellipse.type = "convex",
                        select.var = list(contrib = 20),
-                       col.var = "purple",
+                       col.var = "black",
                        repel = TRUE,
                        pointsize = 2,
-                       labelsize = 5) + scale_color_manual(values=c("coral","coral","dodgerblue","forestgreen","forestgreen"))
+                       labelsize = 5,
+                       palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen") ) 
+  # + scale_color_manual(values=c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen"))
+  
+  meta_mean$set2 <- paste0(meta_mean$imm_time,"_",meta_mean$ret_season)
+  
+  x <- fviz_pca_biplot(pca.res.full,
+                       col.ind = meta_mean$set2,
+                       addEllipses = TRUE,
+                       ellipse.type = "convex",
+                       select.var = list(contrib = 20),
+                       col.var = "black",
+                       repel = TRUE,
+                       pointsize = 2,
+                       labelsize = 5,
+                       palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen") ) 
+  # + scale_color_manual(values=c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen"))
+  
+  #blank
+  
+  v <- fviz_pca_biplot(pca.res.full,
+                       col.ind = meta_mean$set,
+                       addEllipses = TRUE,
+                       ellipse.type = "convex",
+                       select.var = list(contrib = 20),
+                       geom.var = "arrow",
+                       col.var = "black",
+                       repel = TRUE,
+                       pointsize = 2,
+                       labelsize = 5,
+                       palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen") ) 
+
+  i <- fviz_pca_biplot(pca.res.full,
+                       col.ind = meta_mean$set2,
+                       addEllipses = TRUE,
+                       ellipse.type = "convex",
+                       select.var = list(contrib = 20),
+                       geom.var = "arrow",
+                       col.var = "black",
+                       repel = TRUE,
+                       pointsize = 2,
+                       labelsize = 5,
+                       palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen") ) 
   
   path_to_PCA_select_set <- paste0("outputs/PCA_select_set.pdf")
   ggsave(filename =  path_to_PCA_select_set, plot = y, width = 12, height = 10)
   
+  path_to_PCA_select_set2 <- paste0("outputs/PCA_select_set2.pdf")
+  ggsave(filename =  path_to_PCA_select_set2, plot = x, width = 12, height = 10)
+  
   path_to_PCA_select <- paste0("outputs/PCA_select.pdf")
   ggsave(filename =  path_to_PCA_select, plot = w, width = 12, height = 10)
   
-
+  path_to_PCA_select_set_blank <- paste0("outputs/PCA_select_set_blank.pdf")
+  ggsave(filename = path_to_PCA_select_set_blank , plot = v, width = 12, height = 10)
+  
+  path_to_PCA_select_set2_blank <- paste0("outputs/PCA_select_set2_blank.pdf")
+  ggsave(filename =  path_to_PCA_select_set2_blank, plot = i, width = 12, height = 10)
+  
+  
   #### With species pool ----------
   #### Load data and meta data ========
   data_pool <- read.csv(data_mean_pool, header = TRUE, row.names = "X")
@@ -229,6 +280,35 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   path_to_PCA_pool <- paste0("outputs/PCA_pool.pdf")
   ggsave(filename =  path_to_PCA_pool, plot = fin, width = 15, height = 12)
   
+  
+  #### Testing MFA ####
+  
+  # data(meaudret)
+  # fauna <- meaudret$spe
+  # enviro <- meaudret$env
+  # ISvariable1 <- meaudret$design$season
+  # ISvariable2 <- meaudret$design$site
+  # dataset <- data.frame(fauna,enviro)
+  # bloc <- c(dim(fauna)[2],dim(enviro)[2])
+  # 
+  # 
+  # bc.mfa(df=dataset,
+  #        bloc=bloc,
+  #        fac=factor(ISvariable1),
+  #        X=1,
+  #        Y=2)
+  # 
+  # 
+  # dataset <- data.frame(df_mean)
+  # bloc <- c(dim(df_mean)[2],0)
+  # 
+  # bc.mfa(df = dataset,
+  #        bloc = bloc,
+  #        fac=factor(meta_mean$set),
+  #        X=1,
+  #        Y=2)
+  # 
+  # dim(meta_mean)
   
   return(path_to_PCA)
 }
