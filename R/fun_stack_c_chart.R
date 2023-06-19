@@ -18,6 +18,10 @@ fun_stacked_col_chart <- function(metadata_data_mean, data_mean_pool){
   data_pool$Ascidiacea <- rowSums(data.frame(data_pool$ascidiacea_s, data_pool$ascidiacea_c))
   Sediment <- data_pool$sediment
   Bare_plate <- data_pool$bare_plate
+  
+  Sediment = data_pool$sediment
+  Bare_plate = data_pool$bare_plate
+  
   data_pool <- data_pool[,-c(3,4,12,13)]
   
   

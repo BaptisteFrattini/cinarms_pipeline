@@ -277,7 +277,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                             ncol = 2,
                             nrow = 2)
   
-  path_to_PCA_pool <- paste0("outputs/PCA_pool.pdf")
+  path_to_PCA_pool <- paste0("outputs/PCA_poool.pdf")
   ggsave(filename =  path_to_PCA_pool, plot = fin, width = 15, height = 12)
   
   

@@ -14,7 +14,7 @@ fun_pool_full <- function(meta_data){
   meta <- read.csv(meta_data[grepl("metadata", meta_data)], header = TRUE)
   
   spo_columns <- grep("spo", names(data), value = TRUE)
-  spo_columns <- spo_columns[-14]
+  spo_columns <- spo_columns[-length(spo_columns)]
   spo_mean <- rowSums(data[,spo_columns])
   
   bryo_columns <- grep("bryo", names(data), value = TRUE)
@@ -39,8 +39,9 @@ fun_pool_full <- function(meta_data){
   prokariot_columns <- c(grep("biofilm", names(data), value = TRUE), grep("Cyanob", names(data), value = TRUE))
   prokariot_mean <- rowSums(data[,prokariot_columns])
   
+  
   rest_columns <- names(data)
-  rest_columns <- rest_columns[c(1,3,17,55,56,58)]
+  rest_columns <- rest_columns[c(1,3,23,63,64,66)]
   rest_data <- data[,rest_columns]
   
   data_pool <- data.frame(porifera = spo_mean,

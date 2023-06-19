@@ -1,6 +1,6 @@
 library(targets)
 
-tar_source()
+targets::tar_source()
 
 list(
   tar_target(raw_data, "data/raw-data/Data_sans_UNAV(2).csv", format = "file")

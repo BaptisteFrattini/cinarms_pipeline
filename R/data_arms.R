@@ -17,10 +17,12 @@ data_arms <- function(raw_data, arms_id, arms_id_2years){
                      sep = ";", 
                      dec = ",")
   
-  data 
   
   dat <- data[data$prefixe == arms_id, ]
-  dat2y <- data[data$arms_name == arms_id_2years, ]
+  dat2ya <- data[data$arms_name == arms_id_2years[1], ]
+  dat2yb <- data[data$arms_name == arms_id_2years[2], ]
+  dat2yc <- data[data$arms_name == arms_id_2years[3], ]
+  dat2y = data.frame(rbind(dat2ya, dat2yb, dat2yc))
   dat <- data.frame(rbind(dat, dat2y))
   
   

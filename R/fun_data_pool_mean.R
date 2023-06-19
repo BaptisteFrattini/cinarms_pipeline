@@ -14,7 +14,7 @@ fun_pool_mean <- function(metadata_data_mean){
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
   
   spo_columns <- grep("spo", names(df_mean), value = TRUE)
-  spo_columns <- spo_columns[-14]
+  spo_columns <- spo_columns[-length(spo_columns)]
   spo_mean <- rowSums(df_mean[,spo_columns])
   
   bryo_columns <- grep("bryo", names(df_mean), value = TRUE)
@@ -39,7 +39,7 @@ fun_pool_mean <- function(metadata_data_mean){
   prokariot_mean <- rowSums(df_mean[,prokariot_columns])
   
   rest_columns <- names(df_mean)
-  rest_columns <- rest_columns[c(1,3,17,55,56,58)]
+  rest_columns <- rest_columns[c(1,3,23,63,64,66)]
   rest_data <- df_mean[,rest_columns]
   
   data_pool <- data.frame(porifera = spo_mean,
