@@ -15,7 +15,7 @@ fun_tab <- function(metadata_data_mean){
   vegan::diversity(df_mean)
   vegan::specnumber(df_mean)
   
-  piel <- vegan::diversity(df_mean) / log(vegan::specnumber(df_mean))
+  piel <- vegan::diversity(df_mean, index = "shannon") / log(vegan::specnumber(df_mean))
   
   
   div <- data.frame(meta_mean$arms, vegan::specnumber(df_mean), vegan::diversity(df_mean), piel)
