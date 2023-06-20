@@ -31,7 +31,7 @@ fun_alpha_div <- function(metadata){
        ci.col="lightblue",
        xlab="Number of plates analysed",
        ylab="# morpho-species detected in all 15 ARMS",
-       ylim=c(1,60))
+       ylim=c(1,80))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -61,7 +61,7 @@ fun_alpha_div <- function(metadata){
        ci.col="lightblue",
        xlab="Number of plates analysed",
        ylab="# morpho-species detected in 6-month ARMS",
-       ylim=c(1,60))
+       ylim=c(1,80))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -89,7 +89,7 @@ fun_alpha_div <- function(metadata){
        ci.col="lightblue",
        xlab="Number of plates analysed",
        ylab="# morpho-species detected in one-year ARMS",
-       ylim=c(1,60))
+       ylim=c(1,80))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
@@ -118,12 +118,12 @@ fun_alpha_div <- function(metadata){
        ci.col="lightblue",
        xlab="Number of plates analysed",
        ylab="# morpho-species detected in two-year ARMS",
-       ylim=c(1,60))
+       ylim=c(1,80))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
-  text(10,
+  text(25,
        6,
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
@@ -149,11 +149,11 @@ fun_alpha_div <- function(metadata){
        ci.col="lightblue",
        xlab="Number of plates analysed",
        ylab="# morpho-species detected in ARMS deployed in hot season",
-       ylim=c(1,60))
+       ylim=c(1,80))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   
-  text(60,
+  text(70,
        10,
        paste("S = ", pool$Species, " ; \n Estimation of species richness (Chao) = ", round(pool$chao,2),"±",round(pool$chao.se,2)),
        cex = 0.85)
@@ -178,7 +178,7 @@ fun_alpha_div <- function(metadata){
        ci.col="lightblue",
        xlab="Number of plates analysed",
        ylab="# morpho-species detected in ARMS deployed in cool season",
-       ylim=c(1,60))
+       ylim=c(1,80))
   
   boxplot(s, col="yellow", add=TRUE, pch="+")
   

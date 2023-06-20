@@ -74,7 +74,7 @@ beta_div_decomp <- function(metadata_data_mean){
 
   
   p.sed <- rstatix::t_test(decomp.pa, Turnover ~ intrasite) #parametrique
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
   intrainter = c("between ARMS \n of the \n same set", "between ARMS \n of different \n set")
   a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
@@ -88,7 +88,7 @@ beta_div_decomp <- function(metadata_data_mean){
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
     annotate(geom="text", x=1, y=0.24, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black")+
-    annotate(geom="text", x=2, y=0.35, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
+    annotate(geom="text", x=2, y=0.37, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black")
   a
    
@@ -100,7 +100,7 @@ beta_div_decomp <- function(metadata_data_mean){
   shapiro.test(decomp.pa$Nestedness) #Shapiro not OK 
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ intrasite, p.adjust.method = "bonferroni")
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
   intrainter = c("between ARMS \n of the same set", "between ARMS \n of different set")
   b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
@@ -126,7 +126,7 @@ beta_div_decomp <- function(metadata_data_mean){
   shapiro.test(decomp.pa$Jaccard_diss) #not OK
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ intrasite, p.adjust.method = "bonferroni")
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
   intrainter = c("between ARMS \n of the \n same set", "between ARMS \n of different \n set")
   c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
@@ -138,7 +138,7 @@ beta_div_decomp <- function(metadata_data_mean){
     theme_classic() +
     stat_pvalue_manual(p.sed) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-    annotate(geom="text", x=1, y=1-0.625, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
+    annotate(geom="text", x=1, y=1-0.655, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black")+
     annotate(geom="text", x=2, y=1-0.57, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black")
@@ -222,7 +222,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, turn ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    
    comp = c("between six months \n and \n one year", "between one year \n and \n two years", "between six months \n and \n two years")
@@ -237,11 +237,11 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed)  +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
-     annotate(geom="text", x=1, y=0.42, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=1, y=0.39, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=2, y=0.48, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=2, y=0.45, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=3, y=0.47, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=3, y=0.57, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")
    d
    
@@ -255,7 +255,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, nest ~ comp_imm)
    p.sed <- rstatix::pairwise_t_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
      geom_boxplot(fill =  c("coral","coral","coral") ) +
@@ -267,11 +267,11 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=0.041, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=1, y=0.045, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=3, y=0.077, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=3, y=0.071, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")
    e
    
@@ -285,7 +285,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
      geom_boxplot(fill =  c("coral","coral","coral") ) +
@@ -297,11 +297,11 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=1-0.51, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=1, y=1-0.54, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=2, y=1-0.37, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=2, y=1-0.34, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=3, y=1-0.455, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=3, y=1-0.26, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")
    f
    
@@ -382,7 +382,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$turn) #Shapiro not OK 
  
    p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    depl = c("between same \n deployment \n season", "between different \n deployment \n season")
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -408,7 +408,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$nest) #Shapiro not OK 
    
    p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    depl = c("between same \n deployment \n season", "between different \n deployment \n season")
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -420,9 +420,9 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=0.075, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=1, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
-     annotate(geom="text", x=2, y=0.075, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=2, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")
    h
    
@@ -434,7 +434,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$jacc) #Shapiro not OK
   
    p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    depl = c("between same \n deployment \n season", "between different \n deployment \n season")
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -443,12 +443,12 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     stat_pvalue_manual(p.sed) +
+     stat_pvalue_manual(p.sed, label = "p") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=0.36, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=1, y=0.365, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
-     annotate(geom="text", x=2, y=0.39, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=2, y=0.395, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")
    i
    
@@ -457,8 +457,8 @@ beta_div_decomp <- function(metadata_data_mean){
                              ncol = 3,
                              nrow = 3)
    
-   path_to_boxplot <- paste0("outputs/beta/boxplot_beta.pdf")
-   ggsave(filename =  path_to_boxplot, plot = fin, width = 15, height = 13.5)
+   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv.pdf")
+   ggsave(filename =  path_to_boxplot, plot = fin, width = 17, height = 13)
    
    ####dependending on retrieval season ####
    #### Immersion time ####
@@ -536,7 +536,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, turn ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    
    comp = c("between six months \n and \n one year", "between one year \n and \n two years", "between six months \n and \n two years")
@@ -551,11 +551,11 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed)  +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9)) +
-     annotate(geom="text", x=1, y=0.425, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=1, y=0.41, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=2, y=0.49, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=2, y=0.455, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=3, y=0.49, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=3, y=0.53, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")
    
    j
@@ -570,7 +570,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, nest ~ comp_imm)
    p.sed <- rstatix::pairwise_t_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    k <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
      geom_boxplot(fill =  c("coral","coral","coral") ) +
@@ -582,11 +582,11 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=0.028, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=1, y=0.0285, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=3, y=0.057, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=3, y=0.085, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")
    k
    
@@ -599,7 +599,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    l <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
      geom_boxplot(fill =  c("coral","coral","coral") ) +
@@ -611,11 +611,11 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=1-0.53, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=1, y=1-0.535, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=2, y=1-0.37, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=2, y=1-0.49, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=3, y=1-0.46, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=3, y=1-0.415, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")
    l
    
@@ -696,7 +696,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$turn) #Shapiro not OK 
    
    p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    depl = c("between same \n retrieval \n season", "between different \n retrieval \n season")
    m <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -708,9 +708,9 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=0.275, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=1, y=0.3, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
-     annotate(geom="text", x=2, y=0.33, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=2, y=0.335, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")
    m
    
@@ -722,7 +722,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$nest) #Shapiro not OK 
    
    p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    depl = c("between same \n retrieval \n season", "between different \n retrieval \n season")
    n <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -734,7 +734,7 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=0.0355, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=1, y=0.0396, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
      annotate(geom="text", x=2, y=0.032, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")
@@ -748,7 +748,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$jacc) #Shapiro not OK
    
    p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    depl = c("between same \n retrieval \n season", "between different \n retrieval \n season")
    o <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -759,9 +759,9 @@ beta_div_decomp <- function(metadata_data_mean){
      theme_classic() +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=9))+
-     annotate(geom="text", x=1, y=0.36, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=1, y=0.37, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
-     annotate(geom="text", x=2, y=0.39, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=2, y=0.395, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")
    o
    
@@ -771,7 +771,7 @@ beta_div_decomp <- function(metadata_data_mean){
                              nrow = 3)
    
    path_to_boxplot_ret <- paste0("outputs/beta/boxplot_beta_ret.pdf")
-   ggsave(filename =  path_to_boxplot_ret, plot = fin, width = 15, height = 13.5)
+   ggsave(filename =  path_to_boxplot_ret, plot = fin, width = 17, height = 13)
    
    
    

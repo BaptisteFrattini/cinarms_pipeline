@@ -8,7 +8,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   
   # metadata_data_mean = targets::tar_read(mean_metadata_data)
   # data_mean_pool = targets::tar_read(data_pool_mean)
-  
+
   #### Load data and meta data ========
   library(ggpubr)
   library(forcats)
@@ -137,27 +137,30 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   sel <- levels(as.factor(c(rownames(contrib_imm_tim_1), rownames(contrib_imm_tim_2), rownames(contrib_imm_tim_3))))
   
   library(factoextra)
+  
   pca.res.full <- prcomp(df_mean,
                          center = TRUE,
                          scale. = TRUE)
+ 
+  
   
   w <- fviz_pca_biplot(pca.res.full,
                        col.ind = meta_mean$imm_time,
                        addEllipses = TRUE,
                        ellipse.type = "convex",
-                       select.var = list(contrib = 20),
+                       select.var = list(contrib = 35),
                        col.var = "purple",
                        repel = TRUE,
                        pointsize = 3,
                        labelsize = 5)
   
   meta_mean$set <- paste0(meta_mean$imm_time,"_",meta_mean$imm_season)
-  
+  fviz_screeplot(pca.res.full)
   y <- fviz_pca_biplot(pca.res.full,
                        col.ind = meta_mean$set,
                        addEllipses = TRUE,
-                       ellipse.type = "convex",
                        select.var = list(contrib = 20),
+                       ellipse.type = "convex",
                        col.var = "black",
                        repel = TRUE,
                        pointsize = 2,
@@ -165,13 +168,31 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                        palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen") ) 
   # + scale_color_manual(values=c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen"))
   
+  #same but with bray curtis distance
+  bc <- vegan::vegdist(df_mean, method = "bray")
+
+  pca.res.bc <- prcomp(bc,
+                       center = TRUE,
+                       scale. = TRUE)
+  ybray <- fviz_pca_ind(pca.res.bc,
+                        col.ind = meta_mean$set,
+                        addEllipses = TRUE,
+                        ellipse.type = "convex",
+                        col.var = "black",
+                        repel = TRUE,
+                        pointsize = 2,
+                        labelsize = 5,
+                        palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen"))
+  
+  
+  
   meta_mean$set2 <- paste0(meta_mean$imm_time,"_",meta_mean$ret_season)
   
   x <- fviz_pca_biplot(pca.res.full,
                        col.ind = meta_mean$set2,
                        addEllipses = TRUE,
                        ellipse.type = "convex",
-                       select.var = list(contrib = 20),
+                       select.var = list(contrib =35),
                        col.var = "black",
                        repel = TRUE,
                        pointsize = 2,
@@ -185,7 +206,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                        col.ind = meta_mean$set,
                        addEllipses = TRUE,
                        ellipse.type = "convex",
-                       select.var = list(contrib = 20),
+                       select.var = list(contrib = 35),
                        geom.var = "arrow",
                        col.var = "black",
                        repel = TRUE,
@@ -197,7 +218,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                        col.ind = meta_mean$set2,
                        addEllipses = TRUE,
                        ellipse.type = "convex",
-                       select.var = list(contrib = 20),
+                       select.var = list(contrib = 35),
                        geom.var = "arrow",
                        col.var = "black",
                        repel = TRUE,
@@ -205,22 +226,23 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                        labelsize = 5,
                        palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen") ) 
   
-  path_to_PCA_select_set <- paste0("outputs/PCA_select_set.pdf")
+  path_to_PCA_select_set <- paste0("outputs/PCA/PCA_select_set.pdf")
   ggsave(filename =  path_to_PCA_select_set, plot = y, width = 12, height = 10)
   
-  path_to_PCA_select_set2 <- paste0("outputs/PCA_select_set2.pdf")
+  path_to_PCA_select_set2 <- paste0("outputs/PCA/PCA_select_set2.pdf")
   ggsave(filename =  path_to_PCA_select_set2, plot = x, width = 12, height = 10)
   
-  path_to_PCA_select <- paste0("outputs/PCA_select.pdf")
+  path_to_PCA_select <- paste0("outputs/PCA/PCA_select.pdf")
   ggsave(filename =  path_to_PCA_select, plot = w, width = 12, height = 10)
   
-  path_to_PCA_select_set_blank <- paste0("outputs/PCA_select_set_blank.pdf")
+  path_to_PCA_select_set_blank <- paste0("outputs/PCA/PCA_select_set_blank.pdf")
   ggsave(filename = path_to_PCA_select_set_blank , plot = v, width = 12, height = 10)
   
-  path_to_PCA_select_set2_blank <- paste0("outputs/PCA_select_set2_blank.pdf")
+  path_to_PCA_select_set2_blank <- paste0("outputs/PCA/PCA_select_set2_blank.pdf")
   ggsave(filename =  path_to_PCA_select_set2_blank, plot = i, width = 12, height = 10)
   
-  
+  path_to_PCA_select_set_bray <- paste0("outputs/PCA/PCA_select_set_bray.pdf")
+  ggsave(filename =  path_to_PCA_select_set_bray, plot = ybray, width = 12, height = 10)
   #### With species pool ----------
   #### Load data and meta data ========
   data_pool <- read.csv(data_mean_pool, header = TRUE, row.names = "X")
@@ -229,7 +251,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   pca.res.bray <- prcomp(data_pool,
                          center = TRUE,
                          scale. = TRUE)
-  ?prcomp
+
   
   a <- fviz_pca_biplot(pca.res.bray,
                        col.ind = meta_mean$imm_time,
@@ -255,11 +277,21 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   
   
   d <- fviz_pca_biplot(pca.res.bray,
+                        col.ind = meta_mean$comb,
+                        addEllipses = TRUE,
+                        ellipse.type = "convex",
+                        col.var = "purple")
+  
+  d2 <- fviz_pca_biplot(pca.res.bray,
                   col.ind = meta_mean$comb,
                   addEllipses = TRUE,
                   ellipse.type = "convex",
-                  col.var = "purple")
-  
+                  # geom.var = "arrow",
+                  col.var = "black",
+                  repel = TRUE,
+                  pointsize = 2,
+                  labelsize = 5,
+                  palette = c("firebrick3","firebrick3","dodgerblue3","forestgreen","forestgreen") ) 
   
   # plot_pca_bray <- ggplot2::autoplot(pca.res.bray,
   #                                    data = meta_mean,
@@ -277,38 +309,13 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
                             ncol = 2,
                             nrow = 2)
   
-  path_to_PCA_pool <- paste0("outputs/PCA_poool.pdf")
-  ggsave(filename =  path_to_PCA_pool, plot = fin, width = 15, height = 12)
+  path_to_PCA_pool <- paste0("outputs/PCA/PCA_poool.pdf")
+  ggsave(filename =  path_to_PCA_pool, plot = fin, width = 12, height = 10)
   
   
-  #### Testing MFA ####
-  
-  # data(meaudret)
-  # fauna <- meaudret$spe
-  # enviro <- meaudret$env
-  # ISvariable1 <- meaudret$design$season
-  # ISvariable2 <- meaudret$design$site
-  # dataset <- data.frame(fauna,enviro)
-  # bloc <- c(dim(fauna)[2],dim(enviro)[2])
-  # 
-  # 
-  # bc.mfa(df=dataset,
-  #        bloc=bloc,
-  #        fac=factor(ISvariable1),
-  #        X=1,
-  #        Y=2)
-  # 
-  # 
-  # dataset <- data.frame(df_mean)
-  # bloc <- c(dim(df_mean)[2],0)
-  # 
-  # bc.mfa(df = dataset,
-  #        bloc = bloc,
-  #        fac=factor(meta_mean$set),
-  #        X=1,
-  #        Y=2)
-  # 
-  # dim(meta_mean)
+  path_to_PCA_set_pool <- paste0("outputs/PCA/PCA_set_pool.pdf")
+  ggsave(filename =  path_to_PCA_set_pool, plot = d2, width = 12, height = 10)
+
   
   return(path_to_PCA)
 }
