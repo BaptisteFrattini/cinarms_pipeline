@@ -22,8 +22,10 @@ fun_nmds_plot <- function(metadata_data_mean){
   pdf(file = NMDS_imm_path, width = 10, height = 10)
   
   ord <- metaMDS(df_mean, distance = "bray")
+  sppscores(ord) <- df_mean
   plot(ord, main="NMDS (dist=bray)")
   imm <- meta_mean$immersion_season
+  orditorp(ord,display="species",col="red",air=0.01)
   ordihull(ord, imm, col=1:2, lwd=3)
   ordiellipse(ord, imm, col=1:2, kind = "ehull", lwd=3)
   ordiellipse(ord, imm, col=1:2, draw="polygon")
@@ -37,6 +39,8 @@ fun_nmds_plot <- function(metadata_data_mean){
   
   ord <- metaMDS(df_mean, distance = "bray")
   plot(ord, main="NMDS (dist=bray)")
+  sppscores(ord) <- df_mean
+  orditorp(ord,display="species",col="red",air=0.01)
   rec <- meta_mean$recovery_season
   ordihull(ord, rec, col=3:4, lwd=3)
   ordiellipse(ord, rec, col=3:4, kind = "ehull", lwd=3)
@@ -47,9 +51,10 @@ fun_nmds_plot <- function(metadata_data_mean){
   #IMMERSION TIME
   NMDS_tim_path <- here::here("outputs/NMDS/NMDS_tim.pdf")
   pdf(file = NMDS_tim_path, width = 10, height = 10)
-  
+  sppscores(ord) <- df_mean
   plot(ord, main="NMDS (dist=bray)")
   tim <- meta_mean$imm_time
+  orditorp(ord,display="species",col="red",air=0.01)
   ordihull(ord, tim, col=5:7, lwd=3)
   ordiellipse(ord, tim, col=5:7, kind = "ehull", lwd=3)
   ordiellipse(ord, tim, col=5:7, draw="polygon")
