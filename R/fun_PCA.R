@@ -31,7 +31,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   mat.bray <- vegan::vegdist(df_mean, method = "bray")
   
   #### With all species ----------
-  #### PCOA ####
+  #### PCA ####
   #Imm season an imm time
   library(plotly)
   library(ggfortify)
@@ -243,6 +243,70 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   
   path_to_PCA_select_set_bray <- paste0("outputs/PCA/PCA_select_set_bray.pdf")
   ggsave(filename =  path_to_PCA_select_set_bray, plot = ybray, width = 12, height = 10)
+  
+  
+  
+  #### PCoA ####
+  
+  df_bray <- vegan::vegdist(df_mean, method = "bray")
+  pcoa_res <- ape::pcoa(df_bray)
+  sites.scores <- pcoa_res$vectors[,c(1,2)]
+  
+  library(BiodiversityR)
+  pcoa_res2 <- cmdscale(df_bray)
+  species.scores <- BiodiversityR::add.spec.scores(pcoa_res2, df_mean, method="cor.scores", multi=1, Rscale=F, scaling="1")
+  species.scores <- species.scores$cproj
+  
+  sim_imm_tim <- summary(vegan::simper(df_mean, meta_mean$imm_time))
+  
+  ##1
+  sim_imm_tim_1 <- sim_imm_tim[[1]]
+  contrib_imm_tim_1 <- sim_imm_tim_1[(sim_imm_tim_1$p < 0.05) & (sim_imm_tim_1$average > 0.0005),]
+  
+  sim_imm_tim_2 <- sim_imm_tim[[2]]
+  contrib_imm_tim_2 <- sim_imm_tim_2[(sim_imm_tim_2$p < 0.05) & (sim_imm_tim_2$average > 0.0005),]
+  
+  sim_imm_tim_3 <- sim_imm_tim[[3]]
+  contrib_imm_tim_3 <- sim_imm_tim_3[(sim_imm_tim_3$p < 0.05) & (sim_imm_tim_3$average > 0.0005),]
+  
+  
+  ##2
+  sim_imm_tim_1 <- sim_imm_tim[[1]]
+  contrib_imm_tim_1 <- sim_imm_tim_1[(sim_imm_tim_1$p < 0.05),]
+  contrib_imm_tim_1bis <- sim_imm_tim_1[1:10,])
+  sim_imm_tim_2 <- sim_imm_tim[[2]]
+  contrib_imm_tim_2 <- sim_imm_tim_2[(sim_imm_tim_2$p < 0.05) | (sim_imm_tim_2[1:10,]),]
+  
+  sim_imm_tim_3 <- sim_imm_tim[[3]]
+  contrib_imm_tim_3 <- sim_imm_tim_3[(sim_imm_tim_3$p < 0.05) | (sim_imm_tim_3[1:10,]),]
+  
+  
+  
+  sel <- levels(as.factor(c(rownames(contrib_imm_tim_1), rownames(contrib_imm_tim_2), rownames(contrib_imm_tim_3))))
+  
+  species.scores <- species.scores[sel,]
+  species.scores <- species.scores*0.2
+  
+  colnames(sites.scores) <- c("Dim1", "Dim2")
+  
+
+  biplot <- ggplot() +
+    geom_point(data = sites.scores, aes(x = Dim1, y = Dim2, color = meta_mean$imm_time, shape = meta_mean$imm_season, size = 3)) +
+    geom_segment(data = species.scores, aes(x = 0, y = 0, xend = Dim1, yend = Dim2), arrow = arrow(length = unit(0.03, "npc"))) +
+    ggrepel::geom_text_repel(data = species.scores, aes(x = Dim1, y = Dim2, label = rownames(species.scores)), box.padding = 0.5, max.overlaps = Inf) +
+    ggrepel::geom_text_repel(data = sites.scores, aes(x = Dim1, y = Dim2, label = rownames(sites.scores), color = meta_mean$imm_time, fontface = "bold"), vjust = -1.5) +
+    labs(x = "Dimension 1", y = "Dimension 2") +
+    theme_minimal()
+  
+  # Display the biplot
+  print(biplot)
+  
+  
+  pcoa.res <- ape::pcoa(df_bray)
+  ?stats::princomp
+
+  autoplot(pcoa.res)
+  
   #### With species pool ----------
   #### Load data and meta data ========
   data_pool <- read.csv(data_mean_pool, header = TRUE, row.names = "X")
@@ -315,6 +379,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   
   path_to_PCA_set_pool <- paste0("outputs/PCA/PCA_set_pool.pdf")
   ggsave(filename =  path_to_PCA_set_pool, plot = d2, width = 12, height = 10)
+  
 
   
   return(path_to_PCA)

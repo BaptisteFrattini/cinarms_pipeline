@@ -39,6 +39,7 @@ Imports:
   plotly,
   ggfortify,
   factoextra,
-  lmPerm
+  lmPerm,
+  BiodiversityR
   
   
