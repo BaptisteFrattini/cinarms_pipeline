@@ -273,7 +273,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   ##2
   sim_imm_tim_1 <- sim_imm_tim[[1]]
   contrib_imm_tim_1 <- sim_imm_tim_1[(sim_imm_tim_1$p < 0.05),]
-  contrib_imm_tim_1bis <- sim_imm_tim_1[1:10,])
+  contrib_imm_tim_1bis <- sim_imm_tim_1[1:10,]
   sim_imm_tim_2 <- sim_imm_tim[[2]]
   contrib_imm_tim_2 <- sim_imm_tim_2[(sim_imm_tim_2$p < 0.05) | (sim_imm_tim_2[1:10,]),]
   

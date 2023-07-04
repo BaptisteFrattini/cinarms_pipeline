@@ -40,6 +40,9 @@ Imports:
   ggfortify,
   factoextra,
   lmPerm,
-  BiodiversityR
+  BiodiversityR,
+  parameters,
+  effectsize,
+  pwr
   
   
