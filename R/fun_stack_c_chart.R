@@ -13,6 +13,8 @@ fun_stacked_col_chart <- function(metadata_data_mean, data_mean_pool){
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
   data_pool <- read.csv(data_mean_pool, header = TRUE, row.names = "X")
   
+  summary(data_pool)
+  
   #### Stacked column chart ####
   
   data_pool$Ascidiacea <- rowSums(data.frame(data_pool$ascidiacea_s, data_pool$ascidiacea_c))
@@ -61,17 +63,17 @@ fun_stacked_col_chart <- function(metadata_data_mean, data_mean_pool){
   col<-NULL
   col[1] <-  "#FAEFD1" 
   col[2] <-  "#899DA4"
-  col[3] <-  "#F98400"
+  col[3] <-  "navyblue"
   col[4] <-  "#5BBCD6"
-  col[5] <-  "#F2AD00"
-  col[6] <-  "#FF0000"
-  col[7] <-  "#FD6467"
+  col[5] <-  "darkolivegreen2"
+  col[6] <-  "#F2AD00"
+  col[7] <-  "darkorchid1"
   col[8] <-  "darkgreen"
-  col[9] <-  "#FDD262"
+  col[9] <-  "coral"
   col[10] <- "#00A08A"
   col[11] <- "#446455"
   col[12] <- "#F1BB7B"
-  col[13] <- "#C93312"
+  col[13] <- "#FF0000"
  
   
   library(ggplot2)

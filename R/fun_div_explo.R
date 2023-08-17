@@ -52,7 +52,6 @@ diversity_explo <- function(metadata_data_mean){
   n <- pwr.anova.test(k = 3, f = 0.99, sig.level = 0.05, power = 0.8)
   model <- aov(s ~ imm_time, data = data_div)
   parameters(model, effectsize_type = c("eta","f"))
-  n <- pwr.anova.test(k = 3, f = f, sig.level = alpha, power = power)
   
   #Experimental design is quite ok to run ANOVA
   

@@ -453,14 +453,15 @@ beta_div_decomp <- function(metadata_data_mean){
    i
    
    
-   fin <- cowplot::plot_grid(a,b,c,d,e,f,g,h,i,
+   fin <- cowplot::plot_grid(c,a,b,f,d,e,i,g,h,
                              ncol = 3,
                              nrow = 3)
    
    path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv.pdf")
-   ggsave(filename =  path_to_boxplot, plot = fin, width = 17, height = 13)
+   ggsave(filename =  path_to_boxplot, plot = fin, width = 11, height = 14.5)
    
-   ####dependending on retrieval season ####
+   #### dependending on retrieval season ####
+   #
    #### Immersion time ####
    #turnover
    mat.turn
@@ -622,7 +623,7 @@ beta_div_decomp <- function(metadata_data_mean){
    # path_to_boxplot <- paste0("outputs/beta/boxplot_imm_tim.pdf")
    # ggsave(filename =  path_to_boxplot, plot = fin, width = 25, height = 16)
    
-   #### deployment season ####
+   #### retrieval season ####
    #turnover
    mat.turn
    df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
