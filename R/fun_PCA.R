@@ -249,7 +249,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   
   #### PCoA ####
   
-  df_bray <- vegan::vegdist(df_mean, method = "jaccard")
+  df_bray <- vegan::vegdist(df_mean, method = "bray")
   pcoa_res <- ape::pcoa(df_bray)
   # ape::biplot.pcoa(pcoa_res, df_mean, dir.axis2 = -1)
   
