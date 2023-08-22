@@ -92,7 +92,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_bare_plate <- ggplot(data_pool, aes(x = meta$immersion_season, y = bare_plate)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of bare_plate") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -146,7 +146,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_porifera <- ggplot(data_pool, aes(x = meta$immersion_season, y = porifera)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of porifera") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -201,7 +201,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_ascidiacea_c <- ggplot(data_pool, aes(x = meta$immersion_season, y = ascidiacea_c)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of ascidiacea_c") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -254,7 +254,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_ascidiacea_s <- ggplot(data_pool, aes(x = meta$immersion_season, y = ascidiacea_s)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of ascidiacea_s") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -308,7 +308,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_bryozoa <- ggplot(data_pool, aes(x = meta$immersion_season, y = bryozoa)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of bryozoa") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -370,7 +370,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_annelida <- ggplot(data_pool, aes(x = meta$immersion_season, y = annelida)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of annelida") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -424,7 +424,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_foraminifera <- ggplot(data_pool, aes(x = meta$immersion_season, y = foraminifera)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of foraminifera") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -489,7 +489,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_Hydrozoa <- ggplot(data_pool, aes(x = meta$immersion_season, y = Hydrozoa)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of Hydrozoa") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -549,7 +549,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_CCA <- ggplot(data_pool, aes(x = meta$immersion_season, y = CCA)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of CCA") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -604,7 +604,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_Bivalvia <- ggplot(data_pool, aes(x = meta$immersion_season, y = Bivalvia)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of Bivalvia") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -657,7 +657,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_other_algae <- ggplot(data_pool, aes(x = meta$immersion_season, y = other_algae)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of other_algae") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -711,7 +711,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_sediment <- ggplot(data_pool, aes(x = meta$immersion_season, y = sediment)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of sediment") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
@@ -766,7 +766,7 @@ boxplot_explo <- function(data_full_pool, meta_data){
   a2_prokariotic_biotas <- ggplot(data_pool, aes(x = meta$immersion_season, y = prokariotic_biotas)) +
     geom_boxplot(fill = c("dodgerblue2","firebrick3")) +
     labs(title = "",
-         x = "Immersion season",
+         x = "Deployment season",
          y = "Percentage cover of prokariotic_biotas") +
     scale_x_discrete(labels = c("Cool", "Hot")) +
     theme(legend.position = "none") +
