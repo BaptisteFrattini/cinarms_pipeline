@@ -14,9 +14,9 @@ fun_alpha_div <- function(metadata){
  
   div_alpha_name <- paste0("div_alpha_total.pdf")
   div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 12, height = 7)
+  pdf(file =  div_alpha_path, width = 7.65, height = 9.86)
   
-  par(mfrow = c(2, 3))
+  par(mfrow = c(3, 2))
   #### All ARMS pooled ####
   
   s <- vegan::specaccum(df_mean_pa, method = "random", permutations = 999,
