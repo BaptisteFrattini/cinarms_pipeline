@@ -195,7 +195,7 @@ beta_div_decomp <- function(metadata_data_mean){
 
   
   p.sed <- rstatix::t_test(decomp.pa, Turnover ~ intrasite) #parametrique
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
@@ -221,7 +221,7 @@ beta_div_decomp <- function(metadata_data_mean){
   shapiro.test(decomp.pa$Nestedness) #Shapiro not OK 
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ intrasite, p.adjust.method = "bonferroni")
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
@@ -247,7 +247,7 @@ beta_div_decomp <- function(metadata_data_mean){
   shapiro.test(decomp.pa$Jaccard_diss) #not OK
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ intrasite, p.adjust.method = "bonferroni")
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
@@ -503,7 +503,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$turn) #Shapiro not OK 
  
    p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    depl = c("between same \n deployment season", "between different \n deployment season")
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -529,7 +529,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$nest) #Shapiro not OK 
    
    p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    depl = c("between same \n deployment season", "between different \n deployment season")
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -555,7 +555,7 @@ beta_div_decomp <- function(metadata_data_mean){
    shapiro.test(df_deploy$jacc) #Shapiro not OK
   
    p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    depl = c("between same \n deployment season", "between different \n deployment season")
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
@@ -574,12 +574,12 @@ beta_div_decomp <- function(metadata_data_mean){
    i
    
    
-   fin <- cowplot::plot_grid(mm, kk,ll,f,d,e,i,g,h,
+   fin <- cowplot::plot_grid(c,a,b,mm, kk,ll,f,d,e,i,g,h,
                              ncol = 3,
-                             nrow = 3)
+                             nrow = 4)
    
    path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv.pdf")
-   ggsave(filename =  path_to_boxplot, plot = fin, width = 12, height = 14.5)
+   ggsave(filename =  path_to_boxplot, plot = fin, width = 12.5, height = 18.5)
    
    #### dependending on retrieval season ####
    #
