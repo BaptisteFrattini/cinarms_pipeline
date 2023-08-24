@@ -25,10 +25,131 @@ beta_div_decomp <- function(metadata_data_mean){
   mat.nest <- B.pair.pa$beta.jne
   mat.jacc <- B.pair.pa$beta.jac
   
+  ####  inter/intra par set ####
+ 
+  df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
+  df.turn <- subset(df.turn, row != col)
+  
+  df.turn$row <- substr(df.turn$row, 1, 5)
+  df.turn$col <- substr(df.turn$col, 1, 5)
+  df.turn$same_value <- ifelse(df.turn$row == df.turn$col, "Yes", "No")
+  subset_df.turn <- subset(df.turn, same_value == "Yes")
+  
+  df.nest <- melt(as.matrix(mat.nest), varnames = c("row", "col"))
+  df.nest <- subset(df.nest, row != col)
+  
+  df.nest$row <- substr(df.nest$row, 1, 5)
+  df.nest$col <- substr(df.nest$col, 1, 5)
+  df.nest$same_value <- ifelse(df.nest$row == df.nest$col, "Yes", "No")
+  subset_df.nest <- subset(df.nest, same_value == "Yes")
+  
+  df.jacc <- melt(as.matrix(mat.jacc), varnames = c("row", "col"))
+  df.jacc <- subset(df.jacc, row != col)
+  
+  df.jacc$row <- substr(df.jacc$row, 1, 5)
+  df.jacc$col <- substr(df.jacc$col, 1, 5)
+  df.jacc$same_value <- ifelse(df.jacc$row == df.jacc$col, "Yes", "No")
+  subset_df.jacc <- subset(df.jacc, same_value == "Yes")
+  
+  
+  decomp.pa <- as.data.frame(cbind(subset_df.turn$col, subset_df.turn$value, subset_df.nest$value  ,subset_df.jacc$value))
+  
+  colnames(decomp.pa) <- c("set","Turnover", "Nestedness", "Jaccard_diss")
+  
+  decomp.pa$Jaccard_diss <- abs(as.numeric(decomp.pa$Jaccard_diss))
+  decomp.pa$Nestedness <- abs(as.numeric(decomp.pa$Nestedness))
+  decomp.pa$Turnover <- abs(as.numeric(decomp.pa$Turnover))
+  
+  # ggplot(decomp.pa, aes(x=Turnover)) + 
+  #   geom_density() #Données approximativement normales
+  # bartlett.test(Turnover ~ intrasite, data = decomp.pa) #Homoscedasticité OK
+  # ggpubr::ggqqplot(decomp.pa$Turnover) #QQplot OK
+  # shapiro.test(decomp.pa$Turnover) #Shapiro test not OK
+  
+  
+  p.sed <- rstatix::wilcox_test(decomp.pa, Turnover ~ set) #non parametrique
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  kk <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Turnover)) +
+    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen1","darkolivegreen3","darkolivegreen3","darkolivegreen4") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Turnover component") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    stat_pvalue_manual(p.sed) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    annotate(geom="text", x=1, y=0.24, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=2, y=0.45, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=3, y=0.32, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=4, y=0.30, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=5, y=0.25, label = paste0("N = 6"),
+             color="black") 
+  
+  kk
+  
+  p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ set) #non parametrique
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  ll <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Nestedness)) +
+    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen1","darkolivegreen3","darkolivegreen3","darkolivegreen4") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Nestedness component") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    stat_pvalue_manual(p.sed) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    annotate(geom="text", x=1, y=0.09, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=2, y=0.09, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=3, y=0.09, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=4, y=0.1, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=5, y=0.1, label = paste0("N = 6"),
+             color="black")
+  ll
+  
+  p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ set) #non parametrique
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  mm <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Jaccard_diss)) +
+    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen1","darkolivegreen3","darkolivegreen3","darkolivegreen4") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Jaccard dissimilarity component") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    stat_pvalue_manual(p.sed) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    annotate(geom="text", x=1, y=0.32, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=2, y=0.45, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=3, y=0.36, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=4, y=0.36, label = paste0("N = 6"),
+             color="black") +
+    annotate(geom="text", x=5, y=0.42, label = paste0("N = 6"),
+             color="black")
+  mm
+  
   
   
    #### inter/intra ####
-  
+  B.pair.pa <- betapart::beta.pair(matrix.pa, index.family = "jaccard")
+  mat.turn <- B.pair.pa$beta.jtu
+  mat.nest <- B.pair.pa$beta.jne
+  mat.jacc <- B.pair.pa$beta.jac
   
   df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
   df.turn <- subset(df.turn, row != col) 
@@ -453,7 +574,7 @@ beta_div_decomp <- function(metadata_data_mean){
    i
    
    
-   fin <- cowplot::plot_grid(c,a,b,f,d,e,i,g,h,
+   fin <- cowplot::plot_grid(mm, kk,ll,f,d,e,i,g,h,
                              ncol = 3,
                              nrow = 3)
    
