@@ -80,15 +80,15 @@ beta_div_decomp <- function(metadata_data_mean){
     theme_classic() +
     stat_pvalue_manual(p.sed) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-    annotate(geom="text", x=1, y=0.24, label = paste0("N = 6"),
+    annotate(geom="text", x=1, y=0.24, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=2, y=0.45, label = paste0("N = 6"),
+    annotate(geom="text", x=2, y=0.45, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=3, y=0.32, label = paste0("N = 6"),
+    annotate(geom="text", x=3, y=0.32, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=4, y=0.30, label = paste0("N = 6"),
+    annotate(geom="text", x=4, y=0.30, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=5, y=0.25, label = paste0("N = 6"),
+    annotate(geom="text", x=5, y=0.25, label = paste0("N = 3"),
              color="black") 
   
   kk
@@ -106,15 +106,15 @@ beta_div_decomp <- function(metadata_data_mean){
     theme_classic() +
     stat_pvalue_manual(p.sed) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-    annotate(geom="text", x=1, y=0.09, label = paste0("N = 6"),
+    annotate(geom="text", x=1, y=0.09, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=2, y=0.09, label = paste0("N = 6"),
+    annotate(geom="text", x=2, y=0.09, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=3, y=0.09, label = paste0("N = 6"),
+    annotate(geom="text", x=3, y=0.09, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=4, y=0.1, label = paste0("N = 6"),
+    annotate(geom="text", x=4, y=0.1, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=5, y=0.1, label = paste0("N = 6"),
+    annotate(geom="text", x=5, y=0.1, label = paste0("N = 3"),
              color="black")
   ll
   
@@ -131,15 +131,15 @@ beta_div_decomp <- function(metadata_data_mean){
     theme_classic() +
     stat_pvalue_manual(p.sed) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-    annotate(geom="text", x=1, y=0.32, label = paste0("N = 6"),
+    annotate(geom="text", x=1, y=0.32, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=2, y=0.45, label = paste0("N = 6"),
+    annotate(geom="text", x=2, y=0.45, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=3, y=0.36, label = paste0("N = 6"),
+    annotate(geom="text", x=3, y=0.36, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=4, y=0.36, label = paste0("N = 6"),
+    annotate(geom="text", x=4, y=0.36, label = paste0("N = 3"),
              color="black") +
-    annotate(geom="text", x=5, y=0.42, label = paste0("N = 6"),
+    annotate(geom="text", x=5, y=0.42, label = paste0("N = 3"),
              color="black")
   mm
   
@@ -579,7 +579,7 @@ beta_div_decomp <- function(metadata_data_mean){
                              nrow = 4)
    
    path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv.pdf")
-   ggsave(filename =  path_to_boxplot, plot = fin, width = 12.5, height = 18.5)
+   ggsave(filename =  path_to_boxplot, plot = fin, width = 13.3, height = 18.5)
    
    #### dependending on retrieval season ####
    #
