@@ -40,7 +40,7 @@ diversity_explo <- function(metadata_data_mean){
   # res.seas <-  p.sed <- rstatix::pairwise_t_test(data_div, s ~ imm_ret)
   # res.seas <-  p.sed <- rstatix::pairwise_t_test(data_div, s ~ imm_seas)
   res.aov <- rstatix::anova_test(data_div, s ~ imm_time)
-  p.sed <- rstatix::pairwise_t_test(data_div, s ~ imm_time, p.adjust.method = "bonferroni")
+  p.sed <- rstatix::wilcox_test(data_div, s ~ imm_time, p.adjust.method = "none")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.05)
   tapply(data_div$s, data_div$imm_time, mean)
   tapply(data_div$s, data_div$imm_time, sd)
