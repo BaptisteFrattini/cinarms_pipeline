@@ -36,7 +36,22 @@ fun_data_mean <- function(meta_data, arms_id){
   rownames(df_mean) <- df_mean$`meta$arms_name`
   df_mean <- df_mean[,-1]
   
+  #### Making the null model ####
   
+  # site_permutation <- function(matrix) {
+  #   shuffled_matrix <- matrix
+  #   for (i in 1:nrow(matrix)) {
+  #     shuffled_matrix[i, ] <- sample(matrix[i, ])
+  #   }
+  #   return(shuffled_matrix)
+  # }
+  # 
+  # df_mean <- site_permutation(df_mean)
+  # 
+  # # Generate null model (repeat as needed)
+  # rowSums(df_mean)
+  # 
+  #### Null model end ####
 
   data_out_f_path <- paste0("data/derived-data/data_mean_", arms_id, ".csv") #Nom du fichier de data généré
   meta_out_f_path <- paste0("data/derived-data/metadata_mean_", arms_id, ".csv") #Nom du fichier de 
