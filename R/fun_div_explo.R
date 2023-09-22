@@ -39,8 +39,8 @@ diversity_explo <- function(metadata_data_mean){
   ?rstatix::kruskal_test
   # res.seas <-  p.sed <- rstatix::pairwise_t_test(data_div, s ~ imm_ret)
   # res.seas <-  p.sed <- rstatix::pairwise_t_test(data_div, s ~ imm_seas)
-  res.aov <- rstatix::anova_test(data_div, s ~ imm_time)
-  p.sed <- rstatix::wilcox_test(data_div, s ~ imm_time, p.adjust.method = "none")
+  res.aov <- rstatix::kruskal_test(data_div, s ~ imm_time)
+  p.sed <- rstatix::wilcox_test(data_div, s ~ imm_time, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.05)
   tapply(data_div$s, data_div$imm_time, mean)
   tapply(data_div$s, data_div$imm_time, sd)
@@ -53,6 +53,17 @@ diversity_explo <- function(metadata_data_mean){
   model <- aov(s ~ imm_time, data = data_div)
   parameters(model, effectsize_type = c("eta","f"))
   
+  library(lmPerm)
+  model <- aovp(s ~ imm_time, data = data_div, perm = "Prob")
+  summary(model)
+  
+  install.packages("rcompanion")
+  library(rcompanion)
+  
+  PT = pairwisePermutationTest(s ~ imm_time, data = data_div,
+                               method="bonferroni")
+  
+  ?pairwisePercentileTest
   #Experimental design is quite ok to run ANOVA
   
   ff <- ggplot(data_div, aes(x = fct_relevel(imm_time, "6m", "1y", "2y"), y = S)) +

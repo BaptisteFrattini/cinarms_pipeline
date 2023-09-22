@@ -18,8 +18,8 @@ decomp_b_div|function|ce0aa96bd3b4b026|||||||||||||||
 div_alpha|stem|4ead784f76491fba|d19ad5b9c8cb2cd4|c304a158c7f9e1c6|1974110557||t19592.4911956759s|094cdf8ee71e1e88|135|rds|local|vector|||5.16||
 div_beta_decomp|stem|3bb6e9ce87bf3f3b|5e464849c58acc0e|daa3d495db4bf057|1517440787||t19619.3905652988s|0b52c5847220add9|82|rds|local|vector|||10.47||
 div_beta_decomp_full|stem|68cdd469ff628ea6|dc5dd853474c78ad|f9c24068f1df0b06|-1326273654||t19619.3906572085s|3e4acf685da8f273|84|rds|local|vector|||3.86||
-div_explo|stem|032b96ab8dc966ff|5e483ffd086b6638|79e792f29d0b9267|-613222916||t19619.3906805582s|79365c26e374407f|71|rds|local|vector|||1.54|le package parameters a été compilé avec la version R 4.3.1. le package effectsize a été compilé avec la version R 4.3.1. le package pwr a été compilé avec la version R 4.3.1|
-diversity_explo|function|90aca096faa829ee|||||||||||||||
+div_explo|stem|032b96ab8dc966ff|5e483ffd086b6638|73cb8470690b3d1a|-613222916||t19621.4568558598s|79365c26e374407f|71|rds|local|vector|||13.56|le package parameters a été compilé avec la version R 4.3.1. le package effectsize a été compilé avec la version R 4.3.1. le package pwr a été compilé avec la version R 4.3.1. le package rcompanion a été compilé avec la version R 4.3.1|
+diversity_explo|function|691c2532edfaab39|||||||||||||||
 fun_alpha_div|function|eaa4f8e6c3728e0e|||||||||||||||
 fun_data_mean|function|2fc9d6993475b2ab|||||||||||||||
 fun_nmds_plot|function|b032870244acbf01|||||||||||||||

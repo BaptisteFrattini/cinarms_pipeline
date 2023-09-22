@@ -25,7 +25,7 @@ beta_div_decomp <- function(metadata_data_mean){
   mat.nest <- B.pair.pa$beta.jne
   mat.jacc <- B.pair.pa$beta.jac
   
-  ####  inter/intra par set ####
+   ####  inter/intra par set ####
  
   df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
   df.turn <- subset(df.turn, row != col)

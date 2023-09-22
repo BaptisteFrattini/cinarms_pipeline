@@ -43,6 +43,8 @@ Imports:
   BiodiversityR,
   parameters,
   effectsize,
-  pwr
+  pwr,
+  lmPerm,
+  rcompanion
   
   
