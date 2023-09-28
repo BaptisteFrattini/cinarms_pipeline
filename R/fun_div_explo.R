@@ -67,7 +67,7 @@ diversity_explo <- function(metadata_data_mean){
   #Experimental design is quite ok to run ANOVA
   
   ff <- ggplot(data_div, aes(x = fct_relevel(imm_time, "6m", "1y", "2y"), y = S)) +
-    geom_boxplot(fill =  c("cadetblue2","cadetblue3","cadetblue4")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00")) +
     labs(title = "",
          x = "Immersion time",
          y = "Average species richness in an ARMS") +

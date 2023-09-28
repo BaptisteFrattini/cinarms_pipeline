@@ -18,6 +18,7 @@ data_arms <- function(raw_data, arms_id, arms_id_2years){
                      dec = ",")
   
   
+  
   dat <- data[data$prefixe == arms_id, ]
   dat2ya <- data[data$arms_name == arms_id_2years[1], ]
   dat2yb <- data[data$arms_name == arms_id_2years[2], ]

@@ -418,7 +418,7 @@ beta_div_decomp_full <- function(metadata_data_mean){
   shapiro.test(df_deploy$jacc) #Shapiro OK
   
   p.sed <- rstatix::t_test(df_deploy, jacc ~ comp_deploy)
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3001)
   depl = c("between same \n deployment \n season", "between different \n deployment \n season")
   i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
     geom_boxplot(fill =  c("lightgreen","lightgreen") ) +

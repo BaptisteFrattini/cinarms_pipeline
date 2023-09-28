@@ -7,11 +7,11 @@
 beta_div_decomp <- function(metadata_data_mean){
   
    # metadata_data_mean = targets::tar_read(mean_metadata_data)
-  
+   
    #### Load data and meta data ####
   library(ggpubr)
   library(forcats)
-  library(reshape2)
+  library(reshape2) 
   library(ggplot2)
   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
@@ -68,10 +68,10 @@ beta_div_decomp <- function(metadata_data_mean){
   
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Turnover ~ set) #non parametrique
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
   kk <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Turnover)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen1","darkolivegreen3","darkolivegreen3","darkolivegreen4") ) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
          y = "Turnover component") +
@@ -94,10 +94,10 @@ beta_div_decomp <- function(metadata_data_mean){
   kk
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ set) #non parametrique
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
   ll <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Nestedness)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen1","darkolivegreen3","darkolivegreen3","darkolivegreen4") ) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
          y = "Nestedness component") +
@@ -119,10 +119,10 @@ beta_div_decomp <- function(metadata_data_mean){
   ll
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ set) #non parametrique
-  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+  p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
   mm <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Jaccard_diss)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen1","darkolivegreen3","darkolivegreen3","darkolivegreen4") ) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
          y = "Jaccard dissimilarity component") +
@@ -349,7 +349,7 @@ beta_div_decomp <- function(metadata_data_mean){
    comp = c("between six months \n and one year", "between one year \n and two years", "between six months \n and two years")
    
    d <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
-     geom_boxplot(fill =  c("coral","coral","coral") ) +
+     geom_boxplot(fill =  c("lightgreen","lightgreen","lightgreen") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Turnover component") +
@@ -379,7 +379,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
-     geom_boxplot(fill =  c("coral","coral","coral") ) +
+     geom_boxplot(fill =  c("lightgreen","lightgreen","lightgreen") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Nestedness component") +
@@ -409,7 +409,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
-     geom_boxplot(fill =  c("coral","coral","coral") ) +
+     geom_boxplot(fill =  c("lightgreen","lightgreen","lightgreen") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Jaccard dissimilarity") +
@@ -506,7 +506,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    depl = c("between same \n deployment season", "between different \n deployment season")
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
-     geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
+     geom_boxplot(fill =  c("firebrick2","firebrick2") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Turnover component") +
@@ -532,7 +532,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    depl = c("between same \n deployment season", "between different \n deployment season")
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
-     geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
+     geom_boxplot(fill =  c("firebrick2","firebrick2") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Nestedness component") +
@@ -558,7 +558,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    depl = c("between same \n deployment season", "between different \n deployment season")
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
-     geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
+     geom_boxplot(fill =  c("firebrick2","firebrick2") ) +
      labs(title = "",
           y = "Jaccard dissimilarity component") +
      theme(legend.position = "none") + 
@@ -579,10 +579,9 @@ beta_div_decomp <- function(metadata_data_mean){
                              nrow = 4)
    
    path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv.pdf")
-   ggsave(filename =  path_to_boxplot, plot = fin, width = 13.3, height = 18.5)
+   ggsave(filename =  path_to_boxplot, plot = fin, width = 13.1, height = 19.5)
    
    #### dependending on retrieval season ####
-   #
    #### Immersion time ####
    #turnover
    mat.turn

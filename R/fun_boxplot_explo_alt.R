@@ -26,7 +26,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   library(forcats)
   library(ggplot2)
   time <- c("6 month", "1 year", "2 years")
-  col1 <- rev(c("darkolivegreen","darkolivegreen3","darkolivegreen1"))
+  col1 <- rev(c("#FF7F00","#1B9E77","#CC66CC"))
   data_pool$imm_time <- meta$imm_time
   data_pool$immersion_season <- meta$immersion_season
   data_pool$recovery_season <- meta$recovery_season
@@ -125,7 +125,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_bare_plate <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = bare_plate)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of bare_plate") +
@@ -139,7 +139,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_bare_plate <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = bare_plate)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of bare_plate") +
@@ -189,7 +189,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_bare_plate <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = bare_plate)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of bare_plate") +
@@ -203,7 +203,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_bare_plate <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = bare_plate)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of bare_plate") +
@@ -276,7 +276,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_sediment <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = sediment)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of sediment") +
@@ -290,7 +290,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_sediment <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = sediment)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of sediment") +
@@ -334,7 +334,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_sediment <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = sediment)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of sediment") +
@@ -348,7 +348,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_sediment <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = sediment)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of sediment") +
@@ -419,7 +419,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_CCA <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = CCA)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of CCA") +
@@ -433,7 +433,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_CCA <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = CCA)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of CCA") +
@@ -476,7 +476,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_CCA <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = CCA)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of CCA") +
@@ -490,7 +490,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_CCA <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = CCA)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of CCA") +
@@ -560,7 +560,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_porifera <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = porifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of porifera") +
@@ -574,7 +574,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_porifera <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = porifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of porifera") +
@@ -618,7 +618,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_porifera <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = porifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of porifera") +
@@ -632,7 +632,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_porifera <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = porifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of porifera") +
@@ -700,7 +700,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_Ascidiacea <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = Ascidiacea)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of Ascidiacea") +
@@ -714,7 +714,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_Ascidiacea <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = Ascidiacea)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of Ascidiacea") +
@@ -758,7 +758,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_Ascidiacea <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = Ascidiacea)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of Ascidiacea") +
@@ -772,7 +772,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_Ascidiacea <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = Ascidiacea)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of Ascidiacea") +
@@ -841,7 +841,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_foraminifera <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = foraminifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of foraminifera") +
@@ -855,7 +855,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_foraminifera <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = foraminifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of foraminifera") +
@@ -898,7 +898,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_foraminifera <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = foraminifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of foraminifera") +
@@ -911,7 +911,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_foraminifera <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = foraminifera)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of foraminifera") +
@@ -981,7 +981,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_Hydrozoa <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = Hydrozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of Hydrozoa") +
@@ -995,7 +995,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_Hydrozoa <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = Hydrozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of Hydrozoa") +
@@ -1039,7 +1039,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_Hydrozoa <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = Hydrozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of Hydrozoa") +
@@ -1053,7 +1053,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_Hydrozoa <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = Hydrozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of Hydrozoa") +
@@ -1124,7 +1124,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_annelida <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = annelida)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of annelida") +
@@ -1138,7 +1138,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_annelida <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = annelida)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of annelida") +
@@ -1184,7 +1184,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_annelida <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = annelida)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of annelida") +
@@ -1198,7 +1198,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_annelida <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = annelida)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of annelida") +
@@ -1268,7 +1268,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_bryozoa <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = bryozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of bryozoa") +
@@ -1282,7 +1282,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_bryozoa <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = bryozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of bryozoa") +
@@ -1326,7 +1326,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_bryozoa <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = bryozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of bryozoa") +
@@ -1340,7 +1340,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_bryozoa <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = bryozoa)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of bryozoa") +
@@ -1411,7 +1411,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_Bivalvia <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = Bivalvia)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of Bivalvia") +
@@ -1425,7 +1425,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_Bivalvia <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = Bivalvia)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of Bivalvia") +
@@ -1469,7 +1469,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_Bivalvia <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = Bivalvia)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of Bivalvia") +
@@ -1483,7 +1483,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_Bivalvia <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = Bivalvia)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of Bivalvia") +
@@ -1554,7 +1554,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_other_algae <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = other_algae)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of other algae") +
@@ -1568,7 +1568,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_other_algae <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = other_algae)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of other algae") +
@@ -1612,7 +1612,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_other_algae <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = other_algae)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of other algae") +
@@ -1626,7 +1626,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_other_algae <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = other_algae)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of other algae") +
@@ -1697,7 +1697,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   
   
   y1_prokariotic_biotas <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = prokariotic_biotas)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
          y = "Percentage cover of prokariotic_biotas") +
@@ -1711,7 +1711,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y2_prokariotic_biotas <- ggplot(data_pool_cool, aes(x = fct_relevel(data_pool_cool$imm_time, "6m", "1y"), y = prokariotic_biotas)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
          y = "Percentage cover of prokariotic_biotas") +
@@ -1754,7 +1754,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y5_prokariotic_biotas <- ggplot(data_pool_r_hot, aes(x = fct_relevel(data_pool_r_hot$imm_time, "6m", "1y", "2y"), y = prokariotic_biotas)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3","darkolivegreen") ) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
          y = "Percentage cover of prokariotic_biotas") +
@@ -1768,7 +1768,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
   
   y6_prokariotic_biotas <- ggplot(data_pool_r_cool, aes(x = fct_relevel(imm_time, "6m", "1y"), y = prokariotic_biotas)) +
-    geom_boxplot(fill =  c("darkolivegreen1","darkolivegreen3")) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
          y = "Percentage cover of prokariotic_biotas") +
