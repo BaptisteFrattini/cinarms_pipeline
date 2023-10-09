@@ -7,6 +7,8 @@ list(
   
   ,tar_target(campain_id, "CINA")
   
+  
+  
   ,tar_target(arms_id_2y, c("RUNA2A", "RUNA2B","RUNA2C"))
   
   ,tar_target(metadata_data, data_arms(raw_data = raw_data, 
