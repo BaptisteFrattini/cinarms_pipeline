@@ -1551,7 +1551,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
   res.aov <- rstatix::kruskal_test(data_pool_hot, other_algae ~ imm_time)
   p.sed <- rstatix::wilcox_test(data_pool_hot, other_algae ~ imm_time, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.1)
-  
+  data_pool_hot$other_algae
   
   y1_other_algae <- ggplot(data_pool_hot, aes(x = fct_relevel(data_pool_hot$imm_time, "6m", "1y", "2y"), y = other_algae)) +
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +

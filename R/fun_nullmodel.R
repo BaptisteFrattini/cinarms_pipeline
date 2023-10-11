@@ -160,6 +160,9 @@ fun_null_model <- function(metadata_data_mean){
   nest.test.yes <- wilcox.test(x = tab.nest.null$value, mu = obs.nest[2], alternative = "two.sided")
   jacc.test.yes <- wilcox.test(x = tab.jacc.null$value, mu = obs.jacc[2], alternative = "two.sided")
   
+  
+  
+  
   #### boucle ####
   # tab.jacc <- matrix(nrow = n, ncol = 1)
   # 

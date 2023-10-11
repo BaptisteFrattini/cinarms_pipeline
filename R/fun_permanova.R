@@ -26,12 +26,6 @@ fun_perm <- function(metadata_data_mean){
   perm <- vegan::adonis2(df_mean ~ imm_time*immersion_season, data = meta_mean, method = "bray", permutations = 99999)
 
   
-  # Sans RUNA3
-  df_mean <- df_mean[1:15,]
-  meta_mean <- meta_mean[1:15,]
-  
-  perm <- vegan::adonis2(df_mean ~ imm_time*immersion_season, data = meta_mean, method = "bray", permutations = 99999)
-  
   # pairwise_ado <- pairwise.adonis2(df_mean ~ imm_time, data = meta_mean, method = "bray")
 
   

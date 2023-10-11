@@ -72,14 +72,15 @@ diversity_explo <- function(metadata_data_mean){
          x = "Immersion time",
          y = "Average species richness in an ARMS") +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
-    annotate(geom="text", x=1, y=24, label = paste0("N = ",length(data_div$imm_time[grepl("6m", data_div$imm_time)])),
-             color="black") +
-    annotate(geom="text", x=2, y=27.75, label = paste0("N = ",length(data_div$imm_time[grepl("1y", data_div$imm_time)])),
-             color="black") +
-    annotate(geom="text", x=3, y=33, label = paste0("N = ",length(data_div$imm_time[grepl("2y", data_div$imm_time)])),
-             color="black")
-  
+    stat_pvalue_manual(p.sed) 
+  # +
+  #   annotate(geom="text", x=1, y=24, label = paste0("N = ",length(data_div$imm_time[grepl("6m", data_div$imm_time)])),
+  #            color="black") +
+  #   annotate(geom="text", x=2, y=27.75, label = paste0("N = ",length(data_div$imm_time[grepl("1y", data_div$imm_time)])),
+  #            color="black") +
+  #   annotate(geom="text", x=3, y=33, label = paste0("N = ",length(data_div$imm_time[grepl("2y", data_div$imm_time)])),
+  #            color="black")
+  # 
   path_to_box_div <- paste0("outputs/box_div.pdf")
   ggsave(filename =  path_to_box_div , width = 6, height = 6)
   

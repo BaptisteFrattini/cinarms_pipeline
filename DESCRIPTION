@@ -22,7 +22,6 @@ Imports:
   dplyr,
   vegan,
   betapart,
-  adespatial,
   ade4,
   geosphere,
   gclus,
@@ -45,6 +44,7 @@ Imports:
   effectsize,
   pwr,
   lmPerm,
-  rcompanion
+  rcompanion,
+  effsize
   
   

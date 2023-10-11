@@ -7,13 +7,14 @@ list(
   
   ,tar_target(campain_id, "CINA")
   
-  
+  # ,tar_target(micro_hab, "UO")
   
   ,tar_target(arms_id_2y, c("RUNA2A", "RUNA2B","RUNA2C"))
   
   ,tar_target(metadata_data, data_arms(raw_data = raw_data, 
                                        arms_id = campain_id,
-                                       arms_id_2years = arms_id_2y), format = "file")
+                                       arms_id_2years = arms_id_2y,
+                                       micro_habitat = micro_hab), format = "file")
   
   ,tar_target(data_pool, fun_pool_full(meta_data = metadata_data))
   
@@ -29,7 +30,7 @@ list(
   ,tar_target(venn_plot, fun_Venn(metadata_data_mean = mean_metadata_data)) 
   
   # ,tar_target(boxplot_pool, boxplot_explo(data_full_pool = data_pool, 
-                                          # meta_data = metadata_data))
+                                           # meta_data = metadata_data))
   
   ,tar_target(boxplot_pool_alt, boxplot_explo_alt(data_full_pool = data_pool, 
                                                   meta_data = metadata_data))

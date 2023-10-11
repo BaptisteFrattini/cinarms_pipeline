@@ -20,9 +20,18 @@ fun_pool_full <- function(meta_data){
   bryo_columns <- grep("bryo", names(data), value = TRUE)
   bryo_mean <- rowSums(data[,bryo_columns])
   
-  
   ascc_columns <- grep("ascc", names(data), value = TRUE)
-  ascc_mean <- rowSums(data[,ascc_columns])
+  # Vérifiez si data est un data frame
+  if (is.data.frame(data[,ascc_columns]) == TRUE) {
+    # Si c'est un data frame, effectuez les commandes pour les data frames ici
+    ascc_mean <- rowSums(data[,ascc_columns])
+  } else {
+    # Si c'est un vecteur, effectuez les commandes pour les vecteurs ici
+    ascc_mean <- rowSums(data[,ascc_columns])
+  }
+  
+
+  # ascc_mean <- rowSums(data[,ascc_columns])
   
   ascs_columns <- grep("ascs", names(data), value = TRUE)
   ascs_mean <- rowSums(data[,ascs_columns])
@@ -39,10 +48,13 @@ fun_pool_full <- function(meta_data){
   prokariot_columns <- c(grep("biofilm", names(data), value = TRUE), grep("Cyanob", names(data), value = TRUE))
   prokariot_mean <- rowSums(data[,prokariot_columns])
   
-  
   rest_columns <- names(data)
-  rest_columns <- rest_columns[c(1,3,23,63,64,66)]
+  rest_columns <- rest_columns[rest_columns %in% c("Bivalvia", "Cirripedia", "Hydrozoa", "bare_plate", "sediment", "CCA")]
+  
   rest_data <- data[,rest_columns]
+  
+  # with all plates : (1,3,23,63,64,66)
+  # with UP plates : (1,3,45,46,48)
   
   data_pool <- data.frame(porifera = spo_mean,
                           bryozoa = bryo_mean,

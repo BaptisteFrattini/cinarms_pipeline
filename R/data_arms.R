@@ -6,18 +6,17 @@
 #' @return the path to the subseted raw data file
 #' @export
 
-data_arms <- function(raw_data, arms_id, arms_id_2years){
+data_arms <- function(raw_data, arms_id, arms_id_2years, micro_habitat){
   # raw_data = targets::tar_read(raw_data)
   # arms_id = targets::tar_read(campain_id)
   # arms_id_2years = targets::tar_read(arms_id_2y)
+  # micro_habitat = targets::tar_read(micro_hab)
 
   dat_path <- here::here(raw_data)
   data <- read.table(dat_path, 
                      header = TRUE, 
                      sep = ";", 
                      dec = ",")
-  
-  
   
   dat <- data[data$prefixe == arms_id, ]
   dat2ya <- data[data$arms_name == arms_id_2years[1], ]
@@ -26,12 +25,28 @@ data_arms <- function(raw_data, arms_id, arms_id_2years){
   dat2y = data.frame(rbind(dat2ya, dat2yb, dat2yc))
   dat <- data.frame(rbind(dat, dat2y))
   
-  
   meta_names <- as.vector(colnames(dat[,c(1:19)]))
   
-  
   meta_data <- dat[, meta_names]
- 
+  meta_data
+  
+  ### avec que Up ou down
+  # 
+  # dat <- subset(dat, meta_data$Orientation == micro_habitat)
+  # meta_data <- subset(meta_data, meta_data$Orientation == micro_habitat)
+  # 
+  ### fin avec que Up ou down
+  
+  ### avec que Up/Open ; Up/Close ; Down/Open ; Down/Close
+  
+  # meta_data$comb <- paste0(meta_data$Orientation,meta_data$o_c)
+  # 
+  # dat <- subset(dat, meta_data$comb == micro_habitat)
+  # meta_data <- subset(meta_data, meta_data$comb == micro_habitat)
+  # 
+  # meta_data$comb <- paste0(meta_data$Orientation,meta_data$o_c)
+  
+  ### fin avec que Up/Open ; Up/Close ; Down/Open ; Down/Close
   
   library(dplyr)
   meta_data$arms = substr(meta_data$arms_name, 1, 5)
@@ -58,7 +73,6 @@ data_arms <- function(raw_data, arms_id, arms_id_2years){
     dat[i,] <- dat[i,]/sums[i]*100
   }
   
-
   
   out_d_path <- "data/derived-data" #Nom du chemin qui mène à data derived
   out_f_name <- paste0("data_", arms_id, "_",substr(arms_id_2years[1],1,5), ".csv") #Nom du fichier de data généré

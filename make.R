@@ -9,8 +9,8 @@
 
 
 
-## Install Dependencies (listed in DESCRIPTION) ----
-
+## Install Dependencies (not available on CRAN) ----
+# install.packages("~/R-projects/tar.gz files/adespatial_0.3-21.tar.gz", repos = NULL, type = "source")
 
 
 # dependences management
@@ -25,5 +25,6 @@ renv::snapshot()
 targets::tar_visnetwork()
 targets::tar_make()
 targets::tar_visnetwork()
+
 
 

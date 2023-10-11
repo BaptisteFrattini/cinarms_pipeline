@@ -20,8 +20,19 @@ fun_pool_mean <- function(metadata_data_mean){
   bryo_columns <- grep("bryo", names(df_mean), value = TRUE)
   bryo_mean <- rowSums(df_mean[,bryo_columns])
   
+  # ascc_columns <- grep("ascc", names(df_mean), value = TRUE)
+  # ascc_mean <- rowSums(df_mean[,ascc_columns])
+  
   ascc_columns <- grep("ascc", names(df_mean), value = TRUE)
-  ascc_mean <- rowSums(df_mean[,ascc_columns])
+  # Vérifiez si data est un data frame
+  if (is.data.frame(df_mean[,ascc_columns]) == TRUE) {
+    # Si c'est un data frame, effectuez les commandes pour les data frames ici
+    ascc_mean <- rowSums(df_mean[,ascc_columns])
+  } else {
+    # Si c'est un vecteur, effectuez les commandes pour les vecteurs ici
+    ascc_mean <- df_mean[,ascc_columns]
+  }
+  
   
   ascs_columns <- grep("ascs", names(df_mean), value = TRUE)
   ascs_mean <- rowSums(df_mean[,ascs_columns])
@@ -39,7 +50,7 @@ fun_pool_mean <- function(metadata_data_mean){
   prokariot_mean <- rowSums(df_mean[,prokariot_columns])
   
   rest_columns <- names(df_mean)
-  rest_columns <- rest_columns[c(1,3,23,63,64,66)]
+  rest_columns <- rest_columns[rest_columns %in% c("Bivalvia", "Cirripedia", "Hydrozoa", "bare_plate", "sediment", "CCA")]
   rest_data <- df_mean[,rest_columns]
   
   data_pool <- data.frame(porifera = spo_mean,
