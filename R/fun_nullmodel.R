@@ -12,7 +12,9 @@ fun_null_model <- function(metadata_data_mean){
   library(reshape2)
   library(ggplot2)
   library(EcoSimR)
-  
+  library(effsize)
+  library(dplyr)
+  # install.packages("effsize")
   
   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
   meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
@@ -26,7 +28,7 @@ fun_null_model <- function(metadata_data_mean){
   
   # Run the null model using the swapping algorithm
   null_model <- sim9(df_mean, nReps = num_iterations, metric = "c_score", algo = "sim9")
-  
+  ?sim9
     ### parameters justification ###
     # C-Score :
     # EcoSim generates 1000 random matrices as the default. The default 
@@ -50,6 +52,7 @@ fun_null_model <- function(metadata_data_mean){
    
   # Return the null matrix
   null_model_data <- null_model$Randomized.Data
+  rownames(null_model_data) <- meta_mean$arms
   
   B.pair.pa <- betapart::beta.pair(null_model_data, index.family = "jaccard")
   
@@ -60,12 +63,38 @@ fun_null_model <- function(metadata_data_mean){
   #turn
   df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
   df.turn <- subset(df.turn, row != col)
+  df.turn <- df.turn %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  df.turn <- df.turn[!duplicated(df.turn$combined), ]
+  nrow(df.turn)
+  
   #nest
   df.nest <- melt(as.matrix(mat.nest), varnames = c("row", "col"))
   df.nest <- subset(df.nest, row != col)
+  df.nest <- df.nest %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  df.nest <- df.nest[!duplicated(df.nest$combined), ]
+  nrow(df.nest)
+  
   #jac
   df.jacc <- melt(as.matrix(mat.jacc), varnames = c("row", "col"))
   df.jacc <- subset(df.jacc, row != col)
+  df.jacc <- df.jacc %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  df.jacc <- df.jacc[!duplicated(df.jacc$combined), ]
+  nrow(df.jacc)
   
   tab.jacc.null <- as.data.frame(df.jacc)
   tab.nest.null <- as.data.frame(df.nest)
@@ -87,7 +116,16 @@ fun_null_model <- function(metadata_data_mean){
   #turn
   obs.df.turn <- melt(as.matrix(obs.mat.turn), varnames = c("row", "col"))
   obs.df.turn <- subset(obs.df.turn, row != col)
-
+  obs.df.turn <- obs.df.turn %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  obs.df.turn <- obs.df.turn[!duplicated(obs.df.turn$combined), ]
+  nrow(obs.df.turn)
+  
+  
   obs.df.turn$row <- substr(obs.df.turn$row, 1, 5)
   obs.df.turn$col <- substr(obs.df.turn$col, 1, 5)
   obs.df.turn$same_value <- ifelse(obs.df.turn$row == obs.df.turn$col, "Yes", "No")
@@ -96,6 +134,14 @@ fun_null_model <- function(metadata_data_mean){
   #nest
   obs.df.nest <- melt(as.matrix(obs.mat.nest), varnames = c("row", "col"))
   obs.df.nest <- subset(obs.df.nest, row != col)
+  obs.df.nest <- obs.df.nest %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  obs.df.nest <- obs.df.nest[!duplicated(obs.df.nest$combined), ]
+  nrow(obs.df.nest)
   
   obs.df.nest$row <- substr(obs.df.nest$row, 1, 5)
   obs.df.nest$col <- substr(obs.df.nest$col, 1, 5)
@@ -104,6 +150,14 @@ fun_null_model <- function(metadata_data_mean){
   #jacc
   obs.df.jacc <- melt(as.matrix(obs.mat.jacc), varnames = c("row", "col"))
   obs.df.jacc <- subset(obs.df.jacc, row != col)
+  obs.df.jacc <- obs.df.jacc %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  obs.df.jacc <- obs.df.jacc[!duplicated(obs.df.jacc$combined), ]
+  nrow(obs.df.jacc)
   
   obs.df.jacc$row <- substr(obs.df.jacc$row, 1, 5)
   obs.df.jacc$col <- substr(obs.df.jacc$col, 1, 5)
@@ -151,73 +205,210 @@ fun_null_model <- function(metadata_data_mean){
   jacc.test.no <- wilcox.test(x = tab.jacc.null$value, mu = obs.jacc[1], alternative = "two.sided")
   # Comparison between two set of value (mean comparison)
   
-  install.packages("effsize")
-  library(effsize)
+  #### Compute the null deviation data ####
   
-  cohen_d <- cohen.d(tab.turn.null$value, obs.df.turn.no$value)
+  #### JACCARD
   
-  turn.test.yes <- wilcox.test(x = tab.turn.null$value, mu = obs.turn[2], alternative = "two.sided")
-  nest.test.yes <- wilcox.test(x = tab.nest.null$value, mu = obs.nest[2], alternative = "two.sided")
-  jacc.test.yes <- wilcox.test(x = tab.jacc.null$value, mu = obs.jacc[2], alternative = "two.sided")
+  nrow(obs.df.jacc)
+  nrow(tab.jacc.null)
+  null.dev.jacc <- (obs.df.jacc$value - mean(tab.jacc.null$value))/sd(tab.jacc.null$value)
+  
+  tab.null.dev.jacc <- data.frame(obs.df.jacc$row, obs.df.jacc$col, obs.df.jacc$same_value, null.dev.jacc)
+  
+  tapply(tab.null.dev.jacc$null.dev, tab.null.dev.jacc$obs.df.jacc.same_value, mean)
+  tapply(tab.null.dev.jacc$null.dev, tab.null.dev.jacc$obs.df.jacc.same_value, sd)
+  
+  # As proposed by Oscar B. Vitorino Júnior et al, 2016 or Tom R. Bishop et al, (2015)
+  
+  ggplot(tab.null.dev.jacc, aes(x=null.dev)) + 
+    geom_density()
+  
+  #SES values significantly different from random expectations
+  subset_tab.null.dev.jacc <- tab.null.dev.jacc[tab.null.dev.jacc$null.dev > 1.96 | tab.null.dev.jacc$null.dev < -1.96, ] 
+  
+  tapply(subset_tab.null.dev.jacc$null.dev, subset_tab.null.dev.jacc$obs.df.jacc.same_value, mean)
+  tapply(subset_tab.null.dev.jacc$null.dev, subset_tab.null.dev.jacc$obs.df.jacc.same_value, sd)
+  
+  #### TURNOVER
+  
+  nrow(obs.df.turn)
+  nrow(tab.turn.null)
+  
+  null.dev.turn <- (obs.df.turn$value - mean(tab.turn.null$value))/sd(tab.turn.null$value)
+  
+  tab.null.dev.turn <- data.frame(obs.df.turn$row, obs.df.turn$col, obs.df.turn$same_value, null.dev.turn)
+  
+  tapply(tab.null.dev.turn$null.dev, tab.null.dev.turn$obs.df.turn.same_value, mean)
+  tapply(tab.null.dev.turn$null.dev, tab.null.dev.turn$obs.df.turn.same_value, sd)
+  
+  # As proposed by Oscar B. Vitorino Júnior et al, 2016 or Tom R. Bishop et al, (2015)
+  
+  ggplot(tab.null.dev.turn, aes(x=null.dev)) + 
+    geom_density()
+  
+  #SES values significantly different from random expectations
+  subset_tab.null.dev.turn <- tab.null.dev.turn[tab.null.dev.turn$null.dev > 1.96 | tab.null.dev.turn$null.dev < -1.96, ] 
+  
+  tapply(subset_tab.null.dev.turn$null.dev, subset_tab.null.dev.turn$obs.df.turn.same_value, mean)
+  tapply(subset_tab.null.dev.turn$null.dev, subset_tab.null.dev.turn$obs.df.turn.same_value, sd)
+  
+  #### NESTEDNESS
+  
+  nrow(obs.df.nest)
+  nrow(tab.nest.null)
+  
+  null.dev.nest <- (obs.df.nest$value - mean(tab.nest.null$value))/sd(tab.nest.null$value)
+  
+  tab.null.dev.nest <- data.frame(obs.df.nest$row, obs.df.nest$col, obs.df.nest$same_value, null.dev.nest)
+  
+  tapply(tab.null.dev.nest$null.dev, tab.null.dev.nest$obs.df.nest.same_value, mean)
+  tapply(tab.null.dev.nest$null.dev, tab.null.dev.nest$obs.df.nest.same_value, sd)
+  
+  # As proposed by Oscar B. Vitorino Júnior et al, 2016 or Tom R. Bishop et al, (2015)
+  
+  ggplot(tab.null.dev.nest, aes(x=null.dev)) + 
+    geom_density()
+  
+  #SES values significantly different from random expectations
+  subset_tab.null.dev.nest <- tab.null.dev.nest[tab.null.dev.nest$null.dev > 1.96 | tab.null.dev.nest$null.dev < -1.96, ] 
+  
+  tapply(subset_tab.null.dev.nest$null.dev, subset_tab.null.dev.nest$obs.df.nest.same_value, mean)
+  tapply(subset_tab.null.dev.nest$null.dev, subset_tab.null.dev.nest$obs.df.nest.same_value, sd)
   
   
+  #### Represent results ####
+  
+  #### intra set
+  subset_tab.null.dev.jacc
+  subset_tab.null.dev.turn
+  subset_tab.null.dev.nest
+  
+  #### JACCARD
+  
+  subset.tab.null.dev.jacc <- subset(tab.null.dev.jacc, tab.null.dev.jacc$obs.df.jacc.same_value == "Yes")
+  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  kk <- ggplot(subset.tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.jacc)) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    labs(title = "Jaccard",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4, max = 4)
+  
+  #### TURNOVER
+  
+  subset.tab.null.dev.turn <- subset(tab.null.dev.turn, tab.null.dev.turn$obs.df.turn.same_value == "Yes")
+  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  jj <- ggplot(subset.tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.turn)) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    labs(title = "Turnover",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey")+
+    ylim(min = -4, max = 4)
+  
+  #### NESTEDNESS
+  
+  subset.tab.null.dev.nest <- subset(tab.null.dev.nest, tab.null.dev.nest$obs.df.nest.same_value == "Yes")
+  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  hh <- ggplot(subset.tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.nest)) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    labs(title = "Nestedness",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey")+
+    ylim(min = -4, max = 4)
+  
+  #### plot
+  
+  fin <- cowplot::plot_grid(kk,jj,hh,
+                            ncol = 1,
+                            nrow = 3)
+  
+  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model.pdf")
+  ggsave(filename =  path_to_boxplot, plot = fin, width = 8, height = 14)
+  
+  #### intra-inter
+  
+  #### JACCARD
+  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  a <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
+    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    labs(title = "Jaccard",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intrainter) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey")+
+    ylim(min = -4, max = 4)
+  a
+  #### TURNOVER
+  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  b <- ggplot(tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.same_value, "Yes", "No"), y = null.dev.turn)) +
+    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    labs(title = "Turnover",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intrainter) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey")+
+    ylim(min = -4, max = 4)
+  b
+  #### NESTEDNESS
+  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  c <- ggplot(tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.same_value, "Yes", "No"), y = null.dev.nest)) +
+    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    labs(title = "Nestedness",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intrainter) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey")+
+    ylim(min = -4, max = 4)
+  c
+  
+  fin <- cowplot::plot_grid(a,b,c,kk,jj,hh,
+                            ncol = 3,
+                            nrow = 2)
+  
+  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full.pdf")
+  ggsave(filename =  path_to_boxplot, plot = fin, width = 13, height = 9)
+  #### bilateral test ####
+  
+  # turn.test.yes <- wilcox.test(x = tab.turn.null$value, mu = obs.turn[2], alternative = "two.sided")
+  # nest.test.yes <- wilcox.test(x = tab.nest.null$value, mu = obs.nest[2], alternative = "two.sided")
+  # jacc.test.yes <- wilcox.test(x = tab.jacc.null$value, mu = obs.jacc[2], alternative = "two.sided")
   
   
-  #### boucle ####
-  # tab.jacc <- matrix(nrow = n, ncol = 1)
-  # 
-  # tab.nest <- matrix(nrow = n, ncol = 1)
-  # 
-  # tab.turn <- matrix(nrow = n, ncol = 1)
-  # for (i in 1:999) {
-  #   
-  #   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
-  #   df_mean <- vegan::decostand(df_mean, "pa")
-  #   
-  #   # Run the null model using the swapping algorithm
-  #   null_model <- sim9(df_mean, nReps = 1000, metric = "c_score", algo = "sim9")
-  #   
-  #   # Return the null matrix
-  #   null_model_data <- null_model$Randomized.Data
-  #   
-  #   B.pair.pa <- betapart::beta.pair(null_model_data, index.family = "jaccard")
-  #   
-  #   mat.turn <- B.pair.pa$beta.jtu
-  #   mat.nest <- B.pair.pa$beta.jne
-  #   mat.jacc <- B.pair.pa$beta.jac
-  #   
-  #   ####  inter/intra par set ####
-  #   #turn
-  #   df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
-  #   df.turn <- subset(df.turn, row != col)
-  #   
-  #   # Créez un tableau vide de longueur n
-  #   tab.turn[i,] <- mean(df.turn$value)
-  #   
-  #   #nest
-  #   df.nest <- melt(as.matrix(mat.nest), varnames = c("row", "col"))
-  #   df.nest <- subset(df.nest, row != col)
-  #   
-  #   tab.nest[i,] <- mean(df.nest$value)
-  #   
-  #   #jac
-  #   df.jacc <- melt(as.matrix(mat.jacc), varnames = c("row", "col"))
-  #   df.jacc <- subset(df.jacc, row != col)
-  #   
-  #   tab.jacc[i,] <- mean(df.jacc$value)
-  #   
-  #   tab.jacc.null <- as.data.frame(tab.jacc)
-  #   tab.nest.null <- as.data.frame(tab.nest)
-  #   tab.turn.null <- as.data.frame(tab.turn)
-  #   
-  # }
-  # 
-  # mean.jacc.null <- mean(tab.jacc.null[,1])
-  # mean.nest.null <- mean(tab.nest.null[,1])
-  # mean.turn.null <- mean(tab.turn.null[,1])
-  
-
-
-  return(meta_mean)
-  return (cohen_d)
+  return (path_to_boxplot)
 }
