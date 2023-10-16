@@ -21,13 +21,35 @@ fun_null_model <- function(metadata_data_mean){
   
   df_mean <- vegan::decostand(df_mean, "pa")
   
+  #### ab based
+  
+
+  # out <- vegan::nullmodel(df_mean, "quasiswap")
+  # 
+  # b <- stats::simulate(out, nsim = 1000, seed = NULL,
+  #          burnin = 0, thin = 1)
+  # summary(b)
+  
+  # df_mean <- round(df_mean,0)
+  
+  # df_mean <- vegan::decostand(df_mean, "total")
+  
+  # rowSums(df_mean)
+  # ?vegan::decostand
+  # x <- vegan::permatswap(df_mean, method = "swsh_samp", fixedmar="both", shuffle = "both",
+  #            strata = NULL, mtype = "count", times = 99, 
+  #            burnin = 0, thin = 1)
+  # summary(x)
+  # x$perm
   #### Compute beta-diversity index on null model ####
   
   # Define the number of iterations for the null model
   num_iterations <- 1000  # You can adjust this number
   
   # Run the null model using the swapping algorithm
-  null_model <- sim9(df_mean, nReps = num_iterations, metric = "c_score", algo = "sim9")
+  df_mean <- t(df_mean)
+  # null_model <- sim9(df_mean, nReps = num_iterations, metric = "c_score", algo = "sim9")
+  null_model <- sim9(df_mean, nReps = num_iterations, metric = "c_score", algo = "sim2")
   ?sim9
     ### parameters justification ###
     # C-Score :
@@ -39,19 +61,35 @@ fun_null_model <- function(metadata_data_mean){
     # this algorithm has good Type I properties (low chance of falsely rejecting 
     # the null hypothesis when it is true), but also has good power for detecting 
     # non-random patterns in noisy data sets.
-    # sim9 : 
-    # Fixed rows-fixed columns This simulation maintains fixed row and column 
-    # sums. Thus, no degenerate matrices are produced. Although an earlier 
-    # version of this model by Connor and Simberloff (1979) was widely 
-    # criticized, the version implmented in EcoSim has a good Type I error rate, 
-    # and is powerful at detecting patterns in noisy data sets, particularly 
-    # when used with the C-score. This model cannot be used with the V-ratio, 
+    # sim9 :
+    # Fixed rows-fixed columns This simulation maintains fixed row and column
+    # sums. Thus, no degenerate matrices are produced. Although an earlier
+    # version of this model by Connor and Simberloff (1979) was widely
+    # criticized, the version implmented in EcoSim has a good Type I error rate,
+    # and is powerful at detecting patterns in noisy data sets, particularly
+    # when used with the C-score. This model cannot be used with the V-ratio,
     # which is determined exclusively by row and column sums. RECOMMENDED.
   
-    
-   
+  plot(null_model,type="burn_in")
+  plot(null_model,type="hist")
+  plot(null_model,type="cooc")
+  
+  summary(null_model)
+  # 
+  # plot(null_model_2,type="burn_in")
+  # plot(null_model_2,type="hist")
+  # plot(null_model_2,type="cooc")
+  #   
+  # summary(null_model_2)
+  
+  # Global SES using C Score = 6 (>>1,96) --> In community assembly, it would significate 
+  # that niche processes are playing a role. Since we have different parameters 
+  # of immersion time and season, "over dispersion" is attributed to these parameters.
+  
   # Return the null matrix
-  null_model_data <- null_model$Randomized.Data
+  null_model_data <- t(null_model$Randomized.Data)
+  rowSums(null_model_data)
+  colSums(null_model_data)
   rownames(null_model_data) <- meta_mean$arms
   
   B.pair.pa <- betapart::beta.pair(null_model_data, index.family = "jaccard")
@@ -220,8 +258,8 @@ fun_null_model <- function(metadata_data_mean){
   
   # As proposed by Oscar B. Vitorino Júnior et al, 2016 or Tom R. Bishop et al, (2015)
   
-  ggplot(tab.null.dev.jacc, aes(x=null.dev)) + 
-    geom_density()
+  ggplot(tab.null.dev.jacc, aes(x=null.dev.jacc)) +
+  geom_density()
   
   #SES values significantly different from random expectations
   subset_tab.null.dev.jacc <- tab.null.dev.jacc[tab.null.dev.jacc$null.dev > 1.96 | tab.null.dev.jacc$null.dev < -1.96, ] 
@@ -243,7 +281,7 @@ fun_null_model <- function(metadata_data_mean){
   
   # As proposed by Oscar B. Vitorino Júnior et al, 2016 or Tom R. Bishop et al, (2015)
   
-  ggplot(tab.null.dev.turn, aes(x=null.dev)) + 
+  ggplot(tab.null.dev.turn, aes(x=null.dev.turn)) + 
     geom_density()
   
   #SES values significantly different from random expectations
@@ -266,7 +304,7 @@ fun_null_model <- function(metadata_data_mean){
   
   # As proposed by Oscar B. Vitorino Júnior et al, 2016 or Tom R. Bishop et al, (2015)
   
-  ggplot(tab.null.dev.nest, aes(x=null.dev)) + 
+  ggplot(tab.null.dev.nest, aes(x=null.dev.nest)) + 
     geom_density()
   
   #SES values significantly different from random expectations
@@ -405,9 +443,9 @@ fun_null_model <- function(metadata_data_mean){
   ggsave(filename =  path_to_boxplot, plot = fin, width = 13, height = 9)
   #### bilateral test ####
   
-  # turn.test.yes <- wilcox.test(x = tab.turn.null$value, mu = obs.turn[2], alternative = "two.sided")
-  # nest.test.yes <- wilcox.test(x = tab.nest.null$value, mu = obs.nest[2], alternative = "two.sided")
-  # jacc.test.yes <- wilcox.test(x = tab.jacc.null$value, mu = obs.jacc[2], alternative = "two.sided")
+  turn.test.yes <- wilcox.test(x = tab.turn.null$value, mu = obs.turn[2], alternative = "two.sided")
+  nest.test.yes <- wilcox.test(x = tab.nest.null$value, mu = obs.nest[2], alternative = "two.sided")
+  jacc.test.yes <- wilcox.test(x = tab.jacc.null$value, mu = obs.jacc[2], alternative = "two.sided")
   
   
   return (path_to_boxplot)
