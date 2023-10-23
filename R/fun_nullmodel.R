@@ -435,12 +435,12 @@ fun_null_model <- function(metadata_data_mean){
     ylim(min = -4, max = 4)
   c
   
-  fin <- cowplot::plot_grid(a,b,c,kk,jj,hh,
+  fin <- cowplot::plot_grid(kk,jj,hh,
                             ncol = 3,
-                            nrow = 2)
+                            nrow = 1)
   
   path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full.pdf")
-  ggsave(filename =  path_to_boxplot, plot = fin, width = 13, height = 9)
+  ggsave(filename =  path_to_boxplot, plot = fin, width = 14, height = 6)
   #### bilateral test ####
   
   turn.test.yes <- wilcox.test(x = tab.turn.null$value, mu = obs.turn[2], alternative = "two.sided")

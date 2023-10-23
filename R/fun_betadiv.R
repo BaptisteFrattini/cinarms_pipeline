@@ -573,8 +573,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")
    i
    
+   # mm, kk, ll 
    
-   fin <- cowplot::plot_grid(c,a,b,mm, kk,ll,f,d,e,i,g,h,
+   fin <- cowplot::plot_grid(c,a,b,f,d,e,i,g,h,
                              ncol = 3,
                              nrow = 4)
    
