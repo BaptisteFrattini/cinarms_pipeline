@@ -16,18 +16,20 @@ beta_microhab <- function(meta_data){
   library(dplyr)
   library(betapart)
   library(tidyr)
+  library(EcoSimR)
   library(tibble)
   meta = read.csv(meta_data[grepl("metadata", meta_data)], header = TRUE)
   meta <- meta[,-4]
   data = read.csv(meta_data[!grepl("metadata", meta_data)], header = TRUE)
   data <- data[ , colSums(data) != 0]
   
-  meta_red <- data.frame(prefixe = substr(meta$arms_name,1,5), arms = meta$arms_name, Orientation = meta$Orientation)
-  
+  meta_red <- data.frame(prefixe = substr(meta$arms_name,1,5), 
+                         arms = meta$arms_name, 
+                         Orientation = meta$Orientation)
   
   
   #### Comparaison UDOC ####
- 
+  
   
   df_mean_microhab2 <- data %>% 
     group_by(meta$o_c, meta$Orientation,meta$arms_name) %>% 
@@ -39,6 +41,110 @@ beta_microhab <- function(meta_data){
   rownames(df_mean_microhab2) <- paste0(df_mean_microhab2$`meta$arms_name`, "_", df_mean_microhab2$`meta$Orientation`, df_mean_microhab2$`meta$o_c`)
   df_mean_microhab2 <- df_mean_microhab2[,-c(1,2,3)]
   unique_prefixes <- unique(set)
+  
+  ## Compute index on null model
+  
+  ## null model microhab ##
+  num_iterations <- 1000  
+  df_mean_microhab2_t_pa <- vegan::decostand(t(df_mean_microhab2), "pa")
+  # null_model <- sim9(df_mean, nReps = num_iterations, metric = "c_score", algo = "sim9")
+  null_model <- EcoSimR::sim9(df_mean_microhab2_t_pa, nReps = num_iterations, metric = "c_score", algo = "sim2")
+  
+  summary(null_model)
+  null_model_data <- t(null_model$Randomized.Data)
+  
+  plot(null_model,type="burn_in")
+  plot(null_model,type="hist")
+  plot(null_model,type="cooc")
+  
+  
+   
+  ## Compute index on null model data- ##
+  
+  turnover_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
+  rownames(turnover_results) <- sort(unique(meta$arms_name))
+  
+  nestedness_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
+  rownames(nestedness_results) <- sort(unique(meta$arms_name))
+  
+  jaccard_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
+  rownames(jaccard_results) <- sort(unique(meta$arms_name))
+  
+  # Iterate through unique "prefixe" values
+  
+  for (prefix in unique_prefixes) {
+    #prefix = "CINA1A"
+    subset_data <- subset(null_model_data, set == prefix)
+    
+    B.pair.pa <- betapart::beta.pair(subset_data, index.family = "jaccard")
+    
+    mat.turn <- B.pair.pa$beta.jtu
+    mat.nest <- B.pair.pa$beta.jne
+    mat.jacc <- B.pair.pa$beta.jac
+    
+    #Turnover
+    
+    df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
+    df.turn$row <- as.character(df.turn$row)
+    df.turn$col <- as.character(df.turn$col)
+    df.turn <- subset(df.turn, row != col)
+    df.turn <- df.turn %>%
+      mutate(
+        row = as.character(row),  # Convert 'row' to character
+        col = as.character(col),  # Convert 'col' to character
+        combined = paste(pmin(row, col), pmax(row, col), sep = "_")
+      )
+    df.turn <- df.turn[!duplicated(df.turn$combined), ]
+    df.turn <- df.turn[,-4]
+    
+    turnover_results[prefix,1] <- mean(df.turn$value)
+    
+    # Nestedness
+    df.nest <- melt(as.matrix(mat.nest), varnames = c("row", "col"))
+    df.nest$row <- as.character(df.nest$row)
+    df.nest$col <- as.character(df.nest$col)
+    df.nest <- subset(df.nest, row != col)
+    df.nest <- df.nest %>%
+      mutate(
+        row = as.character(row),  # Convert 'row' to character
+        col = as.character(col),  # Convert 'col' to character
+        combined = paste(pmin(row, col), pmax(row, col), sep = "_")
+      )
+    df.nest <- df.nest[!duplicated(df.nest$combined), ]
+    df.nest <- df.nest[,-4]
+    
+    nestedness_results[prefix,1] <- mean(df.nest$value)
+    
+    # Jaccard
+    df.jacc <- melt(as.matrix(mat.jacc), varnames = c("row", "col"))
+    df.jacc$row <- as.character(df.jacc$row)
+    df.jacc$col <- as.character(df.jacc$col)
+    df.jacc <- subset(df.jacc, row != col)
+    df.jacc <- df.jacc %>%
+      mutate(
+        row = as.character(row),  # Convert 'row' to character
+        col = as.character(col),  # Convert 'col' to character
+        combined = paste(pmin(row, col), pmax(row, col), sep = "_")
+      )
+    df.jacc <- df.jacc[!duplicated(df.jacc$combined), ]
+    df.jacc <- df.jacc[,-4]
+    
+    jaccard_results[prefix,1] <- mean(df.jacc$value)
+    
+    
+  }
+  
+  null_results <- data.frame(jacc = jaccard_results$V1, 
+                        turn = turnover_results$V1, 
+                        nest = nestedness_results$V1)
+  
+  rownames(null_results) <- rownames(jaccard_results)
+  
+  
+  
+  
+  
+  #### compute index on observed data ####
   
   turnover_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
   rownames(turnover_results) <- sort(unique(meta$arms_name))
@@ -62,7 +168,7 @@ beta_microhab <- function(meta_data){
     
     mat.turn <- B.pair.pa$beta.jtu
     mat.nest <- B.pair.pa$beta.jne
-    mat.jacc <- 1-B.pair.pa$beta.jac
+    mat.jacc <- B.pair.pa$beta.jac
     
     #Turnover
     
@@ -141,6 +247,85 @@ beta_microhab <- function(meta_data){
   
   rownames(results) <- rownames(bray_results)
   
+  ## Compute the null deviation data ##
+  
+  ## JACCARD
+  
+  null.dev.jacc <- (results$jacc - mean(null_results$jacc))/sd(null_results$jacc)
+  
+  ## NESTEDNESS
+  
+  null.dev.nest <- (results$nest - mean(null_results$nest))/sd(null_results$nest)
+  
+  ## TURNOVER
+  
+  null.dev.turn <- (results$turn - mean(null_results$turn))/sd(null_results$turn)
+  
+  SES_data <- data.frame(ses_jacc = null.dev.jacc, ses_turn = null.dev.turn, ses_nest = null.dev.nest )
+  
+  
+  #Jaccard
+  intra = c("between all \n microhabitats of \n the CINA1 set", 
+            "between all \n microhabitats of \n the CINA3 set", 
+            "between all \n microhabitats of \n the CINA2 set", 
+            "between all \n microhabitats of \n the CINA4 set", 
+            "between all \n microhabitats of \n the RUNA2 set")
+  
+  set_name <- sort(rep(unique(substr(meta$arms_name,1,5)),3))
+  
+  ll <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_jacc)) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    labs(title = "Jaccard dissimilarity",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -3, max = 3)
+  
+  mm <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_turn)) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    labs(title = "Turnover component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -3, max = 3)
+  
+  nn <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_nest)) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    labs(title = "Nestedness component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -3, max = 3)
+ 
+  
+  fin <- cowplot::plot_grid(ll, mm, nn,
+                            ncol = 3,
+                            nrow = 1)
+  
+  path_to_boxplot_SES_UDOC <- paste0("outputs/null_model/boxplot_betadiv_microhab_UDOC_SES.pdf")
+  ggsave(filename =  path_to_boxplot_SES_UDOC, plot = fin, width = 16, height = 7)
+  
+  
+  # Compute boxplots (not SES values)
+  
   #Jaccard
   intra = c("between all microhabitat \n of the CINA1 set", 
             "between all microhabitat \n of the CINA3 set", 
@@ -154,7 +339,7 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard component") +
+         y = "Jaccard similarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
@@ -195,7 +380,7 @@ beta_microhab <- function(meta_data){
                             nrow = 2)
   
   path_to_boxplot_unique_UDOC <- paste0("outputs/beta/boxplot_betadiv_microhab_UDOC_27_10.pdf")
-  ggsave(filename =  path_to_boxplot_unique_UDOC, plot = fin, width = 12, height = 14)
+  ggsave(filename =  path_to_boxplot_unique_UDOC, plot = fin, width = 13.1, height = 12.9)
   
   
   #### comparaison UD --> Unique ####
@@ -327,7 +512,7 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard component") +
+         y = "Jaccard similarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
@@ -577,7 +762,7 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard component") +
+         y = "Jaccard similarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +

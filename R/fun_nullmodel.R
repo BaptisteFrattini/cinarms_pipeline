@@ -327,7 +327,7 @@ fun_null_model <- function(metadata_data_mean){
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
   kk <- ggplot(subset.tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.jacc)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Jaccard",
+    labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
          y = "Standardized Effect Size (SES)") +
     theme(legend.position = "none") +
@@ -345,7 +345,7 @@ fun_null_model <- function(metadata_data_mean){
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
   jj <- ggplot(subset.tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.turn)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Turnover",
+    labs(title = "Turnover component",
          x = "Comparisons",
          y = "Standardized Effect Size (SES)") +
     theme(legend.position = "none") +
@@ -363,7 +363,7 @@ fun_null_model <- function(metadata_data_mean){
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
   hh <- ggplot(subset.tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.nest)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Nestedness",
+    labs(title = "Nestedness component",
          x = "Comparisons",
          y = "Standardized Effect Size (SES)") +
     theme(legend.position = "none") +
@@ -390,7 +390,7 @@ fun_null_model <- function(metadata_data_mean){
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   a <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
-    labs(title = "Jaccard",
+    labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
          y = "Standardized Effect Size (SES)") +
     theme(legend.position = "none") +
@@ -406,7 +406,7 @@ fun_null_model <- function(metadata_data_mean){
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   b <- ggplot(tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.same_value, "Yes", "No"), y = null.dev.turn)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
-    labs(title = "Turnover",
+    labs(title = "Turnover component",
          x = "Comparisons",
          y = "Standardized Effect Size (SES)") +
     theme(legend.position = "none") +
@@ -422,7 +422,7 @@ fun_null_model <- function(metadata_data_mean){
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   c <- ggplot(tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.same_value, "Yes", "No"), y = null.dev.nest)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
-    labs(title = "Nestedness",
+    labs(title = "Nestedness component",
          x = "Comparisons",
          y = "Standardized Effect Size (SES)") +
     theme(legend.position = "none") +
@@ -440,7 +440,7 @@ fun_null_model <- function(metadata_data_mean){
                             nrow = 1)
   
   path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full.pdf")
-  ggsave(filename =  path_to_boxplot, plot = fin, width = 14, height = 6)
+  ggsave(filename =  path_to_boxplot, plot = fin, width = 16, height = 7)
   #### bilateral test ####
   
   turn.test.yes <- wilcox.test(x = tab.turn.null$value, mu = obs.turn[2], alternative = "two.sided")

@@ -125,7 +125,7 @@ beta_div_decomp <- function(metadata_data_mean){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard dissimilarity component") +
+         y = "Jaccard dissimilarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
@@ -253,7 +253,7 @@ beta_div_decomp <- function(metadata_data_mean){
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "",
          x = "",
-         y = "Jaccard dissimilarity component") +
+         y = "Jaccard dissimilarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
@@ -560,7 +560,7 @@ beta_div_decomp <- function(metadata_data_mean){
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("firebrick2","firebrick2") ) +
      labs(title = "",
-          y = "Jaccard dissimilarity component") +
+          y = "Jaccard dissimilarity") +
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
@@ -579,7 +579,7 @@ beta_div_decomp <- function(metadata_data_mean){
                              ncol = 3,
                              nrow = 4)
    
-   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv.pdf")
+   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv-30_10.pdf")
    ggsave(filename =  path_to_boxplot, plot = fin, width = 13.1, height = 19.5)
    
    #### dependending on retrieval season ####
