@@ -24,8 +24,11 @@ diversity_explo <- function(metadata_data_mean){
                          imm_seas = meta_mean$immersion_season,
                          imm_ret = meta_mean$recovery_season)
   
+  tapply(S, substr(meta_mean$arms, 1, 5), mean)
   tapply(S, meta_mean$imm_time, mean)
   time <- c("6 month", "1 year", "2 years")
+  
+  library(vctrs)
   library(ggpubr)
   library(forcats)
   library(ggplot2)
@@ -45,6 +48,7 @@ diversity_explo <- function(metadata_data_mean){
   tapply(data_div$s, data_div$imm_time, mean)
   tapply(data_div$s, data_div$imm_time, sd)
   
+  library(insight)
   library(parameters)
   library(effectsize)
   library(pwr)

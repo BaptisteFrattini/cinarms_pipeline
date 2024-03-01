@@ -196,16 +196,17 @@ beta_div_decomp <- function(metadata_data_mean){
   
   p.sed <- rstatix::t_test(decomp.pa, Turnover ~ intrasite) #parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+  p.sed <- rstatix::add_significance(p.sed, "p")
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
-    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    geom_boxplot(fill =  c("white","white") ) +
     labs(title = "",
          x = "Comparisons",
          y = "Turnover component") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
+    stat_pvalue_manual(p.sed, label = "p.signif") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     annotate(geom="text", x=1, y=0.24, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black")+
@@ -222,16 +223,17 @@ beta_div_decomp <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ intrasite, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+  p.sed <- rstatix::add_significance(p.sed, "p")
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
-    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    geom_boxplot(fill =  c("white","white") ) +
     labs(title = "",
          x = "Comparisons",
          y = "Nestedness component") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
+    stat_pvalue_manual(p.sed, label = "p.signif") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
     annotate(geom="text", x=1, y=0.04, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black") +
@@ -248,16 +250,17 @@ beta_div_decomp <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ intrasite, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+  p.sed <- rstatix::add_significance(p.sed, "p")
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
-    geom_boxplot(fill =  c("lightblue","lightblue") ) +
+    geom_boxplot(fill =  c("white","white") ) +
     labs(title = "",
          x = "",
          y = "Jaccard dissimilarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
+    stat_pvalue_manual(p.sed, label = "p.signif") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
     annotate(geom="text", x=1, y=1-0.655, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black")+
@@ -345,11 +348,10 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::pairwise_t_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
-   
    comp = c("between six months \n and one year", "between one year \n and two years", "between six months \n and two years")
    
    d <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
-     geom_boxplot(fill =  c("lightgreen","lightgreen","lightgreen") ) +
+     geom_boxplot(fill =  c("white","white","white") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Turnover component") +
@@ -377,9 +379,8 @@ beta_div_decomp <- function(metadata_data_mean){
    res.aov <- rstatix::anova_test(df_imm_time, nest ~ comp_imm)
    p.sed <- rstatix::pairwise_t_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
-   
    e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
-     geom_boxplot(fill =  c("lightgreen","lightgreen","lightgreen") ) +
+     geom_boxplot(fill =  c("white","white","white") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Nestedness component") +
@@ -407,9 +408,8 @@ beta_div_decomp <- function(metadata_data_mean){
    res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
-   
    f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
-     geom_boxplot(fill =  c("lightgreen","lightgreen","lightgreen") ) +
+     geom_boxplot(fill =  c("white","white","white") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Jaccard dissimilarity") +
@@ -504,16 +504,17 @@ beta_div_decomp <- function(metadata_data_mean){
  
    p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+   p.sed <- rstatix::add_significance(p.sed, "p")
    depl = c("between same \n deployment season", "between different \n deployment season")
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
-     geom_boxplot(fill =  c("firebrick2","firebrick2") ) +
+     geom_boxplot(fill =  c("white","white") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Turnover component") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     stat_pvalue_manual(p.sed) +
+     stat_pvalue_manual(p.sed, label = "p.signif") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=0.28, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
@@ -530,16 +531,17 @@ beta_div_decomp <- function(metadata_data_mean){
    
    p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+   p.sed <- rstatix::add_significance(p.sed, "p")
    depl = c("between same \n deployment season", "between different \n deployment season")
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
-     geom_boxplot(fill =  c("firebrick2","firebrick2") ) +
+     geom_boxplot(fill =  c("white","white") ) +
      labs(title = "",
           x = "Comparisons",
           y = "Nestedness component") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     stat_pvalue_manual(p.sed) +
+     stat_pvalue_manual(p.sed, label = "p.signif") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
@@ -556,15 +558,16 @@ beta_div_decomp <- function(metadata_data_mean){
   
    p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+   p.sed <- rstatix::add_significance(p.sed, "p")
    depl = c("between same \n deployment season", "between different \n deployment season")
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
-     geom_boxplot(fill =  c("firebrick2","firebrick2") ) +
+     geom_boxplot(fill =  c("white","white") ) +
      labs(title = "",
           y = "Jaccard dissimilarity") +
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     stat_pvalue_manual(p.sed, label = "p") +
+     stat_pvalue_manual(p.sed, label = "p.signif") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=0.365, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),

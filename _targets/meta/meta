@@ -1,28 +1,28 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 .Random.seed|object|922b623575019881|||||||||||||||
-arms_id_2y|stem|58832a250ee22d20|4b256135b5785c65|ef46db3751d8e999|-389702700||t19642.3171461538s|8a2d295a6f6be5b7|61|rds|local|vector|||0||
+arms_id_2y|stem|4da1be4258d08164|4b256135b5785c65|ef46db3751d8e999|253486700||t19783.4060724768s|e0224cf10db1a05d|62|rds|local|vector|||0||
 arms_mean|stem|d5b17e7294ce2cec|d9d9d2a7f9422569|891d01d7e5191caa|1153413326||t19363.420701085s|70a0bb6673f8b3be|137|rds|local|vector|||0.06||
 b_div|stem|bbf0ba429a48f0b4|0a18a7f0a7be8e26|8382b649c13647a9|1199142944||t19363.5550053805s|3e0fddb8c2da2da5|154|rds|local|vector|||2.99||
-beta_div_decomp|function|8090a0f561257aaa|||||||||||||||
+beta_div_decomp|function|499eb7ec118cc36b|||||||||||||||
 beta_div_decomp_full|function|efd9298989eb1888|||||||||||||||
 beta_microhab|function|c10e54164dde50ac|||||||||||||||
 biogeo_test|function|ba3111c68da2c0d1|||||||||||||||
 boxplot_explo|function|e95d620331b0b661|||||||||||||||
 boxplot_explo_alt|function|3909f9f49a513d78|||||||||||||||
 boxplot_pool|stem|271e0ca61b79182c|53fe72af66063a42|7177e50d81510d18|1819811011||t19591.4902538789s||76|rds|local|vector|||2.53||objet gg_all_CCA introuvable
-boxplot_pool_alt|stem|7cb54c1809f63771|500d2036f0733b55|d5ee45c1424e5e55|1165044408||t19640.2030171607s|a3c4b57a6f0085ec|90|rds|local|vector|||45.61||
-campain_id|stem|1c41c7297df19614|89b5eccba0624514|ef46db3751d8e999|-271504171||t19459.5918809606s|710c4f02beb47ff7|57|rds|local|vector|||0||
+boxplot_pool_alt|stem|2d3526790b57ce42|500d2036f0733b55|984ac3fc5ec56ac4|1018682465||t19783.4103711419s|e961a0bcff3caad6|91|rds|local|vector|||46.56||
+campain_id|stem|b44f74c0979a3b2f|89b5eccba0624514|ef46db3751d8e999|989249431||t19783.4060732407s|710c4f02beb47ff7|57|rds|local|vector|||0||
 coldiss|function|1afee6d9f5ff500f|||||||||||||||
 data_arms|function|54d0524450de810b|||||||||||||||
-data_pool|stem|7cb05a5d8fbf4f95|9dd98da54cd79d44|ed9f41fa7c5b8a6e|-1404194966||t19640.198998006s|dff9495c51b724c1|77|rds|local|vector|||0.04||
-data_pool_mean|stem|ff499ad744528e4a|9d290ee6be12009a|7a8b4092cbe98aa5|1690893223||t19640.2031310051s|0b52c5847220add9|82|rds|local|vector|||0.04||
+data_pool|stem|c7c0802b7fda9f10|9dd98da54cd79d44|ed9f41fa7c5b8a6e|-186819139||t19783.4097196954s|8619def19bb20a44|79|rds|local|vector|||0.08||
+data_pool_mean|stem|7183b40f384ece3c|9d290ee6be12009a|7a8b4092cbe98aa5|536003047||t19783.4104133294s|3e4acf685da8f273|84|rds|local|vector|||0.05||
 decomp_b_div|function|ce0aa96bd3b4b026|||||||||||||||
-div_alpha|stem|4ead784f76491fba|d19ad5b9c8cb2cd4|c304a158c7f9e1c6|1974110557||t19640.1990566518s|094cdf8ee71e1e88|135|rds|local|vector|||4.96||
-div_beta_decomp|stem|a3a4dce617799d1e|5e464849c58acc0e|bc47f8d16f2cca6a|1517440787||t19660.5362104744s|bb4e721372eac6a0|88|rds|local|vector|||7.68||
-div_beta_decomp_full|stem|68cdd469ff628ea6|dc5dd853474c78ad|2cc93998eb8fa786|-1326273654||t19640.2032919091s|3e4acf685da8f273|84|rds|local|vector|||3.23||
-div_beta_microhab|stem|de71513c07fa2846|763ad2bf8efc387b|6070e6aabe671ad9|370459828||t19660.5361208562s|e961a0bcff3caad6|91|rds|local|vector|||6.36|le package dplyr a été compilé avec la version R 4.3.1|
-div_explo|stem|032b96ab8dc966ff|5e483ffd086b6638|e7bc1567d01c81b1|-613222916||t19640.203352252s|79365c26e374407f|71|rds|local|vector|||4.83|le package parameters a été compilé avec la version R 4.3.1. le package effectsize a été compilé avec la version R 4.3.1. le package pwr a été compilé avec la version R 4.3.1. le package rcompanion a été compilé avec la version R 4.3.1|
-diversity_explo|function|37419d68a900eb0f|||||||||||||||
+div_alpha|stem|e1dec2505839e30b|d19ad5b9c8cb2cd4|c304a158c7f9e1c6|-844292751||t19783.4097779516s|37c5114db086cc97|136|rds|local|vector|||4.91||
+div_beta_decomp|stem|ae9bcadaf67fe2f0|5e464849c58acc0e|31cb0bdebae777bc|955914457||t19783.4284951922s|1701aa42bd45be76|89|rds|local|vector|||8.61||
+div_beta_decomp_full|stem|7f2fbf6e2ca645ce|dc5dd853474c78ad|2cc93998eb8fa786|-891362319||t19783.4105668158s|0e696b453c03de61|85|rds|local|vector|||3.14||
+div_beta_microhab|stem|f71d5c2d21436565|763ad2bf8efc387b|6070e6aabe671ad9|2128823601||t19783.4098319457s|8fcb0666863d3c08|92|rds|local|vector|||4.64|Removed 2 rows containing nonfinite values stat_boxplot.|
+div_explo|stem|2df2d7ba22a08a79|5e483ffd086b6638|6cee431d8b671ca6|278924425||t19783.4149805743s|c6fbfb9abe15abfd|72|rds|local|vector|||11.45||
+diversity_explo|function|1f3d47e05e106174|||||||||||||||
 fun_alpha_div|function|eaa4f8e6c3728e0e|||||||||||||||
 fun_data_mean|function|2fc9d6993475b2ab|||||||||||||||
 fun_nmds_plot|function|b032870244acbf01|||||||||||||||
@@ -37,21 +37,21 @@ fun_Venn|function|fd73bf45f1d9ab0c|||||||||||||||
 geoDist|function|3559387be7f2c0e9|||||||||||||||
 geoXY|function|9aa1a856fdd373d0|||||||||||||||
 mean_by_arms|function|11f0a2b3e6488feb|||||||||||||||
-mean_metadata_data|stem|054fb3952ccab270|eed761c3314c3f51|b6e6276e7ade296f|-588963438|data/derived-data/data_mean_CINA.csv*data/derived-data/metadata_mean_CINA.csv|t19640.1989989903s|c9ab425368942ccd|10210|file|local|vector|||0.06||
-metadata_data|stem|366c41ff53f0a489|75ce8951f0df0619|a786292e568c7f62|970554103|C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/data_CINA_RUNA2.csv*C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/metadata_CINA_RUNA2.csv|t19642.3171701454s|4177a90f55d07b54|90579|file|local|vector|||2.03|le package dplyr a été compilé avec la version R 4.3.1|
+mean_metadata_data|stem|054fb3952ccab270|eed761c3314c3f51|7d6cd26c6f27f6e3|-138990526|data/derived-data/data_mean_CINA.csv*data/derived-data/metadata_mean_CINA.csv|t19783.4097209454s|c9ab425368942ccd|10210|file|local|vector|||0.09||
+metadata_data|stem|366c41ff53f0a489|75ce8951f0df0619|28a692d1fa018f62|501579747|C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/data_CINA_RUNA2.csv*C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/metadata_CINA_RUNA2.csv|t19783.4097184322s|4177a90f55d07b54|90579|file|local|vector|||1.91||
 micro_hab|stem|c7ef75ba941945aa|ef8bb88a8dc28882|ef46db3751d8e999|209272939||t19640.1898258904s|a96c250e4b19e03e|54|rds|local|vector|||0||
 NMDS|function|ae44c8042649b4b4|||||||||||||||
-nmds_plot|stem|46c55b8c23849a0d|6e5969e7a93a2556|e5f5297351130199|1217765512||t19640.2032961915s|083ed7cd5fdca87c|132|rds|local|vector|||0.35||
+nmds_plot|stem|41a8c2c891ebc68e|6e5969e7a93a2556|e5f5297351130199|1887194496||t19783.4105717232s|63e5c65d6d1ce375|134|rds|local|vector|||0.41||
 NMDS_plot|function|e5e845bf4f5b0c6c|||||||||||||||
 north_south|function|b94162965bafeb0c|||||||||||||||
 ns|stem|16cd4a5cfba691fc|3d16f02ff5211d5d|df4920e5cf7b96fc|2014082040||t19363.4218934428s|c303d0aa7a9c897f|156|rds|local|vector|||1.3||
-null_model|stem|29ce92c83bee1a05|2d6f469ae011c005|9474f939aaa88ca4|-975554149||t19660.5164571799s|1701aa42bd45be76|89|rds|local|vector|||2.85|le package effsize a été compilé avec la version R 4.3.1|
+null_model|stem|3229a49e6ee5ddef|2d6f469ae011c005|9474f939aaa88ca4|897420962||t19783.4104054706s|a3c4b57a6f0085ec|90|rds|local|vector|||2.95||
 pairwise.adonis2|function|f376819615b213eb|||||||||||||||
-PCA|stem|7d7ddd64f45f467d|0661a99c3b14a39e|3d0bca0bccc5fe67|1441643777||t19640.2034666454s|c6fbfb9abe15abfd|72|rds|local|vector|||9.84|le package BiodiversityR a été compilé avec la version R 4.3.1. Conversion automatique de LHS en liste. Conversion automatique de LHS en liste|
+PCA|stem|325230ce87df2777|0661a99c3b14a39e|e33ec3c292e05c72|-1408550969||t19783.4150911681s|5507944482a0fcc9|73|rds|local|vector|||9.53|Conversion automatique de LHS en liste. Conversion automatique de LHS en liste|
 PCA_fun|stem|7d7ddd64f45f467d|0661a99c3b14a39e|fffdd47eb24fcfad|1560311063||t19516.5131122066s|c6fbfb9abe15abfd|72|rds|local|vector|||4.35||
-permanova|stem|d131862dc333587a|dd6d3c91549e78fa|5f7a385c30067094|-1858543183||t19640.2032536693s|44e327d1ee1978d7|43|rds|local|vector|||2.15||
-raw_data|stem|e3a7e2efababb330|a2f81db56e588783|ef46db3751d8e999|-979620141|data/raw-data/Data_sans_UNAV(2).csv|t19461.3268890639s|7d480317d81eaa09|265378|file|local|vector|||0||
-stack_c_chart|stem|58ed2a59765c3461|9456ec9e98a7ed3e|7b705c06e0687286|1986815792||t19640.203475743s|4f74cbc508fbc9d3|133|rds|local|vector|||0.75||
+permanova|stem|d31eedc8ba1385f4|dd6d3c91549e78fa|5f7a385c30067094|-1663095346||t19783.4105297034s|a1c456b03adbfbf8|44|rds|local|vector|||2.04||
+raw_data|stem|e3a7e2efababb330|a2f81db56e588783|ef46db3751d8e999|-1101284392|data/raw-data/Data_sans_UNAV(2).csv|t19461.3268890639s|7d480317d81eaa09|265378|file|local|vector|||0||
+stack_c_chart|stem|c2749430e0050b58|9456ec9e98a7ed3e|110027fdc6e23d39|578039821||t19783.415102672s|4f74cbc508fbc9d3|133|rds|local|vector|||0.95||
 summary.pwadstrata|function|19f623099f484c05|||||||||||||||
-tab_div|stem|d131862dc333587a|e8315ba793553acf|24e2e7e398138be5|1742957628||t19640.2032541197s|44e327d1ee1978d7|43|rds|local|vector|||0||
-venn_plot|stem|1a3bf70edd80b6df|eb116c01bfffdf83|499db49525051658|149217503||t19640.2031300561s|7dead8e41ac4f62d|130|rds|local|vector|||0.64||
+tab_div|stem|d31eedc8ba1385f4|e8315ba793553acf|24e2e7e398138be5|1775370642||t19783.4105302947s|a1c456b03adbfbf8|44|rds|local|vector|||0.03||
+venn_plot|stem|27da4f742e37a4c7|eb116c01bfffdf83|499db49525051658|36130846||t19783.4104124498s|083ed7cd5fdca87c|132|rds|local|vector|||0.57||

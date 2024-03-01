@@ -45,6 +45,9 @@ Imports:
   pwr,
   lmPerm,
   rcompanion,
-  effsize
+  effsize,
+  insight,
+  vctrs,
+  datawizard
   
   
