@@ -271,7 +271,14 @@ beta_microhab <- function(meta_data){
             "between all \n microhabitats of \n the CINA4 set", 
             "between all \n microhabitats of \n the RUNA2 set")
   
-  set_name <- sort(rep(unique(substr(meta$arms_name,1,5)),3))
+  set_name <- sort(rep(unique(substr(meta$arms_name, 1, 5)),3))
+  
+  SES_data$comp <- set_name
+  SES_data$imm_time <- c("6 months","6 months","6 months", 
+                         "1 year", "1 year", "1 year", 
+                         "6 months","6 months","6 months",
+                         "1 year", "1 year", "1 year", 
+                         "2 years","2 years","2 years")
   
   ll <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_jacc)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
@@ -286,7 +293,7 @@ beta_microhab <- function(meta_data){
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
     ylim(min = -3, max = 3)
-  
+  # turnover
   mm <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_turn)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Turnover component",
@@ -300,7 +307,7 @@ beta_microhab <- function(meta_data){
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
     ylim(min = -3, max = 3)
-  
+  # nest
   nn <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_nest)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Nestedness component",
@@ -323,6 +330,61 @@ beta_microhab <- function(meta_data){
   path_to_boxplot_SES_UDOC <- paste0("outputs/null_model/boxplot_betadiv_microhab_UDOC_SES.pdf")
   ggsave(filename =  path_to_boxplot_SES_UDOC, plot = fin, width = 16, height = 7)
   
+  ### 6 moi 1y 2 ans 
+  intra_imm_time = c("between different \n microhab. of  the ARMS \n immersed 6 months", 
+                     "between different \n microhab. of  the ARMS \n immersed 1 year",
+                     "between different \n microhab. of  the ARMS \n immersed 2 years")
+  ll2 <- ggplot(SES_data, aes(x = fct_relevel(imm_time, "6 months", "1 year", "2 years"), y = ses_jacc)) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
+    labs(title = "Jaccard dissimilarity",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra_imm_time) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -3, max = 3)
+  # turnover
+  mm2 <- ggplot(SES_data, aes(x = fct_relevel(imm_time, "6 months", "1 year", "2 years"), y = ses_turn)) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00")) +
+    labs(title = "Turnover component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra_imm_time) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -3, max = 3)
+  # nest
+  nn2 <- ggplot(SES_data, aes(x = fct_relevel(imm_time, "6 months", "1 year", "2 years"), y = ses_nest)) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00")) +
+    labs(title = "Nestedness component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra_imm_time) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -3, max = 3)
+  
+  
+  fin <- cowplot::plot_grid(ll2, mm2, nn2,
+                            ncol = 3,
+                            nrow = 1)
+  
+  path_to_boxplot_SES_UDOC <- paste0("outputs/null_model/boxplot_betadiv_microhab_UDOC_SES_immtime.pdf")
+  ggsave(filename =  path_to_boxplot_SES_UDOC, plot = fin, width = 16, height = 7)
+  
+  ###
   
   # Compute boxplots (not SES values)
   
@@ -339,7 +401,7 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard similarity") +
+         y = "Jaccard dissimilarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
@@ -382,7 +444,63 @@ beta_microhab <- function(meta_data){
   path_to_boxplot_unique_UDOC <- paste0("outputs/beta/boxplot_betadiv_microhab_UDOC_27_10.pdf")
   ggsave(filename =  path_to_boxplot_unique_UDOC, plot = fin, width = 13.1, height = 12.9)
   
+  ### 6 moi 1y 2 ans (not SES)
+  intra_imm_time = c("between different \n microhab. of  the ARMS \n immersed 6 months", 
+                     "between different \n microhab. of  the ARMS \n immersed 1 year",
+                     "between different \n microhab. of  the ARMS \n immersed 2 years")
   
+  results$imm_time <- c("6 months","6 months","6 months", 
+                         "1 year", "1 year", "1 year", 
+                         "6 months","6 months","6 months",
+                         "1 year", "1 year", "1 year", 
+                         "2 years","2 years","2 years")
+  
+  ww2 <- ggplot(results, aes(x = fct_relevel(imm_time, "6 months", "1 year", "2 years"), y = jacc)) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Jaccard dissimilarity") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra_imm_time) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))
+  
+  xx2 <- ggplot(results, aes(x = fct_relevel(imm_time, "6 months", "1 year", "2 years"), y = turn)) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Turnover component") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra_imm_time) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))
+  
+  yy2 <- ggplot(results, aes(x = fct_relevel(imm_time, "6 months", "1 year", "2 years"), y = nest)) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Nestedness component") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra_imm_time) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))
+  
+  zz2 <- ggplot(results, aes(x = fct_relevel(imm_time, "6 months", "1 year", "2 years"), y = bray)) +
+    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
+    labs(title = "",
+         x = "Comparisons",
+         y = "Bray-Curtis index") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra_imm_time) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))
+  
+  fin <- cowplot::plot_grid(ww2, xx2, yy2, zz2,
+                            ncol = 2,
+                            nrow = 2)
+  
+  path_to_boxplot_unique_UDOC <- paste0("outputs/beta/boxplot_betadiv_microhab_UDOC_27_10_imm_time.pdf")
+  ggsave(filename =  path_to_boxplot_unique_UDOC, plot = fin, width = 13.1, height = 12.9)
   #### comparaison UD --> Unique ####
   
 ###############################################################################
@@ -420,7 +538,7 @@ beta_microhab <- function(meta_data){
     
     mat.turn <- B.pair.pa$beta.jtu
     mat.nest <- B.pair.pa$beta.jne
-    mat.jacc <- 1-B.pair.pa$beta.jac
+    mat.jacc <- B.pair.pa$beta.jac
     
     #Turnover
     
@@ -512,7 +630,7 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard similarity") +
+         y = "Jaccard dissimilarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
@@ -579,7 +697,7 @@ beta_microhab <- function(meta_data){
     
     mat.turn <- B.pair.pa$beta.jtu
     mat.nest <- B.pair.pa$beta.jne
-    mat.jacc <- 1-B.pair.pa$beta.jac
+    mat.jacc <- B.pair.pa$beta.jac
     
     #Turnover
     df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
@@ -762,7 +880,7 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
          x = "Comparisons",
-         y = "Jaccard similarity") +
+         y = "Jaccard dissimilarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +

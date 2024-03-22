@@ -21,8 +21,6 @@ fun_null_model <- function(metadata_data_mean){
   
   df_mean <- vegan::decostand(df_mean, "pa")
   
-  #### ab based
-  
 
   # out <- vegan::nullmodel(df_mean, "quasiswap")
   # 
@@ -91,6 +89,7 @@ fun_null_model <- function(metadata_data_mean){
   rowSums(null_model_data)
   colSums(null_model_data)
   rownames(null_model_data) <- meta_mean$arms
+
   
   B.pair.pa <- betapart::beta.pair(null_model_data, index.family = "jaccard")
   
@@ -133,6 +132,8 @@ fun_null_model <- function(metadata_data_mean){
     )
   df.jacc <- df.jacc[!duplicated(df.jacc$combined), ]
   nrow(df.jacc)
+  
+  
   
   tab.jacc.null <- as.data.frame(df.jacc)
   tab.nest.null <- as.data.frame(df.nest)
@@ -337,7 +338,70 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4, max = 4)
+    ylim(min = -4.5, max = 4.5)
+  
+  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  kk2 <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
+    geom_boxplot(fill =  c("white", "white") ) +
+    labs(title = "Jaccard dissimilarity",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intrainter) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
+  
+  tab.null.dev.jacc$comp_imm <- ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA1" & tab.null.dev.jacc$obs.df.jacc.row == "CINA2", "six_one",
+                             ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA3" & tab.null.dev.jacc$obs.df.jacc.row == "CINA4", "six_one",
+                                    ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA2" & tab.null.dev.jacc$obs.df.jacc.row == "RUNA2", "one_two",
+                                           ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA1" & tab.null.dev.jacc$obs.df.jacc.row == "RUNA2", "six_two",
+                                                  NA))))
+  
+  tab.null.dev.jacc.imm <- tab.null.dev.jacc[!is.na(tab.null.dev.jacc$comp_imm),]
+  comp = c("between six months \n and one year", "between one year \n and two years", "between six months \n and two years")
+  kk3 <- ggplot(tab.null.dev.jacc.imm, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = null.dev.jacc)) +
+    geom_boxplot(fill =  c("white", "white", "white") ) +
+    labs(title = "Jaccard dissimilarity",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels = comp) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
+  tab.null.dev.jacc$comp_deploy <- ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA1" & tab.null.dev.jacc$obs.df.jacc.row == "CINA3", "deployment_hot_cool",
+                                ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA2" & tab.null.dev.jacc$obs.df.jacc.row == "CINA4", "deployment_hot_cool",
+                                       ifelse(tab.null.dev.jacc$obs.df.jacc.same_value == "Yes", "same_deployment_season",
+                                              NA)))
+  
+  tab.null.dev.jacc.deploy <- tab.null.dev.jacc[!is.na(tab.null.dev.jacc$comp_deploy),]
+ 
+  
+  
+  depl = c("between same \n deployment season", "between different \n deployment season")
+  kk4 <- ggplot(tab.null.dev.jacc.deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = null.dev.jacc)) +
+    geom_boxplot(fill =  c("white", "white") ) +
+    labs(title = "Jaccard dissimilarity",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels = depl) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
   
   #### TURNOVER
   
@@ -355,7 +419,69 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4, max = 4)
+    ylim(min = -4.5, max = 4.5)
+  
+  jj2 <- ggplot(tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.same_value, "Yes", "No"), y = null.dev.turn)) +
+    geom_boxplot(fill =  c("white", "white") ) +
+    labs(title = "Turnover component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels = intrainter) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
+  
+  tab.null.dev.turn$comp_imm <- ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA1" & tab.null.dev.turn$obs.df.turn.row == "CINA2", "six_one",
+                                       ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA3" & tab.null.dev.turn$obs.df.turn.row == "CINA4", "six_one",
+                                              ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA2" & tab.null.dev.turn$obs.df.turn.row == "RUNA2", "one_two",
+                                                     ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA1" & tab.null.dev.turn$obs.df.turn.row == "RUNA2", "six_two",
+                                                            NA))))
+  
+  tab.null.dev.turn.imm <- tab.null.dev.turn[!is.na(tab.null.dev.turn$comp_imm),]
+  
+  jj3 <- ggplot(tab.null.dev.turn.imm, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = null.dev.turn)) +
+    geom_boxplot(fill =  c("white", "white", "white") ) +
+    labs(title = "Turnover component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels = comp) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
+  tab.null.dev.turn$comp_deploy <- ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA1" & tab.null.dev.turn$obs.df.turn.row == "CINA3", "deployment_hot_cool",
+                                          ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA2" & tab.null.dev.turn$obs.df.turn.row == "CINA4", "deployment_hot_cool",
+                                                 ifelse(tab.null.dev.turn$obs.df.turn.same_value == "Yes", "same_deployment_season",
+                                                        NA)))
+  
+  tab.null.dev.turn.deploy <- tab.null.dev.turn[!is.na(tab.null.dev.turn$comp_deploy),]
+  
+  
+  
+  
+  jj4 <- ggplot(tab.null.dev.turn.deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = null.dev.turn)) +
+    geom_boxplot(fill =  c("white", "white") ) +
+    labs(title = "Turnover component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=depl) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
   
   #### NESTEDNESS
   
@@ -373,7 +499,69 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4, max = 4)
+    ylim(min = -4.5, max = 4.5)
+  
+  
+  hh2 <- ggplot(tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.same_value, "Yes", "No"), y = null.dev.nest)) +
+    geom_boxplot(fill =  c("white", "white") ) +
+    labs(title = "Nestedness component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels = intrainter) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
+  
+  tab.null.dev.nest$comp_imm <- ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA1" & tab.null.dev.nest$obs.df.nest.row == "CINA2", "six_one",
+                                       ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA3" & tab.null.dev.nest$obs.df.nest.row == "CINA4", "six_one",
+                                              ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA2" & tab.null.dev.nest$obs.df.nest.row == "RUNA2", "one_two",
+                                                     ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA1" & tab.null.dev.nest$obs.df.nest.row == "RUNA2", "six_two",
+                                                            NA))))
+  
+  tab.null.dev.nest.imm <- tab.null.dev.nest[!is.na(tab.null.dev.nest$comp_imm),]
+  
+  hh3 <- ggplot(tab.null.dev.nest.imm, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = null.dev.nest)) +
+    geom_boxplot(fill =  c("white", "white", "white") ) +
+    labs(title = "Nestedness component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels = comp) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
+  tab.null.dev.nest$comp_deploy <- ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA1" & tab.null.dev.nest$obs.df.nest.row == "CINA3", "deployment_hot_cool",
+                                          ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA2" & tab.null.dev.nest$obs.df.nest.row == "CINA4", "deployment_hot_cool",
+                                                 ifelse(tab.null.dev.nest$obs.df.nest.same_value == "Yes", "same_deployment_season",
+                                                        NA)))
+  
+  tab.null.dev.nest.deploy <- tab.null.dev.nest[!is.na(tab.null.dev.nest$comp_deploy),]
+  
+  
+  hh4 <- ggplot(tab.null.dev.nest.deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = null.dev.nest)) +
+    geom_boxplot(fill =  c("white", "white") ) +
+    labs(title = "Nestedness component",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels = depl) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5)
+  
+  
   
   #### plot
   
@@ -383,6 +571,15 @@ fun_null_model <- function(metadata_data_mean){
   
   path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model.pdf")
   ggsave(filename =  path_to_boxplot, plot = fin, width = 8, height = 14)
+  
+  fin_big <- cowplot::plot_grid(kk, kk2, kk3, kk4,
+                                jj, jj2, jj3, jj4,
+                                hh, hh2, hh3, hh4,
+                                ncol = 4,
+                                nrow = 3)
+  
+  path_to_boxplot_big <- paste0("outputs/null_model/boxplot_null_model_full_comp.pdf")
+  ggsave(filename =  path_to_boxplot_big, plot = fin_big, width = 22, height = 16)
   
   #### intra-inter
   
@@ -400,7 +597,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4, max = 4)
+    ylim(min = -4.5, max = 4.5)
   a
   #### TURNOVER
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
@@ -416,7 +613,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4, max = 4)
+    ylim(min = -4.5, max = 4.5)
   b
   #### NESTEDNESS
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
@@ -432,7 +629,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4, max = 4)
+    ylim(min = -4.5, max = 4.5)
   c
   
   fin <- cowplot::plot_grid(kk,jj,hh,
@@ -447,6 +644,10 @@ fun_null_model <- function(metadata_data_mean){
   nest.test.yes <- wilcox.test(x = tab.nest.null$value, mu = obs.nest[2], alternative = "two.sided")
   jacc.test.yes <- wilcox.test(x = tab.jacc.null$value, mu = obs.jacc[2], alternative = "two.sided")
   
+  
+  #### testing with abundance based matrix ####
+  #bray test
+
   
   return (path_to_boxplot)
 }
