@@ -263,7 +263,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   nrow(species.scores)
   
   sim_imm_tim <- summary(vegan::simper(df_mean, meta_mean$imm_time, permutations = 9999))
-  ##1
+##1
   # sim_imm_tim_1 <- sim_imm_tim[[1]]
   # contrib_imm_tim_1 <- sim_imm_tim_1[(sim_imm_tim_1$p < 0.0011) | (sim_imm_tim_1$average > 0.01),]
   # 
