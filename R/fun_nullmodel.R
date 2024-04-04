@@ -14,6 +14,7 @@ fun_null_model <- function(metadata_data_mean){
   library(EcoSimR)
   library(effsize)
   library(dplyr)
+  library(canaper)
   # install.packages("effsize")
   
   df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
@@ -326,6 +327,8 @@ fun_null_model <- function(metadata_data_mean){
   
   subset.tab.null.dev.jacc <- subset(tab.null.dev.jacc, tab.null.dev.jacc$obs.df.jacc.same_value == "Yes")
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  
+  means <- aggregate(null.dev.jacc ~  obs.df.jacc.col, subset.tab.null.dev.jacc, mean)
   kk <- ggplot(subset.tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.jacc)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Jaccard dissimilarity",
@@ -338,7 +341,9 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)+
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
   
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
   kk2 <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
@@ -353,7 +358,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   
   tab.null.dev.jacc$comp_imm <- ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA1" & tab.null.dev.jacc$obs.df.jacc.row == "CINA2", "six_one",
@@ -376,7 +381,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   tab.null.dev.jacc$comp_deploy <- ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA1" & tab.null.dev.jacc$obs.df.jacc.row == "CINA3", "deployment_hot_cool",
                                 ifelse(tab.null.dev.jacc$obs.df.jacc.col == "CINA2" & tab.null.dev.jacc$obs.df.jacc.row == "CINA4", "deployment_hot_cool",
@@ -400,13 +405,14 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   
   #### TURNOVER
   
   subset.tab.null.dev.turn <- subset(tab.null.dev.turn, tab.null.dev.turn$obs.df.turn.same_value == "Yes")
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  means <- aggregate(null.dev.turn ~  obs.df.turn.col, subset.tab.null.dev.turn, mean)
   jj <- ggplot(subset.tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.turn)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Turnover component",
@@ -419,7 +425,9 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4) +
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
   
   jj2 <- ggplot(tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.same_value, "Yes", "No"), y = null.dev.turn)) +
     geom_boxplot(fill =  c("white", "white") ) +
@@ -433,7 +441,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   
   tab.null.dev.turn$comp_imm <- ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA1" & tab.null.dev.turn$obs.df.turn.row == "CINA2", "six_one",
@@ -456,7 +464,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   tab.null.dev.turn$comp_deploy <- ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA1" & tab.null.dev.turn$obs.df.turn.row == "CINA3", "deployment_hot_cool",
                                           ifelse(tab.null.dev.turn$obs.df.turn.col == "CINA2" & tab.null.dev.turn$obs.df.turn.row == "CINA4", "deployment_hot_cool",
@@ -480,13 +488,14 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   
   #### NESTEDNESS
   
   subset.tab.null.dev.nest <- subset(tab.null.dev.nest, tab.null.dev.nest$obs.df.nest.same_value == "Yes")
   intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  means <- aggregate(null.dev.nest ~  obs.df.nest.col, subset.tab.null.dev.nest, mean)
   hh <- ggplot(subset.tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.nest)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Nestedness component",
@@ -499,7 +508,9 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)+
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
   
   
   hh2 <- ggplot(tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.same_value, "Yes", "No"), y = null.dev.nest)) +
@@ -514,7 +525,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   
   tab.null.dev.nest$comp_imm <- ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA1" & tab.null.dev.nest$obs.df.nest.row == "CINA2", "six_one",
@@ -537,7 +548,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   tab.null.dev.nest$comp_deploy <- ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA1" & tab.null.dev.nest$obs.df.nest.row == "CINA3", "deployment_hot_cool",
                                           ifelse(tab.null.dev.nest$obs.df.nest.col == "CINA2" & tab.null.dev.nest$obs.df.nest.row == "CINA4", "deployment_hot_cool",
@@ -559,7 +570,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   
   
   
@@ -597,7 +608,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   a
   #### TURNOVER
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
@@ -613,7 +624,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   b
   #### NESTEDNESS
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
@@ -629,7 +640,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4.5, max = 4.5)
+    ylim(min = -4, max = 4)
   c
   
   fin <- cowplot::plot_grid(kk,jj,hh,
@@ -647,7 +658,98 @@ fun_null_model <- function(metadata_data_mean){
   
   #### testing with abundance based matrix ####
   #bray test
-
+  df_mean <- read.csv(metadata_data_mean[!grepl("metadata", metadata_data_mean)], header = TRUE)
+  meta_mean <- read.csv(metadata_data_mean[grepl("metadata", metadata_data_mean)], header = TRUE)
+  
+  #### Compute beta-diversity index on null model ####
+  df_mean.rounded <- round(df_mean*10000, digits = 0)
+  df_mean.rd <- canaper::cpr_rand_comm(df_mean.rounded, "quasiswap_count", 10000)
+  df_mean.rd <- df_mean.rd/10000
+  rowSums(df_mean)
+  rowSums(df_mean.rd)
+  colSums(df_mean)
+  colSums(df_mean.rd)
+  vegan::specnumber(df_mean.rd)
+  vegan::specnumber(df_mean)
+  ?vegan::commsim()
+  
+  df_mean.rd <- as.data.frame(vegan::decostand(df_mean.rd, "total"))*100
+  rownames(df_mean.rd) <- meta_mean$arms
+  
+  mat.bray <- vegan::vegdist(df_mean.rd, "bray")
+  
+  df.bray <- melt(as.matrix(mat.bray), varnames = c("row", "col"))
+  
+  df.bray <- subset(df.bray, row != col)
+  df.bray <- df.bray %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  df.bray <- df.bray[!duplicated(df.bray$combined), ]
+  nrow(df.bray)
+  
+  
+  tab.bray.null <- as.data.frame(df.bray)
+  
+  #### Compute beta-diversity index on observed data ####
+  
+  rownames(df_mean) <- meta_mean$arms
+  mat.bray <- vegan::vegdist(df_mean, "bray")
+  
+  df.bray <- melt(as.matrix(mat.bray), varnames = c("row", "col"))
+  
+  df.bray <- subset(df.bray, row != col)
+  df.bray <- df.bray %>%
+    mutate(
+      row = as.character(row),  # Convert 'row' to character
+      col = as.character(col),  # Convert 'col' to character
+      combined = paste(pmin(row, col), pmax(row, col), sep = "")
+    )
+  df.bray <- df.bray[!duplicated(df.bray$combined), ]
+  nrow(df.bray)
+  
+  tab.bray.obs <- as.data.frame(df.bray)
+  
+  tab.bray.obs$row <- substr(tab.bray.obs$row, 1, 5)
+  tab.bray.obs$col <- substr(tab.bray.obs$col, 1, 5)
+  tab.bray.obs$same_value <- ifelse(tab.bray.obs$row == tab.bray.obs$col, "Yes", "No")
+  
+  nrow(tab.bray.obs)
+  nrow(tab.bray.null)
+  null.dev.bray <- (tab.bray.obs$value - mean(tab.bray.null$value))/sd(tab.bray.null$value)
+  
+  tab.null.dev.bray <- data.frame(tab.bray.obs$row, tab.bray.obs$col, tab.bray.obs$same_value, null.dev.bray)
+  
+  mean(tab.null.dev.bray$null.dev.bray)
+  
+  subset.tab.null.dev.bray <- subset(tab.null.dev.bray, tab.null.dev.bray$tab.bray.obs.same_value == "Yes")
+  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  
+  means <- aggregate(null.dev.bray ~  tab.bray.obs.col, subset.tab.null.dev.bray, mean)
+  uu <- ggplot(subset.tab.null.dev.bray, aes(x = fct_relevel(tab.bray.obs.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.bray)) +
+    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    labs(title = "Bray Curtis dissimilarity",
+         x = "Comparisons",
+         y = "Standardized Effect Size (SES)") +
+    theme(legend.position = "none") +
+    scale_x_discrete(labels=intra) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = 1.96, colour = "red") +
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4, max = 4) +
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
+  
+  fin <- cowplot::plot_grid(uu, kk,jj,hh,
+                            ncol = 4,
+                            nrow = 1)
+  
+  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full(2).pdf")
+  ggsave(filename =  path_to_boxplot, plot = fin, width = 18, height = 7)
   
   return (path_to_boxplot)
 }

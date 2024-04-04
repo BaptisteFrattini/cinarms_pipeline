@@ -241,6 +241,7 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  means <- aggregate(Turnover ~ intrasite, decomp.pa, mean)
   a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "",
@@ -255,7 +256,10 @@ beta_div_decomp <- function(metadata_data_mean){
              color="black")+
     annotate(geom="text", x=2, y=0.37, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black")+ 
-    scale_y_continuous(limits = c(0,0.8))
+    scale_y_continuous(limits = c(0,0.8))+
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
+  
   a
    
   #Nestedness
@@ -269,6 +273,8 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  
+  means <- aggregate(Nestedness ~ intrasite, decomp.pa, mean)
   b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "",
@@ -283,7 +289,9 @@ beta_div_decomp <- function(metadata_data_mean){
              color="black") +
     annotate(geom="text", x=2, y=0.04, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black") + 
-    scale_y_continuous(limits = c(0,0.35))
+    scale_y_continuous(limits = c(0,0.35)) +
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
   b
   
   #Jaccard
@@ -297,6 +305,7 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  means <- aggregate(Jaccard_diss ~ intrasite, decomp.pa, mean)
   c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "",
@@ -311,7 +320,9 @@ beta_div_decomp <- function(metadata_data_mean){
              color="black")+
     annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black")+ 
-    scale_y_continuous(limits = c(0,0.95))
+    scale_y_continuous(limits = c(0,0.95)) +
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
   c
   
   #BrayCurtis
@@ -325,6 +336,7 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
   intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  means <- aggregate(BrayCurtis_diss ~ intrasite, decomp.pa, mean)
   c2 <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = BrayCurtis_diss)) +
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "",
@@ -339,7 +351,9 @@ beta_div_decomp <- function(metadata_data_mean){
              color="black")+
     annotate(geom="text", x=2, y=1-0.66, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black")+ 
-    scale_y_continuous(limits = c(0,0.62))
+    scale_y_continuous(limits = c(0,0.62)) +
+    stat_summary(fun=mean, colour="darkred", geom="point", 
+                 shape=18, size=3, show.legend=FALSE)
   c2
    # path_to_turn_intrainter <- paste0("outputs/beta/turnover_intrainter.pdf")
    # ggsave(filename = path_to_turn_intrainter, plot = v, width = 6, height = 6)
@@ -444,7 +458,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
    
    comp = c("between six months \n and one year", "between one year \n and two years", "between six months \n and two years")
-   
+   means <- aggregate(turn ~ comp_imm, df_imm_time, mean)
    d <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
      geom_boxplot(fill =  c("white","white","white") ) +
      labs(title = "",
@@ -461,7 +475,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=3, y=0.57, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.8))
+     scale_y_continuous(limits = c(0,0.8)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    d
    
    
@@ -475,6 +491,7 @@ beta_div_decomp <- function(metadata_data_mean){
    res.aov <- rstatix::anova_test(df_imm_time, nest ~ comp_imm)
    p.sed <- rstatix::pairwise_t_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   means <- aggregate(nest ~ comp_imm, df_imm_time, mean)
    e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
      geom_boxplot(fill =  c("white","white","white") ) +
      labs(title = "",
@@ -491,7 +508,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=3, y=0.071, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.35))
+     scale_y_continuous(limits = c(0,0.35)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    e
    
    #Jaccard
@@ -505,6 +524,7 @@ beta_div_decomp <- function(metadata_data_mean){
    res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   means <- aggregate(jacc ~ comp_imm, df_imm_time, mean)
    f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
      geom_boxplot(fill =  c("white","white","white") ) +
      labs(title = "",
@@ -521,7 +541,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=3, y=1-0.26, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.95))
+     scale_y_continuous(limits = c(0,0.95)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    f
    
    #Jaccard
@@ -535,6 +557,7 @@ beta_div_decomp <- function(metadata_data_mean){
    res.aov <- rstatix::anova_test(df_imm_time, bray ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, bray ~ comp_imm, p.adjust.method = "bonferroni")
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   means <- aggregate(bray ~ comp_imm, df_imm_time, mean)
    f2 <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = bray)) +
      geom_boxplot(fill =  c("white","white","white") ) +
      labs(title = "",
@@ -551,7 +574,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=3, y=1-0.6, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.62))
+     scale_y_continuous(limits = c(0,0.62)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    f2
    # path_to_boxplot <- paste0("outputs/beta/boxplot_imm_tim.pdf")
    # ggsave(filename =  path_to_boxplot, plot = fin, width = 25, height = 16)
@@ -655,6 +680,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
    depl = c("between same \n deployment season", "between different \n deployment season")
+   means <- aggregate(turn ~ comp_deploy, df_deploy, mean)
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("white","white") ) +
      labs(title = "",
@@ -669,7 +695,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.8))
+     scale_y_continuous(limits = c(0,0.8)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    g
    
    #nest
@@ -683,6 +711,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
    depl = c("between same \n deployment season", "between different \n deployment season")
+   means <- aggregate(nest ~ comp_deploy, df_deploy, mean)
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("white","white") ) +
      labs(title = "",
@@ -697,7 +726,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=2, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.35))
+     scale_y_continuous(limits = c(0,0.35)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    h
    
    #jacc
@@ -711,6 +742,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
    depl = c("between same \n deployment season", "between different \n deployment season")
+   means <- aggregate(jacc ~ comp_deploy, df_deploy, mean)
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("white","white") ) +
      labs(title = "",
@@ -725,7 +757,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.95))
+     scale_y_continuous(limits = c(0,0.95)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    i
    #bray
    ggplot(df_deploy, aes(x=bray)) + 
@@ -738,6 +772,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
    depl = c("between same \n deployment season", "between different \n deployment season")
+   means <- aggregate(bray ~ comp_deploy, df_deploy, mean)
    i2 <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = bray)) +
      geom_boxplot(fill =  c("white","white") ) +
      labs(title = "",
@@ -752,7 +787,9 @@ beta_div_decomp <- function(metadata_data_mean){
               color="black")+
      annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")+ 
-     scale_y_continuous(limits = c(0,0.62))
+     scale_y_continuous(limits = c(0,0.62)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
    i2
    
    # mm, kk, ll 

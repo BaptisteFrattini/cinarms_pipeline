@@ -48,6 +48,7 @@ Imports:
   effsize,
   insight,
   vctrs,
-  datawizard
+  datawizard,
+  canaper
   
   
