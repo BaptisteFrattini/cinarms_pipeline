@@ -29,6 +29,7 @@ fun_nmds_plot|function|b032870244acbf01|||||||||||||||
 fun_null_model|function|271088f4a8c07d46|||||||||||||||
 fun_PCA|function|69769dae7feeb14e|||||||||||||||
 fun_perm|function|f3f48be8fec2d6d2|||||||||||||||
+fun_pielou|function|97e7264d826fe941|||||||||||||||
 fun_pool_full|function|2c678942bdb5cd43|||||||||||||||
 fun_pool_mean|function|c2b4da5adb614831|||||||||||||||
 fun_stacked_col_chart|function|72f13b79e11794c0|||||||||||||||
@@ -50,6 +51,7 @@ pairwise.adonis2|function|f376819615b213eb|||||||||||||||
 PCA|stem|325230ce87df2777|0661a99c3b14a39e|e33ec3c292e05c72|-1408550969||t19783.4150911681s|5507944482a0fcc9|73|rds|local|vector|||9.53|Conversion automatique de LHS en liste. Conversion automatique de LHS en liste|
 PCA_fun|stem|7d7ddd64f45f467d|0661a99c3b14a39e|fffdd47eb24fcfad|1560311063||t19516.5131122066s|c6fbfb9abe15abfd|72|rds|local|vector|||4.35||
 permanova|stem|d31eedc8ba1385f4|dd6d3c91549e78fa|5f7a385c30067094|-1663095346||t19783.4105297034s|a1c456b03adbfbf8|44|rds|local|vector|||2.04||
+pielou|stem|51082c2259133ad4|1dcc206e3d5c172b|e16f53d3aef9130d|-1415576389||t19836.4653219143s|b775319cb82ae1af|184808|rds|local|vector|||4.68||
 raw_data|stem|e3a7e2efababb330|a2f81db56e588783|ef46db3751d8e999|-1101284392|data/raw-data/Data_sans_UNAV(2).csv|t19461.3268890639s|7d480317d81eaa09|265378|file|local|vector|||0||
 stack_c_chart|stem|c2749430e0050b58|9456ec9e98a7ed3e|110027fdc6e23d39|578039821||t19783.415102672s|4f74cbc508fbc9d3|133|rds|local|vector|||0.95||
 summary.pwadstrata|function|19f623099f484c05|||||||||||||||

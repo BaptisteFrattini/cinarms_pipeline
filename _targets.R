@@ -54,5 +54,8 @@ list(
                                                    data_mean_pool = data_pool_mean))
   
   ,tar_target(null_model, fun_null_model(metadata_data_mean = mean_metadata_data))
+
+  ,tar_target(pielou, fun_pielou(metadata = metadata_data,
+                                 metadata_data_mean = mean_metadata_data))  
   
   )

@@ -191,6 +191,9 @@ fun_alpha_div <- function(metadata){
   dev.off()  
   
   
+  
+  
+  
   #### return ####
  return(div_alpha_path) 
 }
