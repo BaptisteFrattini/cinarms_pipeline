@@ -416,6 +416,19 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   path_to_PCoA_full <- paste0("outputs/PCA/PCoA_full_blank.pdf")
   ggsave(filename =  path_to_PCoA_full, plot = biplot1, width = 12, height = 10)
   
+  
+  biplot1_ret <- ggplot() +
+    geom_point(data = sites.scores, aes(x = Dim1, y = Dim2, color = meta_mean$imm_time, shape = meta_mean$ret_season, size = 3)) +
+    scale_color_manual(values = c("6m" = "#CC66CC", "1y" = "#1B9E77", "2y" = "#FF7F00")) +  # Adjust colors as needed
+    geom_segment(data = species.scores, aes(x = 0, y = 0, xend = Dim1, yend = Dim2), arrow = arrow(length = unit(0.03, "npc"))) +
+    # ggrepel::geom_text_repel(data = species.scores, aes(x = Dim1, y = Dim2, label = rownames(species.scores)), box.padding = 0.5, max.overlaps = Inf) +
+    ggrepel::geom_text_repel(data = sites.scores, aes(x = Dim1, y = Dim2, label = rownames(sites.scores), color = meta_mean$imm_time, fontface = "bold"), vjust = -1.5) +
+    labs(x = "Dimension 1", y = "Dimension 2") +
+    theme_minimal()
+  
+  path_to_PCoA_full <- paste0("outputs/PCA/PCoA_full_blank_ret.pdf")
+  ggsave(filename =  path_to_PCoA_full, plot = biplot1_ret, width = 12, height = 10)
+  
   #### With species pool ----------
   #### Load data and meta data ========
   data_pool <- read.csv(data_mean_pool, header = TRUE, row.names = "X")
@@ -520,6 +533,18 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   path_to_PCoA_pool <- paste0("outputs/PCA/PCoA_pool_blank.pdf")
   ggsave(filename =  path_to_PCoA_pool, plot = biplot2, width = 12, height = 10)
   
+  
+  biplot2_ret <- ggplot() +
+    geom_point(data = sites.scores, aes(x = Dim1, y = Dim2, color = meta_mean$imm_time, shape = meta_mean$ret_season, size = 3)) +
+    scale_color_manual(values = c("6m" = "#CC66CC", "1y" = "#1B9E77", "2y" = "#FF7F00")) +  # Adjust colors as needed
+    geom_segment(data = species.scores, aes(x = 0, y = 0, xend = Dim1, yend = Dim2), arrow = arrow(length = unit(0.03, "npc"))) +
+    # ggrepel::geom_text_repel(data = species.scores, aes(x = Dim1, y = Dim2, label = label3), box.padding = 0.5, max.overlaps = Inf) +
+    ggrepel::geom_text_repel(data = sites.scores, aes(x = Dim1, y = Dim2, label = rownames(sites.scores), color = meta_mean$imm_time, fontface = "bold"), vjust = -1.5) +
+    labs(x = "Dimension 1", y = "Dimension 2") +
+    theme_minimal()
+  
+  path_to_PCoA_pool <- paste0("outputs/PCA/PCoA_pool_blank_ret.pdf")
+  ggsave(filename =  path_to_PCoA_pool, plot = biplot2_ret, width = 12, height = 10)
   
   return(path_to_PCA)
 }
