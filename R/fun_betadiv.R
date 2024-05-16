@@ -806,6 +806,8 @@ beta_div_decomp <- function(metadata_data_mean){
    
    #### dependending on retrieval season ####
    #### Immersion time ####
+  
+   
    #turnover
    mat.turn
    df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
@@ -866,10 +868,167 @@ beta_div_decomp <- function(metadata_data_mean){
    
    imm_jacc <- df.jacc.comp.imm$value
    
+   #bray
+   mat.bray
+   df.bray <- melt(as.matrix(mat.bray), varnames = c("row", "col"))
+   df.bray <- subset(df.bray, row != col)
+   
+   df.bray$row <- substr(df.bray$row, 1, 5)
+   df.bray$col <- substr(df.bray$col, 1, 5)
+   df.bray$same_value <- ifelse(df.bray$row == df.bray$col, "Yes", "No")
+   df.bray <- subset(df.bray, row != col)
+   
+   df.bray$comp_imm <- ifelse(df.bray$col == "CINA3" & df.bray$row == "CINA2", "six_one",
+                              ifelse(df.bray$col == "CINA1" & df.bray$row == "CINA4", "six_one",
+                                     ifelse(df.bray$col == "CINA2" & df.bray$row == "RUNA2", "one_two",
+                                            ifelse(df.bray$col == "CINA3" & df.bray$row == "RUNA2", "six_two",
+                                                   NA))))
+   df.bray.comp.imm <- df.bray[!is.na(df.bray$comp_imm),]
+   
+   imm_bray <- df.bray.comp.imm$value
+   
    df_imm_time <- data.frame(turn = imm_turn,
                              nest = imm_nest,
                              jacc = imm_jacc,
+                             bray = imm_bray,
                              comp_imm = df.turn.comp.imm$comp_imm)
+
+   
+   #Turnover
+   ggplot(df_imm_time, aes(x=turn)) + 
+     geom_density() #Données approximativement normales
+   bartlett.test(turn ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_imm_time$turn) #QQplot OK
+   shapiro.test(df_imm_time$turn) #Shapiro OK 
+   
+   
+   res.aov <- rstatix::anova_test(df_imm_time, turn ~ comp_imm) #parametrique
+   p.sed <- rstatix::pairwise_t_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   
+   comp = c("between six months \n and one year", "between one year \n and two years", "between six months \n and two years")
+   means <- aggregate(turn ~ comp_imm, df_imm_time, mean)
+   d_ret <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
+     geom_boxplot(fill =  c("white","white","white") ) +
+     labs(title = "",
+          x = "Comparisons",
+          y = "Turnover component") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=comp) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed)  +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+     # annotate(geom="text", x=1, y=0.39, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=2, y=0.45, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=3, y=0.57, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     #          color="black")+ 
+     scale_y_continuous(limits = c(0,0.8)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   d_ret
+   
+   
+   #Nestedness
+   ggplot(df_imm_time, aes(x=nest)) + 
+     geom_density() #Données approximativement normales
+   bartlett.test(nest ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_imm_time$nest) #QQplot OK
+   shapiro.test(df_imm_time$nest) #Shapiro OK 
+   
+   res.aov <- rstatix::anova_test(df_imm_time, nest ~ comp_imm)
+   p.sed <- rstatix::pairwise_t_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   means <- aggregate(nest ~ comp_imm, df_imm_time, mean)
+   e_ret <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
+     geom_boxplot(fill =  c("white","white","white") ) +
+     labs(title = "",
+          x = "Comparisons",
+          y = "Nestedness component") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=comp) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     # annotate(geom="text", x=1, y=0.045, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=3, y=0.071, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     #          color="black")+ 
+     scale_y_continuous(limits = c(0,0.35)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   e_ret
+   
+   #Jaccard
+   ggplot(df_imm_time, aes(x=jacc)) + 
+     geom_density() #Données approximativement normales
+   
+   bartlett.test(jacc ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_imm_time$jacc) #QQplot OK
+   shapiro.test(df_imm_time$jacc) #Shapiro not OK 
+   
+   res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm) #parametrique
+   p.sed <- rstatix::pairwise_t_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   means <- aggregate(jacc ~ comp_imm, df_imm_time, mean)
+   f_ret <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
+     geom_boxplot(fill =  c("white","white","white") ) +
+     labs(title = "",
+          x = "Comparisons",
+          y = "Jaccard dissimilarity") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=comp) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     # annotate(geom="text", x=1, y=1-0.54, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=2, y=1-0.34, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=3, y=1-0.26, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     #          color="black")+ 
+     scale_y_continuous(limits = c(0,0.95)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   f_ret
+   
+   #Jaccard
+   ggplot(df_imm_time, aes(x=bray)) + 
+     geom_density() #Données approximativement normales
+   
+   bartlett.test(bray ~ comp_imm, data = df_imm_time) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_imm_time$bray) #QQplot OK
+   shapiro.test(df_imm_time$bray) #Shapiro not OK 
+   
+   res.aov <- rstatix::anova_test(df_imm_time, bray ~ comp_imm) #parametrique
+   p.sed <- rstatix::pairwise_t_test(df_imm_time, bray ~ comp_imm, p.adjust.method = "bonferroni")
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   means <- aggregate(bray ~ comp_imm, df_imm_time, mean)
+   f2_ret <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = bray)) +
+     geom_boxplot(fill =  c("white","white","white") ) +
+     labs(title = "",
+          x = "Comparisons",
+          y = "Bray-Curtis dissimilarity") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=comp) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     # annotate(geom="text", x=1, y=1-0.6, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=2, y=1-0.65, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
+     #          color="black")+
+     # annotate(geom="text", x=3, y=1-0.6, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     #          color="black")+ 
+     scale_y_continuous(limits = c(0,0.62)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   f2_ret
+   
+   
    
    #Turnover
    ggplot(df_imm_time, aes(x=turn)) + 
@@ -1027,11 +1186,164 @@ beta_div_decomp <- function(metadata_data_mean){
    
    deploy_jacc <- df.jacc.comp.deploy$value
    
+   #bray
+   mat.bray
+   df.bray <- melt(as.matrix(mat.bray), varnames = c("row", "col"))
+   df.bray <- subset(df.bray, row != col)
+   
+   df.bray$row <- substr(df.bray$row, 1, 5)
+   df.bray$col <- substr(df.bray$col, 1, 5)
+   df.bray$same_value <- ifelse(df.bray$row == df.bray$col, "Yes", "No")
+   # df.bray <- subset(df.bray, row != col)
+   
+   df.bray$comp_deploy <- ifelse(df.bray$col == "CINA1" & df.bray$row == "CINA3", "deployment_hot_cool",
+                                 ifelse(df.bray$col == "CINA2" & df.bray$row == "CINA4", "deployment_hot_cool",
+                                        ifelse(df.bray$same_value == "Yes", "same_deployment_season",
+                                               NA)))
+   
+   df.bray.comp.deploy <- df.bray[!is.na(df.bray$comp_deploy),]
+   df.bray.comp.deploy <- df.bray.comp.deploy[1:42,]
+   
+   deploy_bray <- df.bray.comp.deploy$value
    
    df_deploy <- data.frame(turn = deploy_turn,
                            nest = deploy_nest,
                            jacc = deploy_jacc,
+                           bray = deploy_bray,
                            comp_deploy = df.turn.comp.deploy$comp_deploy)
+   
+   #turn
+   ggplot(df_deploy, aes(x=turn)) + 
+     geom_density() #Données pas normales
+   bartlett.test(turn ~ comp_deploy, data = df_deploy) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_deploy$turn) #QQplot not OK
+   shapiro.test(df_deploy$turn) #Shapiro not OK 
+   
+   p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+   p.sed <- rstatix::add_significance(p.sed, "p")
+   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   means <- aggregate(turn ~ comp_deploy, df_deploy, mean)
+   g_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
+     geom_boxplot(fill =  c("white","white") ) +
+     labs(title = "",
+          x = "Comparisons",
+          y = "Turnover component") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=depl) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed, label = "p.signif") +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     # annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     #          color="black")+
+     # annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     #          color="black")+ 
+     scale_y_continuous(limits = c(0,0.8)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   g_ret
+   
+   #nest
+   ggplot(df_deploy, aes(x=nest)) + 
+     geom_density() #Données approximativement normales
+   bartlett.test(nest ~ comp_deploy, data = df_deploy) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_deploy$nest) #QQplot approximativement OK
+   shapiro.test(df_deploy$nest) #Shapiro not OK 
+   
+   p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+   p.sed <- rstatix::add_significance(p.sed, "p")
+   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   means <- aggregate(nest ~ comp_deploy, df_deploy, mean)
+   h_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
+     geom_boxplot(fill =  c("white","white") ) +
+     labs(title = "",
+          x = "Comparisons",
+          y = "Nestedness component") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels=depl) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed, label = "p.signif") +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     # annotate(geom="text", x=1, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     #          color="black")+
+     # annotate(geom="text", x=2, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     #          color="black")+ 
+     scale_y_continuous(limits = c(0,0.35)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   h_ret
+   
+   #jacc
+   ggplot(df_deploy, aes(x=jacc)) + 
+     geom_density() #Données pas normales
+   bartlett.test(jacc ~ comp_deploy, data = df_deploy) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_deploy$jacc) #QQplot not OK
+   shapiro.test(df_deploy$jacc) #Shapiro not OK
+   
+   p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+   p.sed <- rstatix::add_significance(p.sed, "p")
+   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   means <- aggregate(jacc ~ comp_deploy, df_deploy, mean)
+   i_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
+     geom_boxplot(fill =  c("white","white") ) +
+     labs(title = "",
+          y = "Jaccard dissimilarity") +
+     theme(legend.position = "none") + 
+     scale_x_discrete(labels=depl) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed, label = "p.signif") +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     # annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+     #          color="black")+
+     # annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     #          color="black")+ 
+     scale_y_continuous(limits = c(0,0.95)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   i_ret
+   #bray
+   ggplot(df_deploy, aes(x=bray)) + 
+     geom_density() #Données pas normales
+   bartlett.test(bray ~ comp_deploy, data = df_deploy) #Homoscedasticité OK
+   ggpubr::ggqqplot(df_deploy$bray) #QQplot not OK
+   shapiro.test(df_deploy$bray) #Shapiro not OK
+   
+   p.sed <- rstatix::t_test(df_deploy, bray ~ comp_deploy)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
+   p.sed <- rstatix::add_significance(p.sed, "p")
+   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   means <- aggregate(bray ~ comp_deploy, df_deploy, mean)
+   i2_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = bray)) +
+     geom_boxplot(fill =  c("white","white") ) +
+     labs(title = "",
+          y = "Bray-Curtis dissimilarity") +
+     theme(legend.position = "none") + 
+     scale_x_discrete(labels=depl) +
+     theme_classic() +
+     stat_pvalue_manual(p.sed, label = "p.signif") +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     # annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+              # color="black")+
+     # annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+              # color="black")+ 
+     scale_y_continuous(limits = c(0,0.62)) +
+     stat_summary(fun=mean, colour="darkred", geom="point", 
+                  shape=18, size=3, show.legend=FALSE)
+   i2_ret
+   
+   fin_ret <- cowplot::plot_grid(f2_ret,f_ret,d_ret,e_ret, i2_ret,i_ret,g_ret,h_ret,
+                                 ncol = 4,
+                                 nrow = 2,
+                                 labels = c("a.", " ", " ", " ",
+                                            "b.", " ", " ", " "))
+   path_to_boxplot_ret <- paste0("outputs/beta/boxplot_betadiv_ret.pdf")
+   ggsave(filename =  path_to_boxplot_ret, plot = fin_ret, width = 29.7*0.6, height = 8.4)
+   
+   
    #turn
    ggplot(df_deploy, aes(x=turn)) + 
      geom_density() #Données pas normales
