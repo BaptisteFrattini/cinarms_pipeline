@@ -333,15 +333,19 @@ fun_null_model <- function(metadata_data_mean){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4, max = 4)+
+    ylim(min = -4.5, max = 4.5) +
     stat_summary(fun=mean, colour="darkred", geom="point", 
                  shape=18, size=3, show.legend=FALSE)
   
@@ -417,15 +421,19 @@ fun_null_model <- function(metadata_data_mean){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Turnover component",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4, max = 4) +
+    ylim(min = -4.5, max = 4.5) +
     stat_summary(fun=mean, colour="darkred", geom="point", 
                  shape=18, size=3, show.legend=FALSE)
   
@@ -500,15 +508,19 @@ fun_null_model <- function(metadata_data_mean){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Nestedness component",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4, max = 4)+
+    ylim(min = -4.5, max = 4.5) +
     stat_summary(fun=mean, colour="darkred", geom="point", 
                  shape=18, size=3, show.legend=FALSE)
   
@@ -736,11 +748,14 @@ fun_null_model <- function(metadata_data_mean){
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_text(size=12),
+          axis.text.y = element_text(size = 12)) +
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4, max = 4) +
+    ylim(min = -4.5, max = 4.5) +
     stat_summary(fun=mean, colour="darkred", geom="point", 
                  shape=18, size=3, show.legend=FALSE)
   
@@ -748,8 +763,8 @@ fun_null_model <- function(metadata_data_mean){
                             ncol = 4,
                             nrow = 1)
   
-  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full(2).pdf")
-  ggsave(filename =  path_to_boxplot, plot = fin, width = 18, height = 7)
+  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full_16_05_24.pdf")
+  ggsave(filename =  path_to_boxplot, plot = fin, width = 18.5, height = 7.5)
   
   return (path_to_boxplot)
 }

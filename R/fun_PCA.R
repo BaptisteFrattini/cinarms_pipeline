@@ -514,7 +514,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
 
   species.scores <- species.scores*0.25
 
-  
+   
   colnames(sites.scores) <- c("Dim1", "Dim2")
   
   label3 <- c("Porifera", "Bryozoa", "Ascidiacea (colonial)", "Ascidiacea (solitary)", "Foraminifera",      

@@ -244,12 +244,16 @@ beta_div_decomp <- function(metadata_data_mean){
   means <- aggregate(Turnover ~ intrasite, decomp.pa, mean)
   a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
     geom_boxplot(fill =  c("white","white") ) +
-    labs(title = "",
+    labs(title = "Turnover component",
          x = "Comparisons",
-         y = "Turnover component") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
     stat_pvalue_manual(p.sed, label = "p.signif") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     annotate(geom="text", x=1, y=0.24, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
@@ -277,12 +281,16 @@ beta_div_decomp <- function(metadata_data_mean){
   means <- aggregate(Nestedness ~ intrasite, decomp.pa, mean)
   b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
     geom_boxplot(fill =  c("white","white") ) +
-    labs(title = "",
+    labs(title = "Nestedness component",
          x = "Comparisons",
-         y = "Nestedness component") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
     stat_pvalue_manual(p.sed, label = "p.signif") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
     annotate(geom="text", x=1, y=0.04, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
@@ -308,12 +316,16 @@ beta_div_decomp <- function(metadata_data_mean){
   means <- aggregate(Jaccard_diss ~ intrasite, decomp.pa, mean)
   c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
     geom_boxplot(fill =  c("white","white") ) +
-    labs(title = "",
+    labs(title = "Jaccard dissimilarity",
          x = "",
-         y = "Jaccard dissimilarity") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
     stat_pvalue_manual(p.sed, label = "p.signif") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
     annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
@@ -339,12 +351,16 @@ beta_div_decomp <- function(metadata_data_mean){
   means <- aggregate(BrayCurtis_diss ~ intrasite, decomp.pa, mean)
   c2 <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = BrayCurtis_diss)) +
     geom_boxplot(fill =  c("white","white") ) +
-    labs(title = "",
+    labs(title = "Bray-Curtis dissimilarity",
          x = "",
-         y = "Bray-Curtis dissimilarity") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
     stat_pvalue_manual(p.sed, label = "p.signif") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
     annotate(geom="text", x=1, y=1-0.790, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
@@ -461,12 +477,16 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(turn ~ comp_imm, df_imm_time, mean)
    d <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "",
+     labs(title = "Turnover component",
           x = "Comparisons",
-          y = "Turnover component") +
+          y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed)  +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
      annotate(geom="text", x=1, y=0.39, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
@@ -494,12 +514,16 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(nest ~ comp_imm, df_imm_time, mean)
    e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "",
+     labs(title = "Nestedness component",
           x = "Comparisons",
-          y = "Nestedness component") +
+          y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=0.045, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
@@ -527,12 +551,16 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(jacc ~ comp_imm, df_imm_time, mean)
    f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "",
+     labs(title = "Jaccard dissimilarity",
           x = "Comparisons",
-          y = "Jaccard dissimilarity") +
+          y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=1-0.54, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
@@ -560,12 +588,16 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(bray ~ comp_imm, df_imm_time, mean)
    f2 <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = bray)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "",
+     labs(title = "Bray-Curtis dissimilarity",
           x = "Comparisons",
-          y = "Bray-Curtis dissimilarity") +
+          y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=1-0.6, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
@@ -683,12 +715,16 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(turn ~ comp_deploy, df_deploy, mean)
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "",
+     labs(title = "Turnover component",
           x = "Comparisons",
-          y = "Turnover component") +
+          y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed, label = "p.signif") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
@@ -714,12 +750,16 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(nest ~ comp_deploy, df_deploy, mean)
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "",
+     labs(title = "Nestedness component",
           x = "Comparisons",
-          y = "Nestedness component") +
+          y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed, label = "p.signif") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
      annotate(geom="text", x=1, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
@@ -745,11 +785,15 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(jacc ~ comp_deploy, df_deploy, mean)
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "",
-          y = "Jaccard dissimilarity") +
+     labs(title = "Jaccard dissimilarity",
+          y = "") +
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed, label = "p.signif") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
@@ -775,11 +819,15 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(bray ~ comp_deploy, df_deploy, mean)
    i2 <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = bray)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "",
-          y = "Bray-Curtis dissimilarity") +
+     labs(title = "Bray-Curtis dissimilarity",
+          y = "") +
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
      stat_pvalue_manual(p.sed, label = "p.signif") +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
@@ -801,7 +849,7 @@ beta_div_decomp <- function(metadata_data_mean){
                                         "b.", " ", " ", " ",
                                         "c.", " ", " ", " "))
 
-   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_21_03_2024.pdf")
+   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_20_05_2024.pdf")
    ggsave(filename =  path_to_boxplot, plot = fin, width = 29.7*0.6, height = 21*0.6)
    
    #### dependending on retrieval season ####

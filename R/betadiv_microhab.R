@@ -402,11 +402,11 @@ beta_microhab <- function(meta_data){
   
   
   #Jaccard
-  intra = c("between all \n microhabitats of \n the CINA1 set", 
-            "between all \n microhabitats of \n the CINA3 set", 
-            "between all \n microhabitats of \n the CINA2 set", 
-            "between all \n microhabitats of \n the CINA4 set", 
-            "between all \n microhabitats of \n the RUNA2 set")
+  intra = c("between different \n microhabitats of \n the CINA1 set", 
+            "between different \n microhabitats of \n the CINA3 set", 
+            "between different \n microhabitats of \n the CINA2 set", 
+            "between different \n microhabitats of \n the CINA4 set", 
+            "between different \n microhabitats of \n the RUNA2 set")
   
   set_name <- sort(rep(unique(substr(meta$arms_name, 1, 5)),3))
   
@@ -423,11 +423,15 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
@@ -442,11 +446,15 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Turnover component",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
@@ -461,11 +469,15 @@ beta_microhab <- function(meta_data){
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "Nestedness component",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
@@ -483,7 +495,10 @@ beta_microhab <- function(meta_data){
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_text(size=12),
+          axis.text.y = element_text(size = 12)) +
     geom_hline(yintercept = -1.96, colour = "red")+
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
@@ -495,8 +510,8 @@ beta_microhab <- function(meta_data){
                             ncol = 4,
                             nrow = 1)
   
-  path_to_boxplot_SES_UDOC <- paste0("outputs/null_model/boxplot_betadiv_microhab_UDOC_SES_04_04_2024.pdf")
-  ggsave(filename =  path_to_boxplot_SES_UDOC, plot = fin, width = 16, height = 7)
+  path_to_boxplot_SES_UDOC <- paste0("outputs/null_model/boxplot_betadiv_microhab_UDOC_SES_16_05_2024.pdf")
+  ggsave(filename =  path_to_boxplot_SES_UDOC, plot = fin, width = 18.5, height = 7.5)
   # 
   # ### 6 moi 1y 2 ans 
   # intra_imm_time = c("between different \n microhab. of  the ARMS \n immersed 6 months", 
@@ -670,7 +685,6 @@ beta_microhab <- function(meta_data){
   # path_to_boxplot_unique_UDOC <- paste0("outputs/beta/boxplot_betadiv_microhab_UDOC_27_10_imm_time.pdf")
   # ggsave(filename =  path_to_boxplot_unique_UDOC, plot = fin, width = 13.1, height = 12.9)
   #### comparaison UD --> Unique ####
-  
 ###############################################################################
   # Create empty table to fill with B div values
   # df_mean_microhab <- data %>% 
