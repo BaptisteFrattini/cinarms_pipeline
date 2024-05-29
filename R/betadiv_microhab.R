@@ -132,7 +132,7 @@ beta_microhab <- function(meta_data){
   #### Comparaison UDOC ####
   
   df_mean_microhab2 <- data %>% 
-    group_by(meta$o_c, meta$Orientation,meta$arms_name) %>% 
+    group_by(meta$o_c, meta$Orientation, meta$arms_name) %>% 
     summarise_all(mean, na.rm = TRUE)
   
   set <- df_mean_microhab2$`meta$arms_name`
@@ -140,7 +140,6 @@ beta_microhab <- function(meta_data){
   df_mean_microhab2 <- as.data.frame(df_mean_microhab2)
   rownames(df_mean_microhab2) <- paste0(df_mean_microhab2$`meta$arms_name`, "_", df_mean_microhab2$`meta$Orientation`, df_mean_microhab2$`meta$o_c`)
   df_mean_microhab2 <- df_mean_microhab2[,-c(1,2,3)]
-  
   
   ## Compute index on null model
   
@@ -272,10 +271,6 @@ beta_microhab <- function(meta_data){
                              bray = bray_results$V1)
   
   rownames(null_results) <- rownames(jaccard_results)
-  
-  
-  
-  
   
   #### compute index on observed data ####
   
@@ -1107,6 +1102,9 @@ beta_microhab <- function(meta_data){
   # 
   # 
   # 
+  
+
+  
   return (path_to_boxplot_SES_UDOC)
   
 }
