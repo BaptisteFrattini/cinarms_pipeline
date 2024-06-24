@@ -7,9 +7,9 @@
 #' 
 
 boxplot_explo <- function(data_full_pool, meta_data){
- 
-  # data_full_pool = targets::tar_read(data_pool)
-  # meta_data = targets::tar_read(metadata_data)
+# 
+#   data_full_pool = targets::tar_read(data_pool)
+#   meta_data = targets::tar_read(metadata_data)
 
   data_pool <- read.csv(data_full_pool, header = TRUE)
   

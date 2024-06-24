@@ -326,7 +326,7 @@ fun_null_model <- function(metadata_data_mean){
   #### JACCARD
   
   subset.tab.null.dev.jacc <- subset(tab.null.dev.jacc, tab.null.dev.jacc$obs.df.jacc.same_value == "Yes")
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   
   means <- aggregate(null.dev.jacc ~  obs.df.jacc.col, subset.tab.null.dev.jacc, mean)
   kk <- ggplot(subset.tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.jacc)) +
@@ -349,7 +349,7 @@ fun_null_model <- function(metadata_data_mean){
     stat_summary(fun=mean, colour="darkred", geom="point", 
                  shape=18, size=3, show.legend=FALSE)
   
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different sets")
   kk2 <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
     geom_boxplot(fill =  c("white", "white") ) +
     labs(title = "Jaccard dissimilarity",
@@ -415,7 +415,7 @@ fun_null_model <- function(metadata_data_mean){
   #### TURNOVER
   
   subset.tab.null.dev.turn <- subset(tab.null.dev.turn, tab.null.dev.turn$obs.df.turn.same_value == "Yes")
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   means <- aggregate(null.dev.turn ~  obs.df.turn.col, subset.tab.null.dev.turn, mean)
   jj <- ggplot(subset.tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.turn)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
@@ -502,7 +502,7 @@ fun_null_model <- function(metadata_data_mean){
   #### NESTEDNESS
   
   subset.tab.null.dev.nest <- subset(tab.null.dev.nest, tab.null.dev.nest$obs.df.nest.same_value == "Yes")
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   means <- aggregate(null.dev.nest ~  obs.df.nest.col, subset.tab.null.dev.nest, mean)
   hh <- ggplot(subset.tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.nest)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
@@ -607,7 +607,7 @@ fun_null_model <- function(metadata_data_mean){
   #### intra-inter
   
   #### JACCARD
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different sets")
   a <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "Jaccard dissimilarity",
@@ -623,7 +623,7 @@ fun_null_model <- function(metadata_data_mean){
     ylim(min = -4, max = 4)
   a
   #### TURNOVER
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different sets")
   b <- ggplot(tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.same_value, "Yes", "No"), y = null.dev.turn)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "Turnover component",
@@ -639,7 +639,7 @@ fun_null_model <- function(metadata_data_mean){
     ylim(min = -4, max = 4)
   b
   #### NESTEDNESS
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different sets")
   c <- ggplot(tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.same_value, "Yes", "No"), y = null.dev.nest)) +
     geom_boxplot(fill =  c("lightblue","lightblue") ) +
     labs(title = "Nestedness component",
@@ -737,7 +737,7 @@ fun_null_model <- function(metadata_data_mean){
   mean(tab.null.dev.bray$null.dev.bray)
   
   subset.tab.null.dev.bray <- subset(tab.null.dev.bray, tab.null.dev.bray$tab.bray.obs.same_value == "Yes")
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   
   means <- aggregate(null.dev.bray ~  tab.bray.obs.col, subset.tab.null.dev.bray, mean)
   uu <- ggplot(subset.tab.null.dev.bray, aes(x = fct_relevel(tab.bray.obs.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.bray)) +

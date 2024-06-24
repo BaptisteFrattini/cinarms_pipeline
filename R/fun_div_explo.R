@@ -98,3 +98,4 @@ diversity_explo <- function(metadata_data_mean){
   return(path_to_box_div)
       
 }  
+

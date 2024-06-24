@@ -7,8 +7,6 @@ list(
   
   ,tar_target(campain_id, "CINA")
   
-  # ,tar_target(micro_hab, "UO")
-  
   ,tar_target(arms_id_2y, c("RUNA2A", "RUNA2B","RUNA2C"))
   
   ,tar_target(metadata_data, data_arms(raw_data = raw_data, 
@@ -28,9 +26,6 @@ list(
   ,tar_target(permanova, fun_perm(metadata_data_mean = mean_metadata_data)) 
   
   ,tar_target(venn_plot, fun_Venn(metadata_data_mean = mean_metadata_data)) 
-  
-  # ,tar_target(boxplot_pool, boxplot_explo(data_full_pool = data_pool, 
-                                           # meta_data = metadata_data))
   
   ,tar_target(boxplot_pool_alt, boxplot_explo_alt(data_full_pool = data_pool, 
                                                   meta_data = metadata_data))

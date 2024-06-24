@@ -81,7 +81,7 @@ beta_div_decomp <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Turnover ~ set) #non parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   kk <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Turnover)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
@@ -109,7 +109,7 @@ beta_div_decomp <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ set) #non parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   ll <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Nestedness)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
@@ -134,7 +134,7 @@ beta_div_decomp <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ set) #non parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   mm <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = Jaccard_diss)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
@@ -159,7 +159,7 @@ beta_div_decomp <- function(metadata_data_mean){
   
   p.sed <- rstatix::wilcox_test(decomp.pa, BrayCurtis_diss ~ set) #non parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.3)
-  intra = c("between ARMS of \n the CINA1 set", "between ARMS of \n the CINA3 set","between ARMS of \n the CINA2 set","between ARMS of \n the CINA4 set","between ARMS of \n the RUNA2 set")
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   nn <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = BrayCurtis_diss)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
     labs(title = "",
@@ -240,7 +240,7 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::t_test(decomp.pa, Turnover ~ intrasite) #parametrique
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different batches")
   means <- aggregate(Turnover ~ intrasite, decomp.pa, mean)
   a <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Turnover)) +
     geom_boxplot(fill =  c("white","white") ) +
@@ -276,7 +276,7 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::wilcox_test(decomp.pa, Nestedness ~ intrasite, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different batches")
   
   means <- aggregate(Nestedness ~ intrasite, decomp.pa, mean)
   b <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Nestedness)) +
@@ -312,7 +312,7 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::wilcox_test(decomp.pa, Jaccard_diss ~ intrasite, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different batches")
   means <- aggregate(Jaccard_diss ~ intrasite, decomp.pa, mean)
   c <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = Jaccard_diss)) +
     geom_boxplot(fill =  c("white","white") ) +
@@ -347,7 +347,7 @@ beta_div_decomp <- function(metadata_data_mean){
   p.sed <- rstatix::t_test(decomp.pa, BrayCurtis_diss ~ intrasite, p.adjust.method = "bonferroni")
   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
   p.sed <- rstatix::add_significance(p.sed, "p")
-  intrainter = c("between ARMS of \n the same set", "between ARMS of \n different sets")
+  intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different batches")
   means <- aggregate(BrayCurtis_diss ~ intrasite, decomp.pa, mean)
   c2 <- ggplot(decomp.pa, aes(x = fct_relevel(intrasite, "Yes", "No"), y = BrayCurtis_diss)) +
     geom_boxplot(fill =  c("white","white") ) +
@@ -477,8 +477,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(turn ~ comp_imm, df_imm_time, mean)
    d <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = turn)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "Turnover component",
-          x = "Comparisons",
+     labs(x = "Comparisons",
           y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
@@ -514,8 +513,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(nest ~ comp_imm, df_imm_time, mean)
    e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "Nestedness component",
-          x = "Comparisons",
+     labs(x = "Comparisons",
           y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
@@ -551,8 +549,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(jacc ~ comp_imm, df_imm_time, mean)
    f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "Jaccard dissimilarity",
-          x = "Comparisons",
+     labs(x = "Comparisons",
           y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
@@ -588,8 +585,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(bray ~ comp_imm, df_imm_time, mean)
    f2 <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = bray)) +
      geom_boxplot(fill =  c("white","white","white") ) +
-     labs(title = "Bray-Curtis dissimilarity",
-          x = "Comparisons",
+     labs(x = "Comparisons",
           y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
@@ -715,9 +711,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(turn ~ comp_deploy, df_deploy, mean)
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "Turnover component",
-          x = "Comparisons",
-          y = "") +
+     labs(y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
@@ -750,9 +744,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(nest ~ comp_deploy, df_deploy, mean)
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "Nestedness component",
-          x = "Comparisons",
-          y = "") +
+     labs(y = "") +
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
@@ -785,8 +777,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(jacc ~ comp_deploy, df_deploy, mean)
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "Jaccard dissimilarity",
-          y = "") +
+     labs(y = "") +
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
@@ -819,8 +810,7 @@ beta_div_decomp <- function(metadata_data_mean){
    means <- aggregate(bray ~ comp_deploy, df_deploy, mean)
    i2 <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = bray)) +
      geom_boxplot(fill =  c("white","white") ) +
-     labs(title = "Bray-Curtis dissimilarity",
-          y = "") +
+     labs(y = "") +
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
@@ -849,7 +839,7 @@ beta_div_decomp <- function(metadata_data_mean){
                                         "b.", " ", " ", " ",
                                         "c.", " ", " ", " "))
 
-   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_20_05_2024.pdf")
+   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_24_06_2024.pdf")
    ggsave(filename =  path_to_boxplot, plot = fin, width = 29.7*0.6, height = 21*0.6)
    
    #### dependending on retrieval season ####

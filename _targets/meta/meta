@@ -1,59 +1,59 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 .Random.seed|object|922b623575019881|||||||||||||||
-arms_id_2y|stem|4da1be4258d08164|4b256135b5785c65|ef46db3751d8e999|253486700||t19783.4060724768s|e0224cf10db1a05d|62|rds|local|vector|||0||
+arms_id_2y|stem|7b5b08c736ac501e|37872fbe8d38d75d|2c530c1562a7fbd1|253486700||t19898.3827772143s|08ec9a1d380611bb|62|rds|local|vector|||0.02||
 arms_mean|stem|d5b17e7294ce2cec|d9d9d2a7f9422569|891d01d7e5191caa|1153413326||t19363.420701085s|70a0bb6673f8b3be|137|rds|local|vector|||0.06||
 b_div|stem|bbf0ba429a48f0b4|0a18a7f0a7be8e26|8382b649c13647a9|1199142944||t19363.5550053805s|3e0fddb8c2da2da5|154|rds|local|vector|||2.99||
-beta_div_decomp|function|71ea4e1c2cb934ef|||||||||||||||
-beta_div_decomp_full|function|efd9298989eb1888|||||||||||||||
-beta_microhab|function|9134c74de35c3525|||||||||||||||
-biogeo_test|function|ba3111c68da2c0d1|||||||||||||||
-boxplot_explo|function|e95d620331b0b661|||||||||||||||
-boxplot_explo_alt|function|3909f9f49a513d78|||||||||||||||
+beta_div_decomp|function|840efb23bf420c81|||||||||||||||
+beta_div_decomp_full|function|0e2e9be76a8924f6|||||||||||||||
+beta_microhab|function|ce357638184e1825|||||||||||||||
+biogeo_test|function|184adbd70e1cef22|||||||||||||||
+boxplot_explo|function|ec59623a53ff5215|||||||||||||||
+boxplot_explo_alt|function|9fc3fb32289d4495|||||||||||||||
 boxplot_pool|stem|271e0ca61b79182c|53fe72af66063a42|7177e50d81510d18|1819811011||t19591.4902538789s||76|rds|local|vector|||2.53||objet gg_all_CCA introuvable
-boxplot_pool_alt|stem|2d3526790b57ce42|500d2036f0733b55|984ac3fc5ec56ac4|1018682465||t19783.4103711419s|e961a0bcff3caad6|91|rds|local|vector|||46.56||
-campain_id|stem|b44f74c0979a3b2f|89b5eccba0624514|ef46db3751d8e999|989249431||t19783.4060732407s|710c4f02beb47ff7|57|rds|local|vector|||0||
+boxplot_pool_alt|stem|55a7e35b7c72c05b|8bd654d8b078bf91|43e38c01fe6f0c53|1018682465||t19898.383592959s|87acf94f6e8bd357|91|rds|local|vector|||44.56||
+campain_id|stem|99a5ca5baadae5b6|cad77100fc2f3aaf|2c530c1562a7fbd1|989249431||t19898.3827779666s|02266e49b6c0390d|57|rds|local|vector|||0||
 coldiss|function|1afee6d9f5ff500f|||||||||||||||
-data_arms|function|54d0524450de810b|||||||||||||||
-data_pool|stem|c7c0802b7fda9f10|9dd98da54cd79d44|ed9f41fa7c5b8a6e|-186819139||t19783.4097196954s|8619def19bb20a44|79|rds|local|vector|||0.08||
-data_pool_mean|stem|7183b40f384ece3c|9d290ee6be12009a|7a8b4092cbe98aa5|536003047||t19783.4104133294s|3e4acf685da8f273|84|rds|local|vector|||0.05||
+data_arms|function|610d4de0b263100c|||||||||||||||
+data_pool|stem|b688f6b34d7a1872|1efd5a65b788e40f|9664a75166a120cd|-186819139||t19898.3828005592s|abfed6147cb58a5b|79|rds|local|vector|||0.06||
+data_pool_mean|stem|776f314e2ba546aa|e1abaec438177ef1|40098c0affda741c|536003047||t19898.3837725192s|e5403c57657c131e|84|rds|local|vector|||0.06||
 decomp_b_div|function|ce0aa96bd3b4b026|||||||||||||||
-div_alpha|stem|e1dec2505839e30b|d19ad5b9c8cb2cd4|c304a158c7f9e1c6|-844292751||t19783.4097779516s|37c5114db086cc97|136|rds|local|vector|||4.91||
-div_beta_decomp|stem|02a1bea9407b1d6d|5e464849c58acc0e|95c5dc251c4e5525|955914457||t19863.2643056948s|17e1813002340629|93|rds|local|vector|||13.14||
-div_beta_decomp_full|stem|7f2fbf6e2ca645ce|dc5dd853474c78ad|2cc93998eb8fa786|-891362319||t19783.4105668158s|0e696b453c03de61|85|rds|local|vector|||3.14||
-div_beta_microhab|stem|ed17417ab9bf9a69|763ad2bf8efc387b|0472938b49c0ca02|2128823601||t19863.2640935304s|045b07e719c4cc68|120|rds|local|vector|||6.83||
-div_explo|stem|2df2d7ba22a08a79|5e483ffd086b6638|6cee431d8b671ca6|278924425||t19783.4149805743s|c6fbfb9abe15abfd|72|rds|local|vector|||11.45||
-diversity_explo|function|1f3d47e05e106174|||||||||||||||
-fun_alpha_div|function|eaa4f8e6c3728e0e|||||||||||||||
-fun_data_mean|function|2fc9d6993475b2ab|||||||||||||||
-fun_nmds_plot|function|b032870244acbf01|||||||||||||||
-fun_null_model|function|8685a10470a05c13|||||||||||||||
-fun_PCA|function|f0ec8ef2d926cb4c|||||||||||||||
-fun_perm|function|f3f48be8fec2d6d2|||||||||||||||
-fun_pielou|function|adcad0d2e71c7e0a|||||||||||||||
-fun_pool_full|function|2c678942bdb5cd43|||||||||||||||
-fun_pool_mean|function|c2b4da5adb614831|||||||||||||||
-fun_stacked_col_chart|function|72f13b79e11794c0|||||||||||||||
-fun_tab|function|7367cad956df0c82|||||||||||||||
-fun_Venn|function|fd73bf45f1d9ab0c|||||||||||||||
+div_alpha|stem|00210d932631a53e|d190ff90fd849ba2|88c982385b0e71fd|-844292751||t19898.3828605281s|4a02b7493001b355|136|rds|local|vector|||5.04||
+div_beta_decomp|stem|e8b9fa670d256aed|c5afbb63a530296b|747eacab03321efc|955914457||t19898.3839230863s|e441caf5cebd5545|94|rds|local|vector|||12.99||
+div_beta_decomp_full|stem|2aeb293379f728b1|bcefa6ad67aa9b14|727be6b656c5263e|-891362319||t19898.3839805643s|afe1c0564fcfafab|85|rds|local|vector|||3.18||
+div_beta_microhab|stem|a744058b3f0dd3c9|68aa22b96b00ba04|1efd565371690ce1|2128823601||t19898.3830768822s|b7d4d37884c593be|120|rds|local|vector|||18.68|Removed 21 rows containing nonfinite values stat_boxplot.. Removed 21 rows containing nonfinite values stat_summary.. Removed 15 rows containing nonfinite values stat_boxplot.. Removed 15 rows containing nonfinite values stat_summary.. aucun argument pour max  Inf est renvoyé. Computation failed in stat_summaryCaused by error in seq_len largument doit être convertible automatiquement en un entier non négatif. Removed 15 rows containing nonfinite values stat_boxplot.. Removed 15 rows containing nonfinite values stat_summary.. aucun argument pour max  Inf est renvoyé. Computation failed in stat_summaryCaused by error in seq_len largument doit être convertible automatiquement en un entier non négatif. Removed 15 rows containing nonfinite values stat_boxplot.. Removed 15 rows containing nonfinite values stat_summary.. aucun argument pour max  Inf est renvoyé. Computation failed in stat_summaryCaused by error in seq_len largument doit être convertible automatiquement en un entier non négatif. Removed 15 rows containing nonfinite values stat_boxplot.. Removed 15 rows containing nonfinite values stat_summary.. aucun argument pour max  Inf est renvoyé. Computation failed in stat_summaryCaused by error in seq_len largument doit être convertible automatiquement en un entier non négatif|
+div_explo|stem|eabadcc044aa7fc8|0723a4cd4dd00d1c|116872ecb0d65ec7|278924425||t19898.3841102446s|3ed5ce5eeeea6e9a|72|rds|local|vector|||10.74|le package insight a été compilé avec la version R 4.3.3. le package parameters a été compilé avec la version R 4.3.3. le package effectsize a été compilé avec la version R 4.3.3. Argument effectsize_type is deprecated. Use es_type instead.. Argument effectsize_type is deprecated. Use es_type instead.. Argument effectsize_type is deprecated. Use es_type instead.. le package rcompanion a été compilé avec la version R 4.3.3|
+diversity_explo|function|eb58dd1db6116150|||||||||||||||
+fun_alpha_div|function|c704baa651d7c7cc|||||||||||||||
+fun_data_mean|function|252c969ff81bfda4|||||||||||||||
+fun_nmds_plot|function|daeee5d53b3f01f7|||||||||||||||
+fun_null_model|function|8bd04c9bee8e0472|||||||||||||||
+fun_PCA|function|cf574045a67f0e17|||||||||||||||
+fun_perm|function|1d4b215a07261f14|||||||||||||||
+fun_pielou|function|66d7c5532315fd2f|||||||||||||||
+fun_pool_full|function|225b4ef1ac3065f3|||||||||||||||
+fun_pool_mean|function|eaa7c4e287bbb784|||||||||||||||
+fun_stacked_col_chart|function|ad1923fb08fabbbd|||||||||||||||
+fun_tab|function|5c9078c6586f54e7|||||||||||||||
+fun_Venn|function|32228c85af418fa6|||||||||||||||
 geoDist|function|3559387be7f2c0e9|||||||||||||||
 geoXY|function|9aa1a856fdd373d0|||||||||||||||
 mean_by_arms|function|11f0a2b3e6488feb|||||||||||||||
-mean_metadata_data|stem|054fb3952ccab270|eed761c3314c3f51|7d6cd26c6f27f6e3|-138990526|data/derived-data/data_mean_CINA.csv*data/derived-data/metadata_mean_CINA.csv|t19783.4097209454s|c9ab425368942ccd|10210|file|local|vector|||0.09||
-metadata_data|stem|366c41ff53f0a489|75ce8951f0df0619|28a692d1fa018f62|501579747|C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/data_CINA_RUNA2.csv*C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/metadata_CINA_RUNA2.csv|t19783.4097184322s|4177a90f55d07b54|90579|file|local|vector|||1.91||
+mean_metadata_data|stem|ba2ec6d9a0a31ede|2d783012bce9d5bc|3174da83dc704ea0|-138990526|data/derived-data/data_mean_CINA.csv*data/derived-data/metadata_mean_CINA.csv|t19898.3828017513s|83342b6f6b6279f4|10210|file|local|vector|||0.09||
+metadata_data|stem|12d3a7098ff50c5b|828f101c3f4ff781|1a839af33817211d|501579747|C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/data_CINA_RUNA2.csv*C:/Users/bapti/OneDrive/Documents/R-projects/cinarms_pipeline/data/derived-data/metadata_CINA_RUNA2.csv|t19898.3827995985s|55989de2cc56fe2c|90579|file|local|vector|||1.86||
 micro_hab|stem|c7ef75ba941945aa|ef8bb88a8dc28882|ef46db3751d8e999|209272939||t19640.1898258904s|a96c250e4b19e03e|54|rds|local|vector|||0||
 NMDS|function|ae44c8042649b4b4|||||||||||||||
-nmds_plot|stem|41a8c2c891ebc68e|6e5969e7a93a2556|e5f5297351130199|1887194496||t19783.4105717232s|63e5c65d6d1ce375|134|rds|local|vector|||0.41||
+nmds_plot|stem|4beab84725de51cc|0503750f2dbe26a9|084cea2e8b392578|1887194496||t19898.3839857136s|aecaa0cfd4837746|134|rds|local|vector|||0.42||
 NMDS_plot|function|e5e845bf4f5b0c6c|||||||||||||||
 north_south|function|b94162965bafeb0c|||||||||||||||
 ns|stem|16cd4a5cfba691fc|3d16f02ff5211d5d|df4920e5cf7b96fc|2014082040||t19363.4218934428s|c303d0aa7a9c897f|156|rds|local|vector|||1.3||
-null_model|stem|9f945273b07861d1|2d6f469ae011c005|1c29147420404ed9|897420962||t19863.2641528127s|2005da2f14a67e22|98|rds|local|vector|||5.08|le package canaper a été compilé avec la version R 4.3.3. Removed 1 rows containing nonfinite values stat_boxplot.. Removed 1 rows containing nonfinite values stat_boxplot.|
+null_model|stem|7861cd2fb0bb910a|17fe8fd0b50eaf80|d7af5bb251698631|897420962||t19898.3836569072s|0968ba2c0c5b836c|98|rds|local|vector|||5.5|le package canaper a été compilé avec la version R 4.3.3. Removed 1 rows containing nonfinite values stat_boxplot.. Removed 1 rows containing nonfinite values stat_boxplot.|
 pairwise.adonis2|function|f376819615b213eb|||||||||||||||
-PCA|stem|325230ce87df2777|0661a99c3b14a39e|6ce7df09c0017056|-1408550969||t19859.28726692s|5507944482a0fcc9|73|rds|local|vector|||11.36|Conversion automatique de LHS en liste. Conversion automatique de LHS en liste|
+PCA|stem|fcb80c77623116b4|67c1a14ddb0ad9ed|64115df560a8e02d|-1408550969||t19898.3842281887s|e7b83425a991cb39|73|rds|local|vector|||10.18|Conversion automatique de LHS en liste. Conversion automatique de LHS en liste|
 PCA_fun|stem|7d7ddd64f45f467d|0661a99c3b14a39e|fffdd47eb24fcfad|1560311063||t19516.5131122066s|c6fbfb9abe15abfd|72|rds|local|vector|||4.35||
-permanova|stem|d31eedc8ba1385f4|dd6d3c91549e78fa|5f7a385c30067094|-1663095346||t19783.4105297034s|a1c456b03adbfbf8|44|rds|local|vector|||2.04||
-pielou|stem|af36879ae6de5c3a|1dcc206e3d5c172b|2aa6849fa39995a8|-1415576389||t19872.2884991923s|df4424e19be77efa|267953|rds|local|vector|||17.72|le package canaper a été compilé avec la version R 4.3.3|
-raw_data|stem|e3a7e2efababb330|a2f81db56e588783|ef46db3751d8e999|-1101284392|data/raw-data/Data_sans_UNAV(2).csv|t19461.3268890639s|7d480317d81eaa09|265378|file|local|vector|||0||
-stack_c_chart|stem|c2749430e0050b58|9456ec9e98a7ed3e|110027fdc6e23d39|578039821||t19783.415102672s|4f74cbc508fbc9d3|133|rds|local|vector|||0.95||
+permanova|stem|e1bcb7924f4c872f|e0584a05953bdbb3|dada6ad9a7b615b8|-1663095346||t19898.3839430748s|d21be8cf0dd771ce|44|rds|local|vector|||1.7||
+pielou|stem|106805f1526c9d49|a41de3a4de5b019a|d932ded7695da0d1|-1415576389||t19898.3837715011s|37b374c1a38ded2d|267953|rds|local|vector|||9.14||
+raw_data|stem|1c3d865f4fa09165|32c2b2faf2379c3e|2c530c1562a7fbd1|-1101284392|data/raw-data/Data_sans_UNAV(2).csv|t19461.3268890639s|f0ea365327e48ea7|265378|file|local|vector|||0||
+stack_c_chart|stem|d8b0027a8010c6ba|9bac04b1d6426798|88bee2d8682bcea4|578039821||t19898.3842371253s|9f6df4a48581fac2|133|rds|local|vector|||0.73||
 summary.pwadstrata|function|19f623099f484c05|||||||||||||||
-tab_div|stem|d31eedc8ba1385f4|e8315ba793553acf|24e2e7e398138be5|1775370642||t19783.4105302947s|a1c456b03adbfbf8|44|rds|local|vector|||0.03||
-venn_plot|stem|27da4f742e37a4c7|eb116c01bfffdf83|499db49525051658|36130846||t19783.4104124498s|083ed7cd5fdca87c|132|rds|local|vector|||0.57||
+tab_div|stem|e1bcb7924f4c872f|b96f27496547f111|9f305b521bfac95d|1775370642||t19898.3839435264s|d21be8cf0dd771ce|44|rds|local|vector|||0.01||
+venn_plot|stem|283900a84929594f|470628dfc1ba5c32|afbaaa8f14f1c1e3|36130846||t19898.3836643954s|759dc689e48aedcc|132|rds|local|vector|||0.63|le package vegan a été compilé avec la version R 4.3.3|

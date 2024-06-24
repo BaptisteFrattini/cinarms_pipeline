@@ -397,11 +397,11 @@ beta_microhab <- function(meta_data){
   
   
   #Jaccard
-  intra = c("between different \n microhabitats of \n the CINA1 set", 
-            "between different \n microhabitats of \n the CINA3 set", 
-            "between different \n microhabitats of \n the CINA2 set", 
-            "between different \n microhabitats of \n the CINA4 set", 
-            "between different \n microhabitats of \n the RUNA2 set")
+  intra = c("between different \n microhabitats of \n the CINA1 batch", 
+            "between different \n microhabitats of \n the CINA3 batch", 
+            "between different \n microhabitats of \n the CINA2 batch", 
+            "between different \n microhabitats of \n the CINA4 batch", 
+            "between different \n microhabitats of \n the RUNA2 batch")
   
   set_name <- sort(rep(unique(substr(meta$arms_name, 1, 5)),3))
   
