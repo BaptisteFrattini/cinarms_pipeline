@@ -519,7 +519,7 @@ fun_PCA <- function(metadata_data_mean, data_mean_pool){
   
   label3 <- c("Porifera", "Bryozoa", "Ascidiacea (colonial)", "Ascidiacea (solitary)", "Foraminifera",      
   "Other algae", "Annelida", "Prokariotic biotas", "Bivalvia", "Hydrozoa",          
-   "Cirripedia", "Bare plate", "Sediment", "CCA")
+   "Cirripedia", "Bare plate", "Sediments", "CCA")
   
   biplot2 <- ggplot() +
     geom_point(data = sites.scores, aes(x = Dim1, y = Dim2, color = meta_mean$imm_time, shape = meta_mean$imm_season, size = 3)) +

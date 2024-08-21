@@ -7,7 +7,7 @@
 fun_alpha_div <- function(metadata){
   
   # metadata = targets::tar_read(metadata_data)
-  
+  library(ggplot2)
   df_mean <- read.csv(metadata[!grepl("metadata", metadata)], header = TRUE)
   meta_mean <- read.csv(metadata[grepl("metadata", metadata)], header = TRUE)
   df_mean_pa <- vegan::decostand(df_mean, "pa")
@@ -17,6 +17,25 @@ fun_alpha_div <- function(metadata){
   pdf(file =  div_alpha_path, width = 7.65, height = 9.86)
   
   par(mfrow = c(3, 2))
+  
+  #### Species abundance distribution ####
+  
+  species_abundance <- colSums(df_mean)
+  sad_data <- data.frame(Species = names(species_abundance),
+                         Abundance = species_abundance)
+  sad_data <- sad_data[order(-sad_data$Abundance), ]
+  
+  sad_data <- sad_data[-c(2,5), ]
+  
+  yp <- ggplot2::ggplot(sad_data, aes(x = reorder(Species, -Abundance), y = Abundance)) +
+        geom_bar(stat = "identity") +
+        labs(title = "Species Abundance Distribution",
+             x = "Species",
+             y = "Abundance") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  
   #### All ARMS pooled ####
   
   s <- vegan::specaccum(df_mean_pa, method = "random", permutations = 999,

@@ -609,7 +609,7 @@ beta_div_decomp <- function(metadata_data_mean){
    # path_to_boxplot <- paste0("outputs/beta/boxplot_imm_tim.pdf")
    # ggsave(filename =  path_to_boxplot, plot = fin, width = 25, height = 16)
 
-   #### deployment season ####
+   #### deployment seasons ####
    #turnover
    mat.turn
    df.turn <- melt(as.matrix(mat.turn), varnames = c("row", "col"))
@@ -707,7 +707,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n deployment season", "between different \n deployment season")
+   depl = c("between same \n deployment season", "between different \n deployment seasons")
    means <- aggregate(turn ~ comp_deploy, df_deploy, mean)
    g <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -740,7 +740,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n deployment season", "between different \n deployment season")
+   depl = c("between same \n deployment season", "between different \n deployment seasons")
    means <- aggregate(nest ~ comp_deploy, df_deploy, mean)
    h <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -773,7 +773,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n deployment season", "between different \n deployment season")
+   depl = c("between same \n deployment season", "between different \n deployment seasons")
    means <- aggregate(jacc ~ comp_deploy, df_deploy, mean)
    i <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -806,7 +806,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::t_test(df_deploy, bray ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n deployment season", "between different \n deployment season")
+   depl = c("between same \n deployment season", "between different \n deployment seasons")
    means <- aggregate(bray ~ comp_deploy, df_deploy, mean)
    i2 <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = bray)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -1260,7 +1260,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   depl = c("between same \n retrieval season", "between different \n retrieval seasons")
    means <- aggregate(turn ~ comp_deploy, df_deploy, mean)
    g_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -1291,7 +1291,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   depl = c("between same \n retrieval season", "between different \n retrieval seasons")
    means <- aggregate(nest ~ comp_deploy, df_deploy, mean)
    h_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -1322,7 +1322,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   depl = c("between same \n retrieval season", "between different \n retrieval seasons")
    means <- aggregate(jacc ~ comp_deploy, df_deploy, mean)
    i_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -1352,7 +1352,7 @@ beta_div_decomp <- function(metadata_data_mean){
    p.sed <- rstatix::t_test(df_deploy, bray ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.15)
    p.sed <- rstatix::add_significance(p.sed, "p")
-   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   depl = c("between same \n retrieval season", "between different \n retrieval seasons")
    means <- aggregate(bray ~ comp_deploy, df_deploy, mean)
    i2_ret <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = bray)) +
      geom_boxplot(fill =  c("white","white") ) +
@@ -1391,7 +1391,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    p.sed <- rstatix::wilcox_test(df_deploy, turn ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
-   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   depl = c("between same \n retrieval season", "between different \n retrieval seasons")
    m <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = turn)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
      labs(title = "",
@@ -1417,7 +1417,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    p.sed <- rstatix::wilcox_test(df_deploy, nest ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
-   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   depl = c("between same \n retrieval season", "between different \n retrieval seasons")
    n <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = nest)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
      labs(title = "",
@@ -1443,7 +1443,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    p.sed <- rstatix::wilcox_test(df_deploy, jacc ~ comp_deploy)
    p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
-   depl = c("between same \n retrieval season", "between different \n retrieval season")
+   depl = c("between same \n retrieval season", "between different \n retrieval seasons")
    o <- ggplot(df_deploy, aes(x = fct_relevel(comp_deploy, "same_deployment_season", "deployment_hot_cool"), y = jacc)) +
      geom_boxplot(fill =  c("lightgreen","lightgreen") ) +
      labs(title = "",
