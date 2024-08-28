@@ -14,28 +14,29 @@ fun_alpha_div <- function(metadata){
  
   div_alpha_name <- paste0("div_alpha_total.pdf")
   div_alpha_path <- here::here("outputs/", div_alpha_name)
-  pdf(file =  div_alpha_path, width = 7.65, height = 9.86)
+  pdf(file =  div_alpha_path, width = 7.65, height = 8.5)
   
-  par(mfrow = c(3, 2))
+  par(mfrow = c(3, 2),
+      mar = c(4, 4, 1, 2))
   
-  #### Species abundance distribution ####
-  
-  species_abundance <- colSums(df_mean)
-  sad_data <- data.frame(Species = names(species_abundance),
-                         Abundance = species_abundance)
-  sad_data <- sad_data[order(-sad_data$Abundance), ]
-  
-  sad_data <- sad_data[-c(2,5), ]
-  
-  yp <- ggplot2::ggplot(sad_data, aes(x = reorder(Species, -Abundance), y = Abundance)) +
-        geom_bar(stat = "identity") +
-        labs(title = "Species Abundance Distribution",
-             x = "Species",
-             y = "Abundance") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  
-  
+  # #### Species abundance distribution ####
+  # 
+  # species_abundance <- colSums(df_mean)
+  # sad_data <- data.frame(Species = names(species_abundance),
+  #                        Abundance = species_abundance)
+  # sad_data <- sad_data[order(-sad_data$Abundance), ]
+  # 
+  # sad_data <- sad_data[-c(2,5), ]
+  # 
+  # yp <- ggplot2::ggplot(sad_data, aes(x = reorder(Species, -Abundance), y = Abundance)) +
+  #       geom_bar(stat = "identity") +
+  #       labs(title = "Species Abundance Distribution",
+  #            x = "Species",
+  #            y = "Abundance") +
+  #   theme_minimal() +
+  #   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  # 
+  # 
   #### All ARMS pooled ####
   
   s <- vegan::specaccum(df_mean_pa, method = "random", permutations = 999,
@@ -48,11 +49,11 @@ fun_alpha_div <- function(metadata){
        lwd=2,
        ci.lty=0,
        ci.col="lightblue",
-       xlab="Number of plates analysed",
-       ylab="# morpho-species detected in all 15 ARMS",
+       xlab="",
+       ylab="# MSPs detected in all 15 ARMS",
        ylim=c(1,80))
   
-  boxplot(s, col="yellow", add=TRUE, pch="+")
+  # boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
   text(120,
@@ -78,11 +79,11 @@ fun_alpha_div <- function(metadata){
        lwd=2,
        ci.lty=0,
        ci.col="lightblue",
-       xlab="Number of plates analysed",
-       ylab="# morpho-species detected in 6-month ARMS",
+       xlab="",
+       ylab="# MSPs detected in 6-month ARMS",
        ylim=c(1,80))
   
-  boxplot(s, col="yellow", add=TRUE, pch="+")
+  # boxplot(s, col="yellow", add=TRUE, pch="+")
   
   text(50,
        10,
@@ -106,11 +107,11 @@ fun_alpha_div <- function(metadata){
        lwd=2,
        ci.lty=0,
        ci.col="lightblue",
-       xlab="Number of plates analysed",
-       ylab="# morpho-species detected in one-year ARMS",
+       xlab="",
+       ylab="# MSPs detected in one-year ARMS",
        ylim=c(1,80))
   
-  boxplot(s, col="yellow", add=TRUE, pch="+")
+  # boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
   text(51,
@@ -135,11 +136,11 @@ fun_alpha_div <- function(metadata){
        lwd=2,
        ci.lty=0,
        ci.col="lightblue",
-       xlab="Number of plates analysed",
-       ylab="# morpho-species detected in two-year ARMS",
+       xlab="",
+       ylab="# MSPs detected in two-year ARMS",
        ylim=c(1,80))
   
-  boxplot(s, col="yellow", add=TRUE, pch="+")
+  # boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
   text(25,
@@ -166,11 +167,11 @@ fun_alpha_div <- function(metadata){
        lwd=2,
        ci.lty=0,
        ci.col="lightblue",
-       xlab="Number of plates analysed",
-       ylab="# morpho-species detected in ARMS deployed in hot season",
+       xlab="Number of plate faces analysed",
+       ylab="# MSPs detected in ARMS deployed in hot season",
        ylim=c(1,80))
   
-  boxplot(s, col="yellow", add=TRUE, pch="+")
+  # boxplot(s, col="yellow", add=TRUE, pch="+")
   
   text(70,
        10,
@@ -195,11 +196,11 @@ fun_alpha_div <- function(metadata){
        lwd=2,
        ci.lty=0,
        ci.col="lightblue",
-       xlab="Number of plates analysed",
-       ylab="# morpho-species detected in ARMS deployed in cool season",
+       xlab="Number of plate faces analysed",
+       ylab="# MSPs detected in ARMS deployed in cool season",
        ylim=c(1,80))
   
-  boxplot(s, col="yellow", add=TRUE, pch="+")
+  # boxplot(s, col="yellow", add=TRUE, pch="+")
   
   
   text(49,
