@@ -61,7 +61,7 @@ diversity_explo <- function(metadata_data_mean){
   model <- aovp(s ~ imm_time, data = data_div, perm = "Prob")
   summary(model)
   
-  install.packages("rcompanion")
+
   library(rcompanion)
   
   PT = pairwisePermutationTest(s ~ imm_time, data = data_div,

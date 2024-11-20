@@ -6,7 +6,7 @@
 #' @return the path to the subseted derived data file
 #' @export 
 
-beta_microhab <- function(meta_data){
+beta_microhab_3 <- function(meta_data){
   
   # meta_data = targets::tar_read(metadata_data)
   library(ggpubr)
@@ -166,17 +166,17 @@ beta_microhab <- function(meta_data){
    
   ## Compute index on null model data- ##
   
-  turnover_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(turnover_results) <- sort(unique(meta_red$set))
+  turnover_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  turnover_results$names <- rep(sort(unique(meta$arms_name)), each = 6)
   
-  nestedness_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(nestedness_results) <- sort(unique(meta_red$set))
+  nestedness_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  nestedness_results$names <-  rep(sort(unique(meta$arms_name)), each = 6)
   
-  jaccard_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(jaccard_results) <- sort(unique(meta_red$set))
+  jaccard_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  jaccard_results$names <-  rep(sort(unique(meta$arms_name)), each = 6)
   
-  bray_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(bray_results) <- sort(unique(meta_red$set))
+  bray_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  bray_results$names <-  rep(sort(unique(meta$arms_name)), each = 6)
   
   
   unique_prefixes <- unique(meta_red$set)
@@ -213,7 +213,7 @@ beta_microhab <- function(meta_data){
     df.turn <- df.turn[!duplicated(df.turn$combined), ]
     df.turn <- df.turn[,-4]
     
-    turnover_results[prefix,1] <- mean(df.turn$value)
+    turnover_results$V1[turnover_results$names == prefix] <- df.turn$value
     
     # Nestedness
     df.nest <- melt(as.matrix(mat.nest), varnames = c("row", "col"))
@@ -229,7 +229,7 @@ beta_microhab <- function(meta_data){
     df.nest <- df.nest[!duplicated(df.nest$combined), ]
     df.nest <- df.nest[,-4]
     
-    nestedness_results[prefix,1] <- mean(df.nest$value)
+    nestedness_results$V1[nestedness_results$names == prefix] <- df.nest$value
     
     # Jaccard
     df.jacc <- melt(as.matrix(mat.jacc), varnames = c("row", "col"))
@@ -245,7 +245,7 @@ beta_microhab <- function(meta_data){
     df.jacc <- df.jacc[!duplicated(df.jacc$combined), ]
     df.jacc <- df.jacc[,-4]
     
-    jaccard_results[prefix,1] <- mean(df.jacc$value)
+    jaccard_results$V1[jaccard_results$names == prefix] <- df.jacc$value
     
     # Bray
     df.bray <- melt(as.matrix(mat.bray), varnames = c("row", "col"))
@@ -261,7 +261,7 @@ beta_microhab <- function(meta_data){
     df.bray <- df.bray[!duplicated(df.bray$combined), ]
     df.bray <- df.bray[,-4]
     
-    bray_results[prefix,1] <- mean(df.bray$value)
+    bray_results$V1[bray_results$names == prefix] <- df.bray$value
     
   }
   
@@ -274,17 +274,17 @@ beta_microhab <- function(meta_data){
   
   #### compute index on observed data ####
   
-  turnover_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(turnover_results) <- sort(unique(meta$arms_name))
+  turnover_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  turnover_results$names <- rep(sort(unique(meta$arms_name)), each = 6)
   
-  nestedness_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(nestedness_results) <- sort(unique(meta$arms_name))
+  nestedness_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  nestedness_results$names <-  rep(sort(unique(meta$arms_name)), each = 6)
   
-  jaccard_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(jaccard_results) <- sort(unique(meta$arms_name))
+  jaccard_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  jaccard_results$names <-  rep(sort(unique(meta$arms_name)), each = 6)
   
-  bray_results <- as.data.frame(matrix(NA, nrow = 15, ncol = 1))
-  rownames(bray_results) <- sort(unique(meta$arms_name))
+  bray_results <- as.data.frame(matrix(NA, nrow = 6*15, ncol = 1))
+  bray_results$names <-  rep(sort(unique(meta$arms_name)), each = 6)
   
   # Iterate through unique "prefixe" values
   
@@ -313,7 +313,9 @@ beta_microhab <- function(meta_data){
     df.turn <- df.turn[!duplicated(df.turn$combined), ]
     df.turn <- df.turn[,-4]
     
-    turnover_results[prefix,1] <- mean(df.turn$value)
+    turnover_results$V1[turnover_results$names == prefix] <- df.turn$value
+    
+
     
     # Nestedness
     df.nest <- melt(as.matrix(mat.nest), varnames = c("row", "col"))
@@ -329,7 +331,7 @@ beta_microhab <- function(meta_data){
     df.nest <- df.nest[!duplicated(df.nest$combined), ]
     df.nest <- df.nest[,-4]
     
-    nestedness_results[prefix,1] <- mean(df.nest$value)
+    nestedness_results$V1[nestedness_results$names == prefix] <- df.nest$value
     
     # Jaccard
     df.jacc <- melt(as.matrix(mat.jacc), varnames = c("row", "col"))
@@ -345,7 +347,8 @@ beta_microhab <- function(meta_data){
     df.jacc <- df.jacc[!duplicated(df.jacc$combined), ]
     df.jacc <- df.jacc[,-4]
     
-    jaccard_results[prefix,1] <- mean(df.jacc$value)
+    jaccard_results$V1[jaccard_results$names == prefix] <- df.jacc$value
+    
     
     # Bray
     df.bray <- melt(as.matrix(mat.bray), varnames = c("row", "col"))
@@ -361,8 +364,7 @@ beta_microhab <- function(meta_data){
     df.bray <- df.bray[!duplicated(df.bray$combined), ]
     df.bray <- df.bray[,-4]
     
-    bray_results[prefix,1] <- mean(df.bray$value)
-    
+    bray_results$V1[bray_results$names == prefix] <- df.bray$value
     
     
   }
@@ -394,8 +396,7 @@ beta_microhab <- function(meta_data){
   null.dev.bray <- (results$bray - mean(null_results$bray))/sd(null_results$bray)
   
   SES_data <- data.frame(ses_jacc = null.dev.jacc, ses_turn = null.dev.turn, ses_nest = null.dev.nest, ses_bray = null.dev.bray)
-  
-  
+
   #Jaccard
   intra = c("between different \n microhabitats of \n the CINA1 batch", 
             "between different \n microhabitats of \n the CINA3 batch", 
@@ -403,7 +404,7 @@ beta_microhab <- function(meta_data){
             "between different \n microhabitats of \n the CINA4 batch", 
             "between different \n microhabitats of \n the RUNA2 batch")
   
-  set_name <- sort(rep(unique(substr(meta$arms_name, 1, 5)),3))
+  set_name <- sort(rep(unique(substr(meta$arms_name, 1, 5)),3*6))
   
   SES_data$comp <- set_name
   SES_data$imm_time <- c("6 months","6 months","6 months", 
@@ -415,97 +416,116 @@ beta_microhab <- function(meta_data){
   means <- aggregate(ses_jacc ~  set_name, SES_data, mean)
   
   ll <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_jacc)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    geom_boxplot(color = c("#CC66CC", "#CC66CC", "#1B9E77", "#1B9E77", "#FF7F00"), fill = NA) +
+    geom_jitter(aes(color = set_name), width = 0.2, size = 1.5, alpha = 0.6, show.legend = FALSE) +  # Points colorés selon les catégories
+    scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", "RUNA2" = "#FF7F00")) +
     labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
          y = "") +
     theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
+    scale_x_discrete(labels = intra) +
     theme_classic() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
           axis.text.y = element_text(size = 12)) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-    geom_hline(yintercept = -1.96, colour = "red")+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_text(size = 12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
     ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
+    stat_summary(fun = mean, colour = "darkred", geom = "point", 
+                 shape = 18, size = 3, show.legend = FALSE)
+  
+  
   # turnover
   
   means <- aggregate(ses_turn ~  set_name, SES_data, mean)
   
   mm <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_turn)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Turnover component",
+    geom_boxplot(color = c("#CC66CC", "#CC66CC", "#1B9E77", "#1B9E77", "#FF7F00"), fill = NA) +
+    geom_jitter(aes(color = set_name), width = 0.2, size = 1.5, alpha = 0.6, show.legend = FALSE) +  # Points colorés selon les catégories
+    scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", "RUNA2" = "#FF7F00")) +
+    labs(title = "Turnover",
          x = "Comparisons",
          y = "") +
     theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
+    scale_x_discrete(labels = intra) +
     theme_classic() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
           axis.text.y = element_text(size = 12)) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
-    geom_hline(yintercept = -1.96, colour = "red")+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_text(size = 12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
     ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
+    stat_summary(fun = mean, colour = "darkred", geom = "point", 
+                 shape = 18, size = 3, show.legend = FALSE)
   # nest
   
   means <- aggregate(ses_nest ~  set_name, SES_data, mean)
   
   nn <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_nest)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Nestedness component",
+    geom_boxplot(color = c("#CC66CC", "#CC66CC", "#1B9E77", "#1B9E77", "#FF7F00"), fill = NA) +
+    geom_jitter(aes(color = set_name), width = 0.2, size = 1.5, alpha = 0.6, show.legend = FALSE) +  # Points colorés selon les catégories
+    scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", "RUNA2" = "#FF7F00")) +
+    labs(title = "Nestedness",
          x = "Comparisons",
          y = "") +
     theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
+    scale_x_discrete(labels = intra) +
     theme_classic() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
           axis.text.y = element_text(size = 12)) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
-    geom_hline(yintercept = -1.96, colour = "red")+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_text(size = 12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
     ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
+    stat_summary(fun = mean, colour = "darkred", geom = "point", 
+                 shape = 18, size = 3, show.legend = FALSE)
  
   means <- aggregate(ses_bray ~  set_name, SES_data, mean)
   
   oo <- ggplot(SES_data, aes(x = fct_relevel(set_name, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = ses_bray)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+    geom_boxplot(color = c("#CC66CC", "#CC66CC", "#1B9E77", "#1B9E77", "#FF7F00"), fill = NA) +
+    geom_jitter(aes(color = set_name), width = 0.2, size = 1.5, alpha = 0.6, show.legend = FALSE) +  # Points colorés selon les catégories
+    scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", "RUNA2" = "#FF7F00")) +
     labs(title = "Bray-Curtis dissimilarity",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
+    scale_x_discrete(labels = intra) +
     theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_blank(),
+          axis.text.y = element_text(size = 12)) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), 
           axis.title.x = element_blank(), 
-          axis.title.y = element_text(size=12),
-          axis.text.y = element_text(size = 12)) +
-    geom_hline(yintercept = -1.96, colour = "red")+
+          axis.title.y = element_text(size = 12)) +
+    geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
     ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
+    stat_summary(fun = mean, colour = "darkred", geom = "point", 
+                 shape = 18, size = 3, show.legend = FALSE)
   
   fin <- cowplot::plot_grid(oo, ll, mm, nn,
                             ncol = 4,
                             nrow = 1)
   
-  path_to_boxplot_SES_UDOC <- paste0("outputs/null_model/boxplot_betadiv_microhab_UDOC_SES_16_05_2024.pdf")
+  path_to_boxplot_SES_UDOC <- paste0("outputs/null_model/boxplot_betadiv_microhab_UDOC_SES_15_10_2024.pdf")
   ggsave(filename =  path_to_boxplot_SES_UDOC, plot = fin, width = 18.5, height = 7.5)
   # 
   # ### 6 moi 1y 2 ans 

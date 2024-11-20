@@ -326,31 +326,35 @@ fun_null_model <- function(metadata_data_mean){
   #### JACCARD
   
   subset.tab.null.dev.jacc <- subset(tab.null.dev.jacc, tab.null.dev.jacc$obs.df.jacc.same_value == "Yes")
-  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   
+  intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   means <- aggregate(null.dev.jacc ~  obs.df.jacc.col, subset.tab.null.dev.jacc, mean)
-  kk <- ggplot(subset.tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.jacc)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
+  
+  kk <- ggplot(subset.tab.null.dev.jacc, 
+               aes(x = fct_relevel(obs.df.jacc.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), 
+                   y = null.dev.jacc)) +
+    geom_jitter(aes(color = obs.df.jacc.col), width = 0.2, size = 2, show.legend = FALSE) +
     labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
          y = "") +
     theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
+    scale_x_discrete(labels = intra) +
+    scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
+                                  "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
+                                  "RUNA2" = "#FF7F00")) +
     theme_classic() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
           axis.text.y = element_text(size = 12)) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
+    ylim(min = -4.5, max = 4.5) 
   
   intrainter = c("between ARMS of \n the same batch", "between ARMS of \n different sets")
-  kk2 <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
+ 
+   kk2 <- ggplot(tab.null.dev.jacc, aes(x = fct_relevel(obs.df.jacc.same_value, "Yes", "No"), y = null.dev.jacc)) +
     geom_boxplot(fill =  c("white", "white") ) +
     labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
@@ -417,25 +421,28 @@ fun_null_model <- function(metadata_data_mean){
   subset.tab.null.dev.turn <- subset(tab.null.dev.turn, tab.null.dev.turn$obs.df.turn.same_value == "Yes")
   intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   means <- aggregate(null.dev.turn ~  obs.df.turn.col, subset.tab.null.dev.turn, mean)
-  jj <- ggplot(subset.tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.turn)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Turnover component",
+  
+  jj <- ggplot(subset.tab.null.dev.turn, 
+               aes(x = fct_relevel(obs.df.turn.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), 
+                   y = null.dev.turn)) +
+    geom_jitter(aes(color = obs.df.turn.col), width = 0.2, size = 2, show.legend = FALSE) +
+    labs(title = "Turnover",
          x = "Comparisons",
          y = "") +
     theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
+    scale_x_discrete(labels = intra) +
+    scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
+                                  "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
+                                  "RUNA2" = "#FF7F00")) +
     theme_classic() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
           axis.text.y = element_text(size = 12)) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
-    geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
+    geom_hline(yintercept = 0, colour = "darkgrey") +
+    ylim(min = -4.5, max = 4.5) 
   
   jj2 <- ggplot(tab.null.dev.turn, aes(x = fct_relevel(obs.df.turn.same_value, "Yes", "No"), y = null.dev.turn)) +
     geom_boxplot(fill =  c("white", "white") ) +
@@ -504,27 +511,29 @@ fun_null_model <- function(metadata_data_mean){
   subset.tab.null.dev.nest <- subset(tab.null.dev.nest, tab.null.dev.nest$obs.df.nest.same_value == "Yes")
   intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   means <- aggregate(null.dev.nest ~  obs.df.nest.col, subset.tab.null.dev.nest, mean)
-  hh <- ggplot(subset.tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.nest)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Nestedness component",
-         x = "Comparisons",
-         y = "") +
-    theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
-    theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
-          axis.title.x = element_blank(), 
-          axis.title.y = element_blank(),
-          axis.text.y = element_text(size = 12)) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-    geom_hline(yintercept = -1.96, colour = "red") +
-    geom_hline(yintercept = 1.96, colour = "red") +
-    geom_hline(yintercept = 0, colour = "darkgrey")+
-    ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
-  
-  
+ 
+   hh <- ggplot(subset.tab.null.dev.nest, 
+               aes(x = fct_relevel(obs.df.nest.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), 
+                   y = null.dev.nest)) +
+     geom_jitter(aes(color = obs.df.nest.col), width = 0.2, size = 2, show.legend = FALSE) +
+     labs(title = "Turnover",
+          x = "Comparisons",
+          y = "") +
+     theme(legend.position = "none") +
+     scale_x_discrete(labels = intra) +
+     scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
+                                   "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
+                                   "RUNA2" = "#FF7F00")) +
+     theme_classic() +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+           axis.title.x = element_blank(), 
+           axis.title.y = element_blank(),
+           axis.text.y = element_text(size = 12)) +
+     geom_hline(yintercept = -1.96, colour = "red") +
+     geom_hline(yintercept = 1.96, colour = "red") +
+     geom_hline(yintercept = 0, colour = "darkgrey") +
+     ylim(min = -4.5, max = 4.5) 
+   
   hh2 <- ggplot(tab.null.dev.nest, aes(x = fct_relevel(obs.df.nest.same_value, "Yes", "No"), y = null.dev.nest)) +
     geom_boxplot(fill =  c("white", "white") ) +
     labs(title = "Nestedness component",
@@ -740,30 +749,35 @@ fun_null_model <- function(metadata_data_mean){
   intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   
   means <- aggregate(null.dev.bray ~  tab.bray.obs.col, subset.tab.null.dev.bray, mean)
-  uu <- ggplot(subset.tab.null.dev.bray, aes(x = fct_relevel(tab.bray.obs.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = null.dev.bray)) +
-    geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "Bray Curtis dissimilarity",
+ 
+  
+  uu <- ggplot(subset.tab.null.dev.bray, 
+               aes(x = fct_relevel(tab.bray.obs.col, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), 
+                   y = null.dev.bray)) +
+    geom_jitter(aes(color = tab.bray.obs.col), width = 0.2, size = 2, show.legend = FALSE) +
+    labs(title = "Bray-Curtis dissimilarity",
          x = "Comparisons",
-         y = "Standardized Effect Size (SES)") +
+         y = "") +
     theme(legend.position = "none") +
-    scale_x_discrete(labels=intra) +
+    scale_x_discrete(labels = intra) +
+    scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
+                                  "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
+                                  "RUNA2" = "#FF7F00")) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11), 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
           axis.title.x = element_blank(), 
-          axis.title.y = element_text(size=12),
+          axis.title.y = element_blank(),
           axis.text.y = element_text(size = 12)) +
-    geom_hline(yintercept = -1.96, colour = "red")+
+    geom_hline(yintercept = -1.96, colour = "red") +
     geom_hline(yintercept = 1.96, colour = "red") +
     geom_hline(yintercept = 0, colour = "darkgrey") +
-    ylim(min = -4.5, max = 4.5) +
-    stat_summary(fun=mean, colour="darkred", geom="point", 
-                 shape=18, size=3, show.legend=FALSE)
+    ylim(min = -4.5, max = 4.5) 
   
   fin <- cowplot::plot_grid(uu, kk,jj,hh,
                             ncol = 4,
                             nrow = 1)
   
-  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full_16_05_24.pdf")
+  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_full_15_10_24.pdf")
   ggsave(filename =  path_to_boxplot, plot = fin, width = 18.5, height = 7.5)
   
   return (path_to_boxplot)

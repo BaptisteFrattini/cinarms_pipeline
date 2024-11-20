@@ -49,6 +49,8 @@ Imports:
   insight,
   vctrs,
   datawizard,
-  canaper
+  canaper,
+  reshape2,
+  lme4
   
   
