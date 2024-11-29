@@ -17,7 +17,7 @@ fun_SAD <- function(metadata_data_mean){
   
   # Créer des classes d'abondance (octaves)
   octaves <- octav(species_abundance, preston = TRUE)
-  
+  ?octav
   # Afficher les classes d'abondance
   print(octaves)
   
