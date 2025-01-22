@@ -810,15 +810,15 @@ fun_beta_microhab <- function(meta_data){
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     ylim(0, 1) +   # Set y-axis scale between 0 and 1
-    scale_fill_manual(values = c("#CC66CC", "#1B9E77", "#FF7F00")) +  # Set colors for each value of imm_time
-    stat_pvalue_manual(
-      stat_test,
-      label = "p.adj.signif",
-      y.position = "y.position",  # Use y.position column in stat_test to place segments
-      bracket.size = 0.3
-    )
+    scale_fill_manual(values = c("#CC66CC", "#1B9E77", "#FF7F00"))   # Set colors for each value of imm_time
+    # stat_pvalue_manual(
+    #   stat_test,
+    #   label = "p.adj.signif",
+    #   y.position = "y.position",  # Use y.position column in stat_test to place segments
+    #   bracket.size = 0.3
+    # )
   
-  path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_microhab_20_11_24.png")
+  path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_microhab_20_01_25.png")
   ggsave(filename =  path_to_boxplot, plot = b.beta, width = 13, height = 4.5)
 
   # install.packages("ggridges")
