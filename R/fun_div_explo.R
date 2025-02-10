@@ -73,19 +73,33 @@ diversity_explo <- function(metadata_data_mean){
   ?pairwisePercentileTest
   #Experimental design is quite ok to run ANOVA
   
-  ff <- ggplot(data_div, aes(x = fct_relevel(imm_time, "6m", "1y", "2y"), y = S)) +
-    geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00")) +
+  
+  
+  # Define colors
+  colors <- c("6m" = "#CC66CC", "1y" = "#1B9E77", "2y" = "#FF7F00")
+  
+  # Calculate mean for each immersion time
+  means <- data_div %>%
+    group_by(imm_time) %>%
+    summarise(mean_s = mean(s), .groups = "drop")
+  
+  ff <- ggplot(data_div, aes(x = fct_relevel(imm_time, "6m", "1y", "2y"), y = s, color = imm_time)) +
+    geom_jitter(width = 0.1, size = 3, alpha = 0.7) + # Points with individual colors
+    geom_point(data = means, aes(x = imm_time, y = mean_s), color = "grey30", size = 4) + # Mean points in grey
+    scale_color_manual(values = colors) + # Assign colors
     labs(title = "",
          x = "Immersion time",
          y = "Average MSP richness in an ARMS") +
     theme_classic() +
+    theme(legend.position = "none") + # Remove legend
     stat_pvalue_manual(p.sed, label = "p") +
-    annotate(geom="text", x=1, y=24, label = paste0("N = ",length(data_div$imm_time[grepl("6m", data_div$imm_time)])),
+    annotate(geom="text", x=1, y=30, label = paste0("N = ",sum(data_div$imm_time == "6m")),
              color="black") +
-    annotate(geom="text", x=2, y=27.75, label = paste0("N = ",length(data_div$imm_time[grepl("1y", data_div$imm_time)])),
+    annotate(geom="text", x=2, y=32, label = paste0("N = ",sum(data_div$imm_time == "1y")),
              color="black") +
-    annotate(geom="text", x=3, y=33, label = paste0("N = ",length(data_div$imm_time[grepl("2y", data_div$imm_time)])),
+    annotate(geom="text", x=3, y=35, label = paste0("N = ",sum(data_div$imm_time == "2y")),
              color="black")
+  
   # 
   path_to_box_div <- paste0("outputs/box_div.pdf")
   ggsave(filename =  path_to_box_div , width = 6, height = 6)
