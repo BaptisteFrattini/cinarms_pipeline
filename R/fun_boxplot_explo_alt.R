@@ -563,7 +563,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -577,7 +577,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -591,7 +591,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "Deployment season",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -605,7 +605,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "Deployment season",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -621,7 +621,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -635,7 +635,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -649,7 +649,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "retrieval season",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -662,7 +662,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "retrieval season",
-         y = "Percentage cover of porifera") +
+         y = "Percentage cover of Porifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -844,7 +844,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -858,7 +858,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -872,7 +872,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "Deployment season",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -886,7 +886,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "Deployment season",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -901,7 +901,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -914,7 +914,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -929,7 +929,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "retrieval season",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -943,7 +943,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "retrieval season",
-         y = "Percentage cover of foraminifera") +
+         y = "Percentage cover of Foraminifera") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1127,7 +1127,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1141,7 +1141,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1155,7 +1155,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "Deployment season",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1171,7 +1171,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "Deployment season",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1187,7 +1187,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1201,7 +1201,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1216,7 +1216,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "retrieval season",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1230,7 +1230,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "retrieval season",
-         y = "Percentage cover of annelida") +
+         y = "Percentage cover of Annelida") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1271,7 +1271,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Deployment season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1285,7 +1285,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Deployment season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1299,7 +1299,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "Deployment season",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1313,7 +1313,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "Deployment season",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1329,7 +1329,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77","#FF7F00") ) +
     labs(title = "Retrieval season : Hot",
          x = "Immersion time",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=time) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1343,7 +1343,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("#CC66CC","#1B9E77")) +
     labs(title = "Rerieval season : Cool",
          x = "Immersion time",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=c("6 month", "1 year")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1358,7 +1358,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : 6 months",
          x = "retrieval season",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
@@ -1372,7 +1372,7 @@ boxplot_explo_alt <- function(data_full_pool, meta_data){
     geom_boxplot(fill =  c("dodgerblue","firebrick3")) +
     labs(title = "Immersion time : one year",
          x = "retrieval season",
-         y = "Percentage cover of bryozoa") +
+         y = "Percentage cover of Bryozoa") +
     scale_x_discrete(labels=c("cool", "hot")) +
     theme(legend.position = "none")+
     theme_classic() +
