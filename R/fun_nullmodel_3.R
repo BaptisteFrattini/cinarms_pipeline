@@ -364,7 +364,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_jitter(aes(color = arms), width = 0.2, size = 3.5, show.legend = FALSE) +
     labs(title = "Jaccard dissimilarity",
          x = "Comparisons",
-         y = "") +
+         y = "", size = 16) +
     scale_x_discrete(labels = intra) +
     scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
                                   "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
@@ -375,9 +375,10 @@ fun_null_model <- function(metadata_data_mean){
       panel.background = element_rect(fill = "white", color = NA), # Changer l'arrière-plan
       panel.grid.major = element_line(color = "grey"),  # Quadrillage principal en blanc
       panel.grid.minor = element_line(color = "white", linetype = "dashed"),  # Quadrillage mineur
-      axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
-      axis.text.y = element_text(size = 6)
+      axis.text.y = element_text(size = 8.5),
+      plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
     geom_hline(yintercept = 40, colour = "red") +
@@ -392,7 +393,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_jitter(aes(color = arms), width = 0.2, size = 3.5, show.legend = FALSE) +
     labs(title = "Turnover component",
          x = "Comparisons",
-         y = "") +
+         y = "", size = 16) +
     scale_x_discrete(labels = intra) +
     scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
                                   "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
@@ -403,9 +404,10 @@ fun_null_model <- function(metadata_data_mean){
       panel.background = element_rect(fill = "white", color = NA), # Changer l'arrière-plan
       panel.grid.major = element_line(color = "grey"),  # Quadrillage principal en blanc
       panel.grid.minor = element_line(color = "white", linetype = "dashed"),  # Quadrillage mineur
-      axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
-      axis.text.y = element_text(size = 6)
+      axis.text.y = element_text(size = 8.5),
+      plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
     geom_hline(yintercept = 40, colour = "red") +
@@ -418,7 +420,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_jitter(aes(color = arms), width = 0.2, size = 3.5, show.legend = FALSE) +
     labs(title = "Nestedness component",
          x = "Comparisons",
-         y = "") +
+         y = "", size = 16) +
     scale_x_discrete(labels = intra) +
     scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
                                   "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
@@ -429,9 +431,10 @@ fun_null_model <- function(metadata_data_mean){
       panel.background = element_rect(fill = "white", color = NA), # Changer l'arrière-plan
       panel.grid.major = element_line(color = "grey"),  # Quadrillage principal en blanc
       panel.grid.minor = element_line(color = "white", linetype = "dashed"),  # Quadrillage mineur
-      axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
-      axis.text.y = element_text(size = 6)
+      axis.text.y = element_text(size = 8.5),
+      plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
     geom_hline(yintercept = 40, colour = "red") +
@@ -444,7 +447,7 @@ fun_null_model <- function(metadata_data_mean){
     geom_jitter(aes(color = arms), width = 0.2, size = 3.5, show.legend = FALSE) +
     labs(title = "Bray-Curtis dissimilarity",
          x = "Comparisons",
-         y = "Quantiles") +
+         y = "Percentiles", size = 16) +
     scale_x_discrete(labels = intra) +
     scale_color_manual(values = c("CINA1" = "#CC66CC", "CINA3" = "#CC66CC", 
                                   "CINA2" = "#1B9E77", "CINA4" = "#1B9E77", 
@@ -455,9 +458,10 @@ fun_null_model <- function(metadata_data_mean){
       panel.background = element_rect(fill = "white", color = NA), # Changer l'arrière-plan
       panel.grid.major = element_line(color = "grey"),  # Quadrillage principal en blanc
       panel.grid.minor = element_line(color = "white", linetype = "dashed"),  # Quadrillage mineur
-      axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
-      axis.text.y = element_text(size = 6)
+      axis.text.y = element_text(size = 8.5),
+      plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
     geom_hline(yintercept = 40, colour = "red") +
@@ -468,8 +472,8 @@ fun_null_model <- function(metadata_data_mean){
                             ncol = 4,
                             nrow = 1)
   
-  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_25_10_24.pdf")
-  ggsave(filename =  path_to_boxplot, plot = fin, width = 18.5, height = 7.5)
+  path_to_boxplot <- paste0("outputs/null_model/boxplot_null_model_16_05_2025.pdf")
+  ggsave(filename =  path_to_boxplot, plot = fin, width = 21.5, height = 7.5)
   
   
 

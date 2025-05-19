@@ -90,7 +90,7 @@ beta_div_decomp <- function(metadata_data_mean){
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
+    stat_pvalue_manual(p.sed, size = 6) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     annotate(geom="text", x=1, y=0.24, label = paste0("N = 3"),
              color="black") +
@@ -118,7 +118,7 @@ beta_div_decomp <- function(metadata_data_mean){
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
+    stat_pvalue_manual(p.sed, size = 6) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     annotate(geom="text", x=1, y=0.09, label = paste0("N = 3"),
              color="black") +
@@ -143,7 +143,7 @@ beta_div_decomp <- function(metadata_data_mean){
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
+    stat_pvalue_manual(p.sed, size = 6) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
     annotate(geom="text", x=1, y=0.32, label = paste0("N = 3"),
              color="black") +
@@ -162,14 +162,17 @@ beta_div_decomp <- function(metadata_data_mean){
   intra = c("between ARMS of \n the CINA1 batch", "between ARMS of \n the CINA3 batch","between ARMS of \n the CINA2 batch","between ARMS of \n the CINA4 batch","between ARMS of \n the RUNA2 batch")
   nn <- ggplot(decomp.pa, aes(x = fct_relevel(set, "CINA1", "CINA3", "CINA2", "CINA4", "RUNA2"), y = BrayCurtis_diss)) +
     geom_boxplot(fill =  c("#CC66CC","#CC66CC","#1B9E77","#1B9E77","#FF7F00") ) +
-    labs(title = "",
+    labs(title = "gagag",
          x = "Comparisons",
          y = "Bray-Curtis dissimilarity") +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intra) +
     theme_classic() +
-    stat_pvalue_manual(p.sed) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+    stat_pvalue_manual(p.sed, size = 6) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+          axis.title.x = element_blank(), 
+          axis.title.y = element_text(size=14),
+          plot.title = element_text(size = 18, face = "bold")) +
     annotate(geom="text", x=1, y=0.32, label = paste0("N = 3"),
              color="black") +
     annotate(geom="text", x=2, y=0.45, label = paste0("N = 3"),
@@ -246,17 +249,17 @@ beta_div_decomp <- function(metadata_data_mean){
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "Turnover component",
          x = "Comparisons",
-         y = "") +
+         y = "", size = 14) +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
-          axis.text.y = element_text(size = 12)) +
-    stat_pvalue_manual(p.sed, label = "p.signif") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-    annotate(geom="text", x=1, y=0.24, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
+          axis.text.y = element_text(size = 14)) +
+    stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12), plot.title = element_text(size = 18, face = "bold")) +
+    annotate(geom="text", x=1, y=0.25, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black")+
     annotate(geom="text", x=2, y=0.37, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black")+ 
@@ -283,19 +286,19 @@ beta_div_decomp <- function(metadata_data_mean){
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "Nestedness component",
          x = "Comparisons",
-         y = "") +
+         y = "", size = 14) +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
-          axis.text.y = element_text(size = 12)) +
-    stat_pvalue_manual(p.sed, label = "p.signif") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
-    annotate(geom="text", x=1, y=0.04, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
+          axis.text.y = element_text(size = 14)) +
+    stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
+    annotate(geom="text", x=1, y=0.045, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black") +
-    annotate(geom="text", x=2, y=0.04, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
+    annotate(geom="text", x=2, y=0.045, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
              color="black") + 
     scale_y_continuous(limits = c(0,0.35)) +
     stat_summary(fun=mean, colour="darkred", geom="point", 
@@ -318,16 +321,16 @@ beta_div_decomp <- function(metadata_data_mean){
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "Jaccard dissimilarity",
          x = "",
-         y = "") +
+         y = "", size = 14) +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
-          axis.text.y = element_text(size = 12)) +
-    stat_pvalue_manual(p.sed, label = "p.signif") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+          axis.text.y = element_text(size = 14)) +
+    stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
     annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black")+
     annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
@@ -353,16 +356,16 @@ beta_div_decomp <- function(metadata_data_mean){
     geom_boxplot(fill =  c("white","white") ) +
     labs(title = "Bray-Curtis dissimilarity",
          x = "",
-         y = "") +
+         y = "", size = 14) +
     theme(legend.position = "none") +
     scale_x_discrete(labels=intrainter) +
     theme_classic() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
           axis.title.x = element_blank(), 
           axis.title.y = element_blank(),
-          axis.text.y = element_text(size = 12)) +
-    stat_pvalue_manual(p.sed, label = "p.signif") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+          axis.text.y = element_text(size = 14)) +
+    stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
     annotate(geom="text", x=1, y=1-0.790, label = paste0("N = ",length(decomp.pa$intrasite[grepl("Yes", decomp.pa$intrasite)])),
              color="black")+
     annotate(geom="text", x=2, y=1-0.66, label = paste0("N = ",length(decomp.pa$intrasite[grepl("No", decomp.pa$intrasite)])),
@@ -471,7 +474,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, turn ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, turn ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.25)
    
    comp = c("between six months \n and one year", "between one year \n and two years", "between six months \n and two years")
    means <- aggregate(turn ~ comp_imm, df_imm_time, mean)
@@ -482,17 +485,17 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed)  +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold")) +
      annotate(geom="text", x=1, y=0.39, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=0.45, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
               color="black")+
-     annotate(geom="text", x=3, y=0.57, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
+     annotate(geom="text", x=3, y=0.58, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_two", df_imm_time$comp_imm)])),
               color="black")+ 
      scale_y_continuous(limits = c(0,0.8)) +
      stat_summary(fun=mean, colour="darkred", geom="point", 
@@ -509,7 +512,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, nest ~ comp_imm)
    p.sed <- rstatix::pairwise_t_test(df_imm_time, nest ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.25)
    means <- aggregate(nest ~ comp_imm, df_imm_time, mean)
    e <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = nest)) +
      geom_boxplot(fill =  c("white","white","white") ) +
@@ -518,12 +521,12 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      annotate(geom="text", x=1, y=0.045, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -545,7 +548,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, jacc ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, jacc ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.25)
    means <- aggregate(jacc ~ comp_imm, df_imm_time, mean)
    f <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = jacc)) +
      geom_boxplot(fill =  c("white","white","white") ) +
@@ -554,12 +557,12 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      annotate(geom="text", x=1, y=1-0.54, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=1-0.34, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -581,7 +584,7 @@ beta_div_decomp <- function(metadata_data_mean){
    
    res.aov <- rstatix::anova_test(df_imm_time, bray ~ comp_imm) #parametrique
    p.sed <- rstatix::pairwise_t_test(df_imm_time, bray ~ comp_imm, p.adjust.method = "bonferroni")
-   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.2)
+   p.sed <- rstatix::add_y_position(test = p.sed, step.increase = 0.25)
    means <- aggregate(bray ~ comp_imm, df_imm_time, mean)
    f2 <- ggplot(df_imm_time, aes(x = fct_relevel(comp_imm, "six_one", "one_two", "six_two"), y = bray)) +
      geom_boxplot(fill =  c("white","white","white") ) +
@@ -590,12 +593,12 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") +
      scale_x_discrete(labels=comp) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      annotate(geom="text", x=1, y=1-0.6, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=1-0.65, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -715,12 +718,12 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed, label = "p.signif") +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
      annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
@@ -748,15 +751,15 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") +
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed, label = "p.signif") +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
-     annotate(geom="text", x=1, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
+     annotate(geom="text", x=1, y=0.07, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
-     annotate(geom="text", x=2, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
+     annotate(geom="text", x=2, y=0.07, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
               color="black")+ 
      scale_y_continuous(limits = c(0,0.35)) +
      stat_summary(fun=mean, colour="darkred", geom="point", 
@@ -781,13 +784,12 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed, label = "p.signif") +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold")) +
      annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
      annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
@@ -814,13 +816,12 @@ beta_div_decomp <- function(metadata_data_mean){
      theme(legend.position = "none") + 
      scale_x_discrete(labels=depl) +
      theme_classic() +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), 
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
            axis.title.x = element_blank(), 
            axis.title.y = element_blank(),
-           axis.text.y = element_text(size = 12)) +
-     stat_pvalue_manual(p.sed, label = "p.signif") +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+           axis.text.y = element_text(size = 14)) +
+     stat_pvalue_manual(p.sed, label = "p.signif", size = 5.5) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold")) +
      annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
               color="black")+
      annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
@@ -836,11 +837,11 @@ beta_div_decomp <- function(metadata_data_mean){
                              ncol = 4,
                              nrow = 3,
                              labels = c("a.", " ", " ", " ",
-                                        "b.", " ", " ", " ",
-                                        "c.", " ", " ", " "))
+                                        " ", " ", " ", " ",
+                                        " ", " ", " ", " "))
 
-   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_24_06_2024.pdf")
-   ggsave(filename =  path_to_boxplot, plot = fin, width = 29.7*0.6, height = 21*0.6)
+   path_to_boxplot <- paste0("outputs/beta/boxplot_betadiv_16_05_2025.pdf")
+    ggsave(filename =  path_to_boxplot, plot = fin, width = 32*0.6, height = 21.5*0.6)
    
    #### dependending on retrieval season ####
    #### Immersion time ####
@@ -955,7 +956,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed)  +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12,plot.title = element_text(size = 18, face = "bold"))) +
      # annotate(geom="text", x=1, y=0.39, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
      #          color="black")+
      # annotate(geom="text", x=2, y=0.45, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -988,7 +989,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      # annotate(geom="text", x=1, y=0.045, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
      #          color="black")+
      # annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -1021,7 +1022,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      # annotate(geom="text", x=1, y=1-0.54, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
      #          color="black")+
      # annotate(geom="text", x=2, y=1-0.34, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -1054,7 +1055,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      # annotate(geom="text", x=1, y=1-0.6, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
      #          color="black")+
      # annotate(geom="text", x=2, y=1-0.65, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -1091,7 +1092,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed)  +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12)) +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold")) +
      annotate(geom="text", x=1, y=0.41, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=0.455, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -1122,7 +1123,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      annotate(geom="text", x=1, y=0.0285, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=0.065, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -1151,7 +1152,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=comp) +
      theme_classic() +
      stat_pvalue_manual(p.sed) +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      annotate(geom="text", x=1, y=1-0.535, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("six_one", df_imm_time$comp_imm)])),
               color="black")+
      annotate(geom="text", x=2, y=1-0.49, label = paste0("N = ",length(df_imm_time$comp_imm[grepl("one_two", df_imm_time$comp_imm)])),
@@ -1271,7 +1272,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed, label = "p.signif") +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      # annotate(geom="text", x=1, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
      #          color="black")+
      # annotate(geom="text", x=2, y=1-0.9, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
@@ -1302,7 +1303,7 @@ beta_div_decomp <- function(metadata_data_mean){
      scale_x_discrete(labels=depl) +
      theme_classic() +
      stat_pvalue_manual(p.sed, label = "p.signif") +
-     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12))+
+     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_blank(), axis.title.y = element_text(size=12),plot.title = element_text(size = 18, face = "bold"))+
      # annotate(geom="text", x=1, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("same_deployment_season", df_deploy$comp_deploy)])),
      #          color="black")+
      # annotate(geom="text", x=2, y=0.074, label = paste0("N = ",length(df_deploy$comp_deploy[grepl("deployment_hot_cool", df_deploy$comp_deploy)])),
