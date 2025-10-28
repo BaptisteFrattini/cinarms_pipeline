@@ -378,6 +378,7 @@ fun_null_model <- function(metadata_data_mean){
       axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
       axis.text.y = element_text(size = 8.5),
+      axis.title.y = element_text(size=16),
       plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
@@ -407,6 +408,7 @@ fun_null_model <- function(metadata_data_mean){
       axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
       axis.text.y = element_text(size = 8.5),
+      axis.title.y = element_text(size=16),
       plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
@@ -434,6 +436,7 @@ fun_null_model <- function(metadata_data_mean){
       axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
       axis.text.y = element_text(size = 8.5),
+      axis.title.y = element_text(size=16),
       plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
@@ -461,6 +464,7 @@ fun_null_model <- function(metadata_data_mean){
       axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
       axis.title.x = element_blank(), 
       axis.text.y = element_text(size = 8.5),
+      axis.title.y = element_text(size=16),
       plot.title = element_text(size = 18, face = "bold")
     ) +
     geom_hline(yintercept = 2, colour = "red") +
